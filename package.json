@@ -39,7 +39,11 @@
     }
   },
   "lint-staged": {
-    "*.js": ["npm run format-code", "git add", "eslint --cache --fix"],
+    "*.js": [
+      "npm run format-code",
+      "git add",
+      "eslint --cache --fix"
+    ],
     "*.{js,css,md}": "prettier --write"
   }
 }
