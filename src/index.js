@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import colors from './constants/colors';
+import colors from './styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: { color: colors.primary },
+  text: { color: colors.primary, fontFamily: 'BrandonGrotesque' },
 });
 
 export default function App() {
