@@ -6,11 +6,12 @@ import KarlaBold from './assets/fonts/Karla-Bold.ttf';
 import KarlaRegular from './assets/fonts/Karla-Regular.ttf';
 import BrandonBold from './assets/fonts/BrandonGrotesque-Bold.ttf';
 import BrandonRegular from './assets/fonts/BrandonGrotesque-Regular.ttf';
+import colors from './styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.secondary,
     alignItems: 'center',
     justifyContent: 'center',
   },
