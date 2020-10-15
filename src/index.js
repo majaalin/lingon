@@ -7,6 +7,7 @@ import KarlaRegular from './assets/fonts/Karla-Regular.ttf';
 import BrandonBold from './assets/fonts/BrandonGrotesque-Bold.ttf';
 import BrandonRegular from './assets/fonts/BrandonGrotesque-Regular.ttf';
 import colors from './styles/colors';
+import typography from './styles/typography';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,9 +15,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  header: {
-    fontFamily: 'KarlaBold',
   },
   p: {
     fontFamily: 'KarlaRegular',
@@ -36,10 +34,12 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Lingon</Text>
-      <Text style={styles.p}>Lingon</Text>
-      <Text style={{ fontFamily: 'BrandonBold' }}>Lingon</Text>
-      <Text style={{ fontFamily: 'BrandonRegular' }}>Lingon</Text>
+      <Text style={typography.h1}>Välkommen</Text>
+      <Text style={typography.h5}>
+        Svara på några frågor och vi kommer anpassa appen för dig
+      </Text>
+      <Text style={typography.buttonSecondary}>Logga in</Text>
+      <Text style={typography.buttonPrimary}>Kom igång</Text>
     </View>
   );
 }
