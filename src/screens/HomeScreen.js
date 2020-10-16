@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet, Text, View, StatusBar,
+} from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 
@@ -21,6 +23,7 @@ export default function Home() {
       </Text>
       <Text style={typography.buttonSecondary}>Logga in</Text>
       <Text style={typography.buttonPrimary}>Kom igång</Text>
+      <StatusBar barStyle="light-content" />
     </View>
   );
 }
