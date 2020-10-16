@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write '*.js'",
     "format-code": "npm run prettier && npm run lint:fix",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "test": "jest"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.2.1",
@@ -41,8 +42,10 @@
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.1.2",
     "husky": "^4.3.0",
+    "jest-expo": "^39.0.0",
     "lint-staged": "^10.4.0",
-    "prettier": "2.1.2"
+    "prettier": "2.1.2",
+    "react-test-renderer": "^16.14.0"
   },
   "private": true,
   "husky": {
@@ -57,5 +60,11 @@
       "eslint --cache --fix"
     ],
     "*.{js,css,md}": "prettier --write"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+    "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+  ]
   }
 }
