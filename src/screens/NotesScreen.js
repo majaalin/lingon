@@ -6,16 +6,24 @@ import typography from '../styles/typography';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
 
-export default function Notes() {
+// eslint-disable-next-line react/prop-types
+export default function Notes({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={typography.h1}>Anteckningar</Text>
+      <Text
+        // eslint-disable-next-line react/prop-types
+        onPress={() => navigation.goBack()}
+        label="Dismiss modal"
+        style={typography.h1}
+      >
+        Anteckningar
+      </Text>
       <Text style={typography.h5}>Periods are cool. Period.</Text>
     </View>
   );

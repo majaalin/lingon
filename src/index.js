@@ -22,72 +22,85 @@ export default function App() {
     BrandonRegular,
   });
 
-  const RootStack = createBottomTabNavigator();
-  const MainStack = createStackNavigator();
-
-  const ModalStack = () => (
-    <MainStack.Navigator mode="modal">
-      <MainStack.Screen
+  const AppTabs = createBottomTabNavigator();
+  const AppTabsScreen = () => (
+    <AppTabs.Navigator
+      tabBarOptions={{
+        activeTintColor: colors.primary,
+        inactiveTintColor: colors.secondary,
+        labelStyle: {
+          fontSize: 16,
+          fontFamily: 'BrandonBold',
+        },
+        style: {},
+      }}
+    >
+      <AppTabs.Screen
+        name="Överblick"
+        component={HomeScreen}
+        options={{
+          // eslint-disable-next-line react/prop-types
+          tabBarIcon: ({ color }) => (
+            <Entypo
+              name="mask"
+              color={color}
+              size={26}
+              activeTintColor="colors.primary"
+            />
+          ),
+          fontFamily: 'BrandonBold',
+        }}
+      />
+      <AppTabs.Screen
         name="Anteckningar"
         component={NotesScreen}
-        options={{ headerShown: false }}
+        options={{
+          // eslint-disable-next-line react/prop-types
+          tabBarIcon: ({ color }) => (
+            <Entypo name="plus" color={color} size={26} />
+          ),
+        }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.navigate('NotesModal');
+          },
+        })}
       />
-    </MainStack.Navigator>
+      <AppTabs.Screen
+        name="Kalender"
+        component={CalendarScreen}
+        options={{
+          // eslint-disable-next-line react/prop-types
+          tabBarIcon: ({ color }) => (
+            <Entypo name="water" color={color} size={26} />
+          ),
+        }}
+      />
+    </AppTabs.Navigator>
   );
 
+  const RootStack = createStackNavigator();
+  const RootStackScreen = () => (
+    <RootStack.Navigator
+      headerMode="none"
+      screenOptions={{ animationEnabled: false }}
+      mode="modal"
+    >
+      <RootStack.Screen name="Main" component={AppTabsScreen} />
+      <RootStack.Screen
+        name="NotesModal"
+        component={NotesScreen}
+        options={{ animationEnabled: true }}
+      />
+    </RootStack.Navigator>
+  );
   if (!fontsLoaded) {
     return <AppLoading />;
   }
   return (
     <NavigationContainer>
-      <RootStack.Navigator
-        tabBarOptions={{
-          activeTintColor: colors.primary,
-          inactiveTintColor: colors.secondary,
-          labelStyle: {
-            fontSize: 16,
-            fontFamily: 'BrandonBold',
-          },
-          style: {},
-        }}
-      >
-        <RootStack.Screen
-          name="Överblick"
-          component={HomeScreen}
-          options={{
-            // eslint-disable-next-line react/prop-types
-            tabBarIcon: ({ color }) => (
-              <Entypo
-                name="mask"
-                color={color}
-                size={26}
-                activeTintColor="colors.primary"
-              />
-            ),
-            fontFamily: 'BrandonBold',
-          }}
-        />
-        <RootStack.Screen
-          name="Anteckningar"
-          component={ModalStack}
-          options={{
-            // eslint-disable-next-line react/prop-types
-            tabBarIcon: ({ color }) => (
-              <Entypo name="plus" color={color} size={26} />
-            ),
-          }}
-        />
-        <RootStack.Screen
-          name="Kalender"
-          component={CalendarScreen}
-          options={{
-            // eslint-disable-next-line react/prop-types
-            tabBarIcon: ({ color }) => (
-              <Entypo name="water" color={color} size={26} />
-            ),
-          }}
-        />
-      </RootStack.Navigator>
+      <RootStackScreen />
     </NavigationContainer>
   );
 }
