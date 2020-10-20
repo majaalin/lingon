@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Navigation from "./config/navigation";
 import StartScreen from "./screens/StartScreen";
-import HomeScreen from "./screens/HomeScreen";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-// import { keys } from './config/keys';
+import { View, Text } from "react-native";
 import * as firebase from "firebase";
 
 const firebaseConfig = {
@@ -59,10 +57,10 @@ export class App extends Component {
     }
 
     if (!loggedIn) {
-      return <Navigation initialRouteName={StartScreen} />;
+      return <StartScreen />;
     }
 
-    return <Navigation initialRouteName={HomeScreen} />;
+    return <Navigation />;
   }
 }
 

@@ -11,6 +11,7 @@ import NotesScreen from "../screens/NotesScreen";
 import CalendarScreen from "../screens/CalendarScreen";
 import StartScreen from "../screens/StartScreen";
 import RegisterScreen from "../screens/RegisterScreen";
+import LoginScreen from "../screens/LoginScreen";
 import KarlaBold from "../assets/fonts/Karla-Bold.ttf";
 import KarlaRegular from "../assets/fonts/Karla-Regular.ttf";
 import BrandonBold from "../assets/fonts/BrandonGrotesque-Bold.ttf";
@@ -85,6 +86,7 @@ export default function Navigation() {
   );
 
   const RootStack = createStackNavigator();
+
   const RootStackScreen = () => (
     <RootStack.Navigator
       headerMode="none"
@@ -92,11 +94,18 @@ export default function Navigation() {
       mode="modal"
     >
       <RootStack.Screen name="Main" component={AppTabsScreen} />
+
       <RootStack.Screen
         name="Start"
         component={StartScreen}
         options={{ headerShown: false }}
       />
+      <RootStack.Screen
+        name="Log in"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+
       <RootStack.Screen
         name="Register"
         component={RegisterScreen}

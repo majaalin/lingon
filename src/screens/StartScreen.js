@@ -22,12 +22,12 @@ export default function Start({ navigation }) {
       <Button
         style={typography.h1}
         title="Logga in"
-        onPress={() => navigation.navigate("login")}
+        onPress={() => navigation.navigate("Log in")}
       />
       <Button
         style={typography.h5}
         title="Kom igång"
-        onPress={() => navigation.navigate("register")}
+        onPress={() => navigation.navigate("Register")}
       />
     </View>
   );

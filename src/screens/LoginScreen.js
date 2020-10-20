@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Textinput } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import firebase from "firebase";
 import colors from "../styles/colors";
-import typography from "../styles/typography";
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +48,7 @@ export class Login extends Component {
           secureTextEntry={true}
           onChangeText={(password) => this.setState({ password })}
         />
-        <Button onPress={() => this.onSignUp()} title="login" />
+        <Button onPress={() => this.onSignUp()} title="Log in" />
       </View>
     );
   }
