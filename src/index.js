@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Navigation from "./config/navigation";
+import AppNavigation from "./config/Navigation/AppNavigation";
+import AuthNavigation from "./config/Navigation/AuthNavigation";
 import StartScreen from "./screens/StartScreen";
 import { View, Text } from "react-native";
 import * as firebase from "firebase";
@@ -57,10 +58,10 @@ export class App extends Component {
     }
 
     if (!loggedIn) {
-      return <StartScreen />;
+      return <AuthNavigation />;
     }
 
-    return <Navigation />;
+    return <AppNavigation />;
   }
 }
 

@@ -5,19 +5,19 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
 import { Entypo } from "@expo/vector-icons";
-import colors from "../styles/colors";
-import HomeScreen from "../screens/HomeScreen";
-import NotesScreen from "../screens/NotesScreen";
-import CalendarScreen from "../screens/CalendarScreen";
-import StartScreen from "../screens/StartScreen";
-import RegisterScreen from "../screens/RegisterScreen";
-import LoginScreen from "../screens/LoginScreen";
-import KarlaBold from "../assets/fonts/Karla-Bold.ttf";
-import KarlaRegular from "../assets/fonts/Karla-Regular.ttf";
-import BrandonBold from "../assets/fonts/BrandonGrotesque-Bold.ttf";
-import BrandonRegular from "../assets/fonts/BrandonGrotesque-Regular.ttf";
+import colors from "../../styles/colors";
+import HomeScreen from "../../screens/HomeScreen";
+import NotesScreen from "../../screens/NotesScreen";
+import CalendarScreen from "../../screens/CalendarScreen";
+import StartScreen from "../../screens/StartScreen";
+import RegisterScreen from "../../screens/RegisterScreen";
+import LoginScreen from "../../screens/LoginScreen";
+import KarlaBold from "../../assets/fonts/Karla-Bold.ttf";
+import KarlaRegular from "../../assets/fonts/Karla-Regular.ttf";
+import BrandonBold from "../../assets/fonts/BrandonGrotesque-Bold.ttf";
+import BrandonRegular from "../../assets/fonts/BrandonGrotesque-Regular.ttf";
 
-export default function Navigation() {
+export default function AppNavigation() {
   const [fontsLoaded] = useFonts({
     KarlaBold,
     KarlaRegular,
