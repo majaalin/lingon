@@ -1,18 +1,20 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useFonts } from 'expo-font';
-import { AppLoading } from 'expo';
-import { Entypo } from '@expo/vector-icons';
-import colors from '../styles/colors';
-import HomeScreen from '../screens/HomeScreen';
-import NotesScreen from '../screens/NotesScreen';
-import CalendarScreen from '../screens/CalendarScreen';
-import KarlaBold from '../assets/fonts/Karla-Bold.ttf';
-import KarlaRegular from '../assets/fonts/Karla-Regular.ttf';
-import BrandonBold from '../assets/fonts/BrandonGrotesque-Bold.ttf';
-import BrandonRegular from '../assets/fonts/BrandonGrotesque-Regular.ttf';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useFonts } from "expo-font";
+import { AppLoading } from "expo";
+import { Entypo } from "@expo/vector-icons";
+import colors from "../styles/colors";
+import HomeScreen from "../screens/HomeScreen";
+import NotesScreen from "../screens/NotesScreen";
+import CalendarScreen from "../screens/CalendarScreen";
+import StartScreen from "../screens/StartScreen";
+import RegisterScreen from "../screens/RegisterScreen";
+import KarlaBold from "../assets/fonts/Karla-Bold.ttf";
+import KarlaRegular from "../assets/fonts/Karla-Regular.ttf";
+import BrandonBold from "../assets/fonts/BrandonGrotesque-Bold.ttf";
+import BrandonRegular from "../assets/fonts/BrandonGrotesque-Regular.ttf";
 
 export default function Navigation() {
   const [fontsLoaded] = useFonts({
@@ -23,6 +25,7 @@ export default function Navigation() {
   });
 
   const AppTabs = createBottomTabNavigator();
+
   const AppTabsScreen = () => (
     <AppTabs.Navigator
       tabBarOptions={{
@@ -30,16 +33,15 @@ export default function Navigation() {
         inactiveTintColor: colors.secondary,
         labelStyle: {
           fontSize: 16,
-          fontFamily: 'BrandonBold',
+          fontFamily: "BrandonBold",
         },
         style: {},
       }}
     >
       <AppTabs.Screen
-        name="Överblick"
+        name="Home"
         component={HomeScreen}
         options={{
-          // eslint-disable-next-line react/prop-types
           tabBarIcon: ({ color }) => (
             <Entypo
               name="mask"
@@ -48,33 +50,35 @@ export default function Navigation() {
               activeTintColor="colors.primary"
             />
           ),
-          fontFamily: 'BrandonBold',
+          title: "Överblick",
         }}
       />
+
       <AppTabs.Screen
-        name="Anteckningar"
+        name="Notes"
         component={NotesScreen}
         options={{
-          // eslint-disable-next-line react/prop-types
           tabBarIcon: ({ color }) => (
             <Entypo name="plus" color={color} size={26} />
           ),
+          title: "Anteckningar",
         }}
         listeners={({ navigation }) => ({
           tabPress: (e) => {
             e.preventDefault();
-            navigation.navigate('NotesModal');
+            navigation.navigate("NotesModal");
           },
         })}
       />
+
       <AppTabs.Screen
-        name="Kalender"
+        name="Calendar"
         component={CalendarScreen}
         options={{
-          // eslint-disable-next-line react/prop-types
           tabBarIcon: ({ color }) => (
             <Entypo name="water" color={color} size={26} />
           ),
+          title: "Kalender",
         }}
       />
     </AppTabs.Navigator>
@@ -89,6 +93,16 @@ export default function Navigation() {
     >
       <RootStack.Screen name="Main" component={AppTabsScreen} />
       <RootStack.Screen
+        name="Start"
+        component={StartScreen}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
         name="NotesModal"
         component={NotesScreen}
         options={{ animationEnabled: true }}
@@ -99,6 +113,7 @@ export default function Navigation() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
   return (
     <NavigationContainer>
       <RootStackScreen />
