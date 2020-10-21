@@ -40,7 +40,6 @@ export class App extends Component {
         </View>
       );
     }
-
     if (!loggedIn) {
       return <AuthNavigation />;
     }

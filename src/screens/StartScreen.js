@@ -14,16 +14,16 @@ const styles = StyleSheet.create({
 });
 
 export default function Start({ navigation }) {
-  signInAnonymously = () => {
-    firebaseAuth
-      .signInAnonymously()
-      .then(() => navigation.navigate("Overview", { type: "anonymous" }))
-      .catch((error) => {
-        this.setState({ errorMessage: error.message }, () => {
-          console.log(error);
-        });
-      });
-  };
+  // signInAnonymously = () => {
+  //   firebaseAuth
+  //     .signInAnonymously()
+  //     .then(() => navigation.navigate("Overview", { type: "anonymous" }))
+  //     .catch((error) => {
+  //       this.setState({ errorMessage: error.message }, () => {
+  //         console.log(error);
+  //       });
+  //     });
+  // };
 
   return (
     <View style={styles.container}>
@@ -39,7 +39,7 @@ export default function Start({ navigation }) {
       <Button
         style={typography.h5}
         title="Kom igång"
-        onPress={() => this.signInAnonymously()}
+        onPress={() => navigation.navigate("LatestStartDateScreen")}
       />
     </View>
   );

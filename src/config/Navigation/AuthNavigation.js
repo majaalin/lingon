@@ -7,6 +7,7 @@ import { AppLoading } from "expo";
 import StartScreen from "../../screens/StartScreen";
 import OverviewScreen from "../../screens/OverviewScreen";
 import LoginScreen from "../../screens/LoginScreen";
+import LatestStartDateScreen from "../../screens/LatestStartDateScreen";
 import KarlaBold from "../../assets/fonts/Karla-Bold.ttf";
 import KarlaRegular from "../../assets/fonts/Karla-Regular.ttf";
 import BrandonBold from "../../assets/fonts/BrandonGrotesque-Bold.ttf";
@@ -41,6 +42,11 @@ export default function AppNavigation() {
       <Stack.Screen
         name="Overview"
         component={OverviewScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Overview"
+        component={LatestStartDateScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
