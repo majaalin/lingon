@@ -11,8 +11,6 @@ const firebaseConfig = {
   measurementId: "G-14SESQM186",
 };
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
-}
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-export { keys };
+export const firebaseAuth = firebaseApp.auth();
