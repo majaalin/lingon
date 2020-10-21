@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
 import StartScreen from "../../screens/StartScreen";
-import RegisterScreen from "../../screens/RegisterScreen";
+import OverviewScreen from "../../screens/OverviewScreen";
 import LoginScreen from "../../screens/LoginScreen";
 import KarlaBold from "../../assets/fonts/Karla-Bold.ttf";
 import KarlaRegular from "../../assets/fonts/Karla-Regular.ttf";
@@ -39,8 +39,8 @@ export default function AppNavigation() {
       />
 
       <Stack.Screen
-        name="Register"
-        component={RegisterScreen}
+        name="Overview"
+        component={OverviewScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

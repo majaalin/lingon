@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import { firebaseAuth } from "../config/keys";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 
@@ -16,10 +17,10 @@ export default function Start({ navigation }) {
   signInAnonymously = () => {
     firebaseAuth
       .signInAnonymously()
-      .then(() => this.props.navigation.navigate("Home", { type: "anonymous" }))
+      .then(() => navigation.navigate("Overview", { type: "anonymous" }))
       .catch((error) => {
         this.setState({ errorMessage: error.message }, () => {
-          ToastAndroid.show(this.state.errorMessage, ToastAndroid.SHORT);
+          console.log(error);
         });
       });
   };
