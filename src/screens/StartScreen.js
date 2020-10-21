@@ -39,7 +39,7 @@ export default function Start({ navigation }) {
       <Button
         style={typography.h5}
         title="Kom igång"
-        onPress={() => navigation.navigate("LatestStartDateScreen")}
+        onPress={() => navigation.navigate("LatestStartDate")}
       />
     </View>
   );
