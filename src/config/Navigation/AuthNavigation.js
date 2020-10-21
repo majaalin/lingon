@@ -8,12 +8,13 @@ import StartScreen from "../../screens/StartScreen";
 import OverviewScreen from "../../screens/OverviewScreen";
 import LoginScreen from "../../screens/LoginScreen";
 import LatestStartDateScreen from "../../screens/LatestStartDateScreen";
+import CycleLengthScreen from "../../screens/CycleLengthScreen";
 import KarlaBold from "../../assets/fonts/Karla-Bold.ttf";
 import KarlaRegular from "../../assets/fonts/Karla-Regular.ttf";
 import BrandonBold from "../../assets/fonts/BrandonGrotesque-Bold.ttf";
 import BrandonRegular from "../../assets/fonts/BrandonGrotesque-Regular.ttf";
 
-export default function AppNavigation() {
+export default function AuthNavigation() {
   const [fontsLoaded] = useFonts({
     KarlaBold,
     KarlaRegular,
@@ -51,6 +52,11 @@ export default function AppNavigation() {
         options={{ headerShown: false }}
       />
 
+      <Stack.Screen
+        name="CycleLengthScreen"
+        component={CycleLengthScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 

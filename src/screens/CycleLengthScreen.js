@@ -19,18 +19,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
 const width = Dimensions.get("window").width;
 
-export class LatestStartDate extends Component {
+export class CycleLength extends Component {
   render() {
-    const { navigate } = this.props.navigation;
-
     return (
       <View style={styles.wrapper}>
         <SafeAreaView>
           <PageControl
             numberOfPages={3}
-            currentPage={0}
+            currentPage={1}
             hidesForSinglePage
             pageIndicatorTintColor={colors.primary}
             currentPageIndicatorTintColor={colors.white}
@@ -41,20 +40,17 @@ export class LatestStartDate extends Component {
           />
         </SafeAreaView>
         <View style={styles.container}>
-          <Text style={typography.h1}>Ange när senaste mensen startade</Text>
+          <Text style={typography.h1}>Ange längd på din menscykel</Text>
           <Button
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
           />
-          <Button
-            title="Fortsätt"
-            onPress={() => navigate("CycleLengthScreen")}
-          />
+          <Button title="Fortsätt" />
         </View>
       </View>
     );
   }
 }
 
-export default LatestStartDate;
+export default CycleLength;
