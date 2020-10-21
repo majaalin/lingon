@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
 import { Entypo } from "@expo/vector-icons";
 import colors from "../../styles/colors";
-import HomeScreen from "../../screens/HomeScreen";
+import OverviewScreen from "../../screens/OverviewScreen";
 import NotesScreen from "../../screens/NotesScreen";
 import CalendarScreen from "../../screens/CalendarScreen";
 import StartScreen from "../../screens/StartScreen";
@@ -40,8 +40,8 @@ export default function AppNavigation() {
       }}
     >
       <AppTabs.Screen
-        name="Home"
-        component={HomeScreen}
+        name="Overview"
+        component={OverviewScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Entypo

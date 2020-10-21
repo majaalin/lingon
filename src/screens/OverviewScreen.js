@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Home() {
+export default function Overview() {
   return (
     <View style={styles.container}>
       <Text style={typography.buttonSecondary}>3 dagar kvar</Text>
