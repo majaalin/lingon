@@ -13,6 +13,17 @@ const styles = StyleSheet.create({
 });
 
 export default function Start({ navigation }) {
+  signInAnonymously = () => {
+    firebaseAuth
+      .signInAnonymously()
+      .then(() => this.props.navigation.navigate("Home", { type: "anonymous" }))
+      .catch((error) => {
+        this.setState({ errorMessage: error.message }, () => {
+          ToastAndroid.show(this.state.errorMessage, ToastAndroid.SHORT);
+        });
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={typography.h1}>Välkommen</Text>
@@ -27,7 +38,7 @@ export default function Start({ navigation }) {
       <Button
         style={typography.h5}
         title="Kom igång"
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => this.signInAnonymously()}
       />
     </View>
   );
