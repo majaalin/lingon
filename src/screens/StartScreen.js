@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { firebaseAuth } from "../config/keys";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
+import Button from "../components/Button";
 
 const styles = StyleSheet.create({
   container: {
@@ -32,15 +33,12 @@ export default function Start({ navigation }) {
         Svara på några frågor och vi kommer anpassa appen för dig
       </Text>
       <Button
-        style={typography.h1}
         title="Logga in"
-        onPress={() => navigation.navigate("Log in")}
+        backgroundColor="secondary"
+        font="buttonSecondary"
+        onPress={() => navigation.navigate('Login')}
       />
-      <Button
-        style={typography.h5}
-        title="Kom igång"
-        onPress={() => navigation.navigate("LatestStartDate")}
-      />
+      <Button title="Kom igång" />
     </View>
   );
 }
