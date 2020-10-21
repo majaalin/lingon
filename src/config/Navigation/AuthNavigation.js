@@ -34,7 +34,7 @@ export default function AppNavigation() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Log in"
+        name="Login"
         component={LoginScreen}
         options={{ headerShown: false }}
       />
@@ -42,11 +42,6 @@ export default function AppNavigation() {
       <Stack.Screen
         name="Overview"
         component={OverviewScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Overview"
-        component={LatestStartDateScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
