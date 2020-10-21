@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
 import { PageControlJaloro } from "react-native-chi-page-control";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
+import Button from "../components/Button";
 
 const width = Dimensions.get("window").width;
 
@@ -50,6 +51,12 @@ export class LatestStartDate extends Component {
         </SafeAreaView>
         <View style={styles.container}>
           <Text style={typography.h1}>Ange när senaste mensen startade</Text>
+          <Button
+            title="Fyll i senare"
+            backgroundColor="secondary"
+            font="buttonSecondary"
+          />
+          <Button title="Fortsätt" />
         </View>
       </View>
     );
