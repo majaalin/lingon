@@ -36,7 +36,7 @@ export default function Start({ navigation }) {
         title="Logga in"
         backgroundColor="secondary"
         font="buttonSecondary"
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate('Login')}
       />
       <Button title="Kom igång" />
     </View>

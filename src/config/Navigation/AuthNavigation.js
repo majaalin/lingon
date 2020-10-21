@@ -44,6 +44,13 @@ export default function AppNavigation() {
         component={OverviewScreen}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="LatestStartDate"
+        component={LatestStartDateScreen}
+        options={{ headerShown: false }}
+      />
+
     </Stack.Navigator>
   );
 
