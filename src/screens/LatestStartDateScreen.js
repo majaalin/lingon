@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
 import PageControl from "react-native-page-control";
+import DatePicker from "../components/DatePicker";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 import Button from "../components/Button";
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
 const width = Dimensions.get("window").width;
 
 export class LatestStartDate extends Component {
@@ -42,6 +44,7 @@ export class LatestStartDate extends Component {
         </SafeAreaView>
         <View style={styles.container}>
           <Text style={typography.h1}>Ange när senaste mensen startade</Text>
+          <DatePicker />
           <Button
             title="Fyll i senare"
             backgroundColor="secondary"
