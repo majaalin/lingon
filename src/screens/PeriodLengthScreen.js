@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 
 const width = Dimensions.get("window").width;
 
-export class CycleLength extends Component {
+export class PeriodLength extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -31,7 +31,7 @@ export class CycleLength extends Component {
         <SafeAreaView>
           <PageControl
             numberOfPages={3}
-            currentPage={1}
+            currentPage={2}
             hidesForSinglePage
             pageIndicatorTintColor={colors.primary}
             currentPageIndicatorTintColor={colors.white}
@@ -43,21 +43,18 @@ export class CycleLength extends Component {
         </SafeAreaView>
 
         <View style={styles.container}>
-          <Text style={typography.h1}>Ange längd på din menscykel</Text>
-          <Range average={27} arrayLength={40} />
+          <Text style={typography.h1}>Ange antal dagar du har mens</Text>
+          <Range average={4} arrayLength={20} />
           <Button
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
           />
-          <Button
-            title="Fortsätt"
-            onPress={() => navigate("PeriodLengthScreen")}
-          />
+          <Button title="Fortsätt" />
         </View>
       </View>
     );
   }
 }
 
-export default CycleLength;
+export default PeriodLength;

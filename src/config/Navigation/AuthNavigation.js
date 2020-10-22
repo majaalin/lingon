@@ -9,6 +9,7 @@ import OverviewScreen from "../../screens/OverviewScreen";
 import LoginScreen from "../../screens/LoginScreen";
 import LatestStartDateScreen from "../../screens/LatestStartDateScreen";
 import CycleLengthScreen from "../../screens/CycleLengthScreen";
+import PeriodLengthScreen from "../../screens/PeriodLengthScreen";
 import KarlaBold from "../../assets/fonts/Karla-Bold.ttf";
 import KarlaRegular from "../../assets/fonts/Karla-Regular.ttf";
 import BrandonBold from "../../assets/fonts/BrandonGrotesque-Bold.ttf";
@@ -55,6 +56,12 @@ export default function AuthNavigation() {
       <Stack.Screen
         name="CycleLengthScreen"
         component={CycleLengthScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="PeriodLengthScreen"
+        component={PeriodLengthScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
