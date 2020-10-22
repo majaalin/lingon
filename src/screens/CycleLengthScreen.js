@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
 import PageControl from "react-native-page-control";
+import Range from "../components/Range";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 import Button from "../components/Button";
@@ -39,8 +40,10 @@ export class CycleLength extends Component {
             onPageIndicatorPress={this.onItemTap}
           />
         </SafeAreaView>
+
         <View style={styles.container}>
           <Text style={typography.h1}>Ange längd på din menscykel</Text>
+          <Range average={27} arrayLength={40} />
           <Button
             title="Fyll i senare"
             backgroundColor="secondary"

@@ -4,7 +4,6 @@ import { firebaseAuth } from "../config/keys";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 import Button from "../components/Button";
-import Range from "../components/Range";
 
 const styles = StyleSheet.create({
   container: {
@@ -43,8 +42,6 @@ export default function Start({ navigation }) {
         title="Kom igång"
         onPress={() => navigation.navigate("LatestStartDate")}
       />
-      <Range average={27} arrayLength={40} />
-      <Range average={4} arrayLength={20} />
     </View>
   );
 }
