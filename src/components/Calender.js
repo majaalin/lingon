@@ -6,12 +6,18 @@ import colors from "../styles/colors";
 import typography from "../styles/typography";
 import { color } from "react-native-reanimated";
 
-let period = [
+let ovulationDate = ["2020-10-01", "2020-10-02", "2020-10-03"];
+
+let periodDate = [
   "2020-10-05",
   "2020-10-06",
   "2020-10-08",
   "2020-10-07",
   "2020-10-09",
+  "2020-10-27",
+  "2020-10-28",
+  "2020-10-29",
+  "2020-10-30",
 ];
 
 LocaleConfig.locales["sv"] = {
@@ -59,11 +65,11 @@ export class Calender extends Component {
   }
 
   componentDidMount() {
-    this.getPeriodDate();
+    this.colorDate();
   }
 
-  getPeriodDate = () => {
-    let obj = period.reduce(
+  colorDate = () => {
+    let periodDateColored = periodDate.reduce(
       (c, v) =>
         Object.assign(c, {
           [v]: {
@@ -74,7 +80,20 @@ export class Calender extends Component {
       {}
     );
 
-    this.setState({ markedPeriod: obj });
+    let ovulationDateColored = ovulationDate.reduce(
+      (c, v) =>
+        Object.assign(c, {
+          [v]: {
+            color: colors.secondary,
+            textColor: colors.white,
+          },
+        }),
+      {}
+    );
+
+    const markedPeriod = Object.assign(periodDateColored, ovulationDateColored);
+
+    this.setState({ markedPeriod: markedPeriod });
   };
 
   render() {
