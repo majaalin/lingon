@@ -45,15 +45,17 @@ export class CycleLength extends Component {
         <View style={styles.container}>
           <Text style={typography.h1}>Ange längd på din menscykel</Text>
           <Range average={27} arrayLength={40} />
-          <Button
-            title="Fyll i senare"
-            backgroundColor="secondary"
-            font="buttonSecondary"
-          />
-          <Button
-            title="Fortsätt"
-            onPress={() => navigate("PeriodLengthScreen")}
-          />
+          <View style={{ bottom: 20, position: "absolute" }}>
+            <Button
+              title="Fyll i senare"
+              backgroundColor="secondary"
+              font="buttonSecondary"
+            />
+            <Button
+              title="Fortsätt"
+              onPress={() => navigate("PeriodLengthScreen")}
+            />
+          </View>
         </View>
       </View>
     );

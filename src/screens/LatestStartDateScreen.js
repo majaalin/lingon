@@ -45,15 +45,17 @@ export class LatestStartDate extends Component {
         <View style={styles.container}>
           <Text style={typography.h1}>Ange när senaste mensen startade</Text>
           <DatePicker />
-          <Button
-            title="Fyll i senare"
-            backgroundColor="secondary"
-            font="buttonSecondary"
-          />
-          <Button
-            title="Fortsätt"
-            onPress={() => navigate("CycleLengthScreen")}
-          />
+          <View style={{ bottom: 20, position: "absolute" }}>
+            <Button
+              title="Fyll i senare"
+              backgroundColor="secondary"
+              font="buttonSecondary"
+            />
+            <Button
+              title="Fortsätt"
+              onPress={() => navigate("CycleLengthScreen")}
+            />
+          </View>
         </View>
       </View>
     );

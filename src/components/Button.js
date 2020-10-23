@@ -1,8 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, Dimensions } from "react-native";
 
 import colors from "../styles/colors";
 import typography from "../styles/typography";
+
+const width = Dimensions.get("window").width - 20;
 
 function Button({
   title,
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    width: width,
     height: 60,
     marginTop: 20,
     borderWidth: 2,

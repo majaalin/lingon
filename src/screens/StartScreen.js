@@ -32,16 +32,18 @@ export default function Start({ navigation }) {
       <Text style={typography.h5}>
         Svara på några frågor och vi kommer anpassa appen för dig
       </Text>
-      <Button
-        title="Logga in"
-        backgroundColor="secondary"
-        font="buttonSecondary"
-        onPress={() => navigation.navigate("Login")}
-      />
-      <Button
-        title="Kom igång"
-        onPress={() => navigation.navigate("LatestStartDate")}
-      />
+      <View style={{ bottom: 20, position: "absolute" }}>
+        <Button
+          title="Logga in"
+          backgroundColor="secondary"
+          font="buttonSecondary"
+          onPress={() => navigation.navigate("Login")}
+        />
+        <Button
+          title="Kom igång"
+          onPress={() => navigation.navigate("LatestStartDate")}
+        />
+      </View>
     </View>
   );
 }

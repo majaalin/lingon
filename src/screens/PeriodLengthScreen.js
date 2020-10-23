@@ -10,8 +10,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.secondary,
-    paddingLeft: 20,
-    paddingRight: 20,
   },
   container: {
     flex: 1,
@@ -45,12 +43,14 @@ export class PeriodLength extends Component {
         <View style={styles.container}>
           <Text style={typography.h1}>Ange antal dagar du har mens</Text>
           <Range average={4} arrayLength={20} />
-          <Button
-            title="Fyll i senare"
-            backgroundColor="secondary"
-            font="buttonSecondary"
-          />
-          <Button title="Fortsätt" />
+          <View style={{ bottom: 20, position: "absolute" }}>
+            <Button
+              title="Fyll i senare"
+              backgroundColor="secondary"
+              font="buttonSecondary"
+            />
+            <Button title="Fortsätt" />
+          </View>
         </View>
       </View>
     );
