@@ -44,7 +44,7 @@ export class App extends Component {
     if (!loggedIn) {
       return <AuthNavigation />;
     }
-
+    // if user starting date, period length, cycle length exists in database, go to home screen. else go to start screen next time user opens app
     return <AppNavigation />;
   }
 }
