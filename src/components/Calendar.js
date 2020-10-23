@@ -6,7 +6,7 @@ import colors from "../styles/colors";
 import typography from "../styles/typography";
 import { color } from "react-native-reanimated";
 
-let ovulationDate = ["2020-10-01", "2020-10-02", "2020-10-03"];
+let ovulationDate = ["2020-10-01", "2020-10-02", "2020-10-03", "2020-10-04"];
 
 let periodDate = [
   "2020-10-05",
@@ -14,10 +14,6 @@ let periodDate = [
   "2020-10-08",
   "2020-10-07",
   "2020-10-09",
-  "2020-10-27",
-  "2020-10-28",
-  "2020-10-29",
-  "2020-10-30",
 ];
 
 LocaleConfig.locales["sv"] = {
@@ -75,6 +71,8 @@ export class Calender extends Component {
           [v]: {
             color: colors.primary,
             textColor: colors.white,
+            endingDay: true,
+            startingDay: true,
           },
         }),
       {}
@@ -86,6 +84,8 @@ export class Calender extends Component {
           [v]: {
             color: colors.secondary,
             textColor: colors.white,
+            endingDay: true,
+            startingDay: true,
           },
         }),
       {}
@@ -101,17 +101,15 @@ export class Calender extends Component {
       <View>
         <Text>{this.state.currentDate}</Text>
         <Calendar
-          markingType={"period"}
-          markedDates={this.state.markedPeriod}
           horizontal={true}
           pagingEnabled={true}
           enableSwipeMonths={true}
-          onDayPress={(day) => {
-            {
-              console.log("selected day", day.dateString),
-                this.setState({ currentDate: day.dateString });
-            }
+          markingType={"period"}
+          markedDates={{
+            [this.state.date]: { selected: true },
           }}
+          markedDates={this.state.markedPeriod}
+          onDayPress={(day) => this.setState({ date: day.dateString })}
           onDayLongPress={(day) => {
             console.log("selected day", day.dateString);
           }}
@@ -125,19 +123,15 @@ export class Calender extends Component {
             backgroundColor: colors.secondary,
             calendarBackground: colors.white,
             textSectionTitleColor: colors.primary,
-            textSectionTitleDisabledColor: "#d9e1e8",
-            selectedDayBackgroundColor: "#333248",
-            selectedDayTextColor: "#ffffff",
+            selectedDayBackgroundColor: colors.grey,
+            selectedDayTextColor: colors.grey,
             todayTextColor: colors.white,
-            todayBackgroundColor: colors.primary,
+            todayBackgroundColor: colors.grey,
             dayTextColor: colors.primary,
             textDisabledColor: colors.secondary,
             dotColor: colors.primary,
-            selectedDotColor: "#ffffff",
             arrowColor: colors.primary,
-            disabledArrowColor: "#d9e1e8",
             monthTextColor: colors.primary,
-            indicatorColor: colors.primary,
             textDayFontFamily: "KarlaRegular",
             textMonthFontFamily: "KarlaBold",
             textDayHeaderFontFamily: "KarlaRegular",
