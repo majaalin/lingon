@@ -38,7 +38,7 @@ export class LatestStartDate extends Component {
             currentPageIndicatorTintColor={colors.white}
             indicatorStyle={{ borderRadius: 5 }}
             currentIndicatorStyle={{ borderRadius: 5 }}
-            indicatorSize={{ width: width / 3, height: 5 }}
+            indicatorSize={{ width: width / 3 - 20, height: 5 }}
             onPageIndicatorPress={this.onItemTap}
           />
         </SafeAreaView>

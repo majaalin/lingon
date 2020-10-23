@@ -10,8 +10,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.secondary,
-    paddingLeft: 20,
-    paddingRight: 20,
   },
   container: {
     flex: 1,
@@ -29,17 +27,19 @@ export class CycleLength extends Component {
     return (
       <View style={styles.wrapper}>
         <SafeAreaView>
-          <PageControl
-            numberOfPages={3}
-            currentPage={1}
-            hidesForSinglePage
-            pageIndicatorTintColor={colors.primary}
-            currentPageIndicatorTintColor={colors.white}
-            indicatorStyle={{ borderRadius: 5 }}
-            currentIndicatorStyle={{ borderRadius: 5 }}
-            indicatorSize={{ width: width / 3, height: 5 }}
-            onPageIndicatorPress={this.onItemTap}
-          />
+          <View>
+            <PageControl
+              numberOfPages={3}
+              currentPage={1}
+              hidesForSinglePage
+              pageIndicatorTintColor={colors.primary}
+              currentPageIndicatorTintColor={colors.white}
+              indicatorStyle={{ borderRadius: 5 }}
+              currentIndicatorStyle={{ borderRadius: 5 }}
+              indicatorSize={{ width: width / 3 - 20, height: 5 }}
+              onPageIndicatorPress={this.onItemTap}
+            />
+          </View>
         </SafeAreaView>
 
         <View style={styles.container}>
