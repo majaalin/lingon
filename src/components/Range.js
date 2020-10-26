@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import SmoothPicker from "react-native-smooth-picker";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
+const ls = require("local-storage");
 
 const opacities = {
   0: 1,
@@ -54,9 +55,10 @@ const ItemToRender = ({ item, index }, indexSelected, vertical) => {
   );
 };
 
-const Range = ({ average, arrayLength }) => {
+const Range = ({ average, arrayLength, keyValue }) => {
   function handleChange(index) {
     setSelected(index);
+    ls.set(keyValue, index);
   }
 
   const [selected, setSelected] = useState(average);
@@ -66,7 +68,7 @@ const Range = ({ average, arrayLength }) => {
         initialScrollToIndex={selected}
         onScrollToIndexFailed={() => {}}
         keyExtractor={(_, index) => index.toString()}
-        data={Array.from({ length: arrayLength }, (_, i) => i + 1)}
+        data={Array.from({ length: arrayLength }, (_, i) => i)}
         horizontal={true}
         scrollAnimation
         showsHorizontalScrollIndicator={false}

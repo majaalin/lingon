@@ -5,16 +5,20 @@ import { LocaleConfig } from "react-native-calendars";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 import { color } from "react-native-reanimated";
+import CycleLength from "../screens/CycleLengthScreen";
+import { formatDistance, subDays } from "date-fns";
+
+const ls = require("local-storage");
+
+let date = ls.get("lastStartDate") || "2020-10-01T";
+
+let lastStartDate = date.split("T")[0];
+let periodLenght = ls.get("periodLenght");
+let cycleLength = ls.get("CycleLenght");
 
 let ovulationDate = ["2020-10-01", "2020-10-02", "2020-10-03", "2020-10-04"];
 
-let periodDate = [
-  "2020-10-05",
-  "2020-10-06",
-  "2020-10-08",
-  "2020-10-07",
-  "2020-10-09",
-];
+let periodDate = [lastStartDate];
 
 LocaleConfig.locales["sv"] = {
   monthNames: [
@@ -99,6 +103,7 @@ export class Calender extends Component {
   render() {
     return (
       <View>
+        <Text>{lastStartDate}</Text>
         <Text>{this.state.currentDate}</Text>
         <Calendar
           horizontal={true}

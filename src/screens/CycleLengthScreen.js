@@ -5,6 +5,7 @@ import Range from "../components/Range";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 import Button from "../components/Button";
+const ls = require("local-storage");
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -44,7 +45,7 @@ export class CycleLength extends Component {
 
         <View style={styles.container}>
           <Text style={typography.h1}>Ange längd på din menscykel</Text>
-          <Range average={27} arrayLength={40} />
+          <Range average={28} arrayLength={40} keyValue="CycleLenght" />
           <View style={{ bottom: 20, position: "absolute" }}>
             <Button
               title="Fyll i senare"

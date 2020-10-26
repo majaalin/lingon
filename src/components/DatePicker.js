@@ -3,9 +3,10 @@ import { StyleSheet, View, Text } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
+const ls = require("local-storage");
 
 const DatePicker = () => {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(true);
 
@@ -13,6 +14,7 @@ const DatePicker = () => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
+    ls.set("lastStartDate", currentDate);
   };
 
   const showMode = (currentMode) => {

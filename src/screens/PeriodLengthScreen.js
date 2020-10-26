@@ -5,6 +5,8 @@ import Range from "../components/Range";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 import Button from "../components/Button";
+import { firebaseAuth } from "../config/keys";
+const ls = require("local-storage");
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -24,6 +26,18 @@ const width = Dimensions.get("window").width;
 export class PeriodLength extends Component {
   render() {
     const { navigate } = this.props.navigation;
+
+    const signInAnonymously = () => {
+      firebaseAuth
+        .signInAnonymously()
+        .then(() => navigate("Overview", { type: "anonymous" }))
+        .catch((error) => {
+          this.setState({ errorMessage: error.message }, () => {
+            console.log(error);
+          });
+        });
+    };
+
     return (
       <View style={styles.wrapper}>
         <SafeAreaView>
@@ -42,14 +56,14 @@ export class PeriodLength extends Component {
 
         <View style={styles.container}>
           <Text style={typography.h1}>Ange antal dagar du har mens</Text>
-          <Range average={4} arrayLength={20} />
+          <Range average={5} arrayLength={20} keyValue="periodLenght" />
           <View style={{ bottom: 20, position: "absolute" }}>
             <Button
               title="Fyll i senare"
               backgroundColor="secondary"
               font="buttonSecondary"
             />
-            <Button title="Fortsätt" />
+            <Button title="Fortsätt" onPress={() => signInAnonymously()} />
           </View>
         </View>
       </View>

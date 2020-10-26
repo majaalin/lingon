@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { firebaseAuth } from "../config/keys";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
 import Button from "../components/Button";
@@ -15,17 +14,6 @@ const styles = StyleSheet.create({
 });
 
 export default function Start({ navigation }) {
-  // signInAnonymously = () => {
-  //   firebaseAuth
-  //     .signInAnonymously()
-  //     .then(() => navigation.navigate("Overview", { type: "anonymous" }))
-  //     .catch((error) => {
-  //       this.setState({ errorMessage: error.message }, () => {
-  //         console.log(error);
-  //       });
-  //     });
-  // };
-
   return (
     <View style={styles.container}>
       <Text style={typography.h1}>Välkommen</Text>
