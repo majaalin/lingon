@@ -7,8 +7,6 @@ import typography from '../styles/typography';
 import { color } from 'react-native-reanimated';
 import CycleLength from '../screens/CycleLengthScreen';
 import { formatDistance, subDays } from 'date-fns';
-import { firebaseAuth } from '../config/keys';
-import firebase from 'firebase';
 
 let ovulationDate = ['2020-10-01', '2020-10-02', '2020-10-03', '2020-10-04'];
 
@@ -97,7 +95,6 @@ export class Calender extends Component {
   render() {
     return (
       <View>
-        <Text>{lastStartDate}</Text>
         <Text>{this.state.currentDate}</Text>
         <Calendar
           horizontal={true}
