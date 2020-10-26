@@ -6,11 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
     "prettier": "prettier --write '*.js'",
-    "format-code": "npm run prettier && npm run lint:fix",
-    "precommit": "lint-staged",
+    "format-code": "npm run prettier",
     "test": "jest"
   },
   "dependencies": {
@@ -49,27 +46,16 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "eslint": "^7.11.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.21.4",
-    "eslint-plugin-react-hooks": "^4.1.2",
     "husky": "^4.3.0",
     "jest-expo": "^39.0.0",
-    "lint-staged": "^10.4.0",
     "prettier": "2.1.2",
     "react-test-renderer": "^16.14.0"
   },
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      
     }
-  },
-  "lint-staged": {
-    "*.js": [],
-    "*.{js,css,md}": "prettier --write"
   },
   "jest": {
     "preset": "jest-expo",

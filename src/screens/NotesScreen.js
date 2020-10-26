@@ -12,12 +12,10 @@ const styles = StyleSheet.create({
   },
 });
 
-// eslint-disable-next-line react/prop-types
 export default function Notes({ navigation }) {
   return (
     <View style={styles.container}>
       <Text
-        // eslint-disable-next-line react/prop-types
         onPress={() => navigation.goBack()}
         label="Dismiss modal"
         style={typography.h1}
