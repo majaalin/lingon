@@ -53,9 +53,7 @@
   },
   "private": true,
   "husky": {
-    "hooks": {
-      
-    }
+    "hooks": {}
   },
   "jest": {
     "preset": "jest-expo",

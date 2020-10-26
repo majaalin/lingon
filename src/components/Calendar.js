@@ -1,59 +1,53 @@
-import React, { Component, useState } from "react";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { LocaleConfig } from "react-native-calendars";
-import colors from "../styles/colors";
-import typography from "../styles/typography";
-import { color } from "react-native-reanimated";
-import CycleLength from "../screens/CycleLengthScreen";
-import { formatDistance, subDays } from "date-fns";
+import React, { Component, useState } from 'react';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { LocaleConfig } from 'react-native-calendars';
+import colors from '../styles/colors';
+import typography from '../styles/typography';
+import { color } from 'react-native-reanimated';
+import CycleLength from '../screens/CycleLengthScreen';
+import { formatDistance, subDays } from 'date-fns';
+import { firebaseAuth } from '../config/keys';
+import firebase from 'firebase';
 
-const ls = require("local-storage");
+let ovulationDate = ['2020-10-01', '2020-10-02', '2020-10-03', '2020-10-04'];
 
-let date = ls.get("lastStartDate") || "2020-10-01T";
+let periodDate = ['2020-10-20'];
 
-let lastStartDate = date.split("T")[0];
-let periodLenght = ls.get("periodLenght");
-let cycleLength = ls.get("CycleLenght");
-
-let ovulationDate = ["2020-10-01", "2020-10-02", "2020-10-03", "2020-10-04"];
-
-let periodDate = [lastStartDate];
-
-LocaleConfig.locales["sv"] = {
+LocaleConfig.locales['sv'] = {
   monthNames: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "Maj",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Okt",
-    "Nov",
-    "Dec",
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Maj',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Dec',
   ],
   monthNamesShort: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "Maj",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Okt",
-    "Nov",
-    "Dec",
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Maj',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Dec',
   ],
-  dayNames: ["M", "T", "O", "T", "F", "L", "S"],
-  dayNamesShort: ["M", "T", "O", "T", "F", "L", "S"],
-  today: "Idag",
+  dayNames: ['M', 'T', 'O', 'T', 'F', 'L', 'S'],
+  dayNamesShort: ['M', 'T', 'O', 'T', 'F', 'L', 'S'],
+  today: 'Idag',
 };
-LocaleConfig.defaultLocale = "sv";
+LocaleConfig.defaultLocale = 'sv';
 
 export class Calender extends Component {
   constructor(props) {
@@ -109,14 +103,14 @@ export class Calender extends Component {
           horizontal={true}
           pagingEnabled={true}
           enableSwipeMonths={true}
-          markingType={"period"}
+          markingType={'period'}
           markedDates={{
             [this.state.date]: { selected: true },
           }}
           markedDates={this.state.markedPeriod}
           onDayPress={(day) => this.setState({ date: day.dateString })}
           onDayLongPress={(day) => {
-            console.log("selected day", day.dateString);
+            console.log('selected day', day.dateString);
           }}
           style={{
             margin: 20,
@@ -137,29 +131,29 @@ export class Calender extends Component {
             dotColor: colors.primary,
             arrowColor: colors.primary,
             monthTextColor: colors.primary,
-            textDayFontFamily: "KarlaRegular",
-            textMonthFontFamily: "KarlaBold",
-            textDayHeaderFontFamily: "KarlaRegular",
+            textDayFontFamily: 'KarlaRegular',
+            textMonthFontFamily: 'KarlaBold',
+            textDayHeaderFontFamily: 'KarlaRegular',
             textDayFontSize: 16,
             textMonthFontSize: 18,
             textDayHeaderFontSize: 16,
-            "stylesheet.calendar.header": {
+            'stylesheet.calendar.header': {
               week: {
                 marginTop: 20,
-                flexDirection: "row",
-                justifyContent: "space-between",
+                flexDirection: 'row',
+                justifyContent: 'space-between',
               },
               monthText: {
                 backgroundColor: colors.primary,
                 color: colors.white,
-                fontFamily: "BrandonBold",
+                fontFamily: 'BrandonBold',
                 fontSize: 18,
                 margin: 10,
                 width: 106,
                 padding: 8,
-                textAlign: "center",
+                textAlign: 'center',
                 borderRadius: 20,
-                overflow: "hidden",
+                overflow: 'hidden',
                 borderColor: colors.primary,
               },
             },

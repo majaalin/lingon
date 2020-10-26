@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
-import PageControl from "react-native-page-control";
-import Range from "../components/Range";
-import colors from "../styles/colors";
-import typography from "../styles/typography";
-import Button from "../components/Button";
-import { firebaseAuth } from "../config/keys";
-import firebase from "firebase";
-const ls = require("local-storage");
+import React, { Component } from 'react';
+import { View, Text, SafeAreaView, Dimensions, StyleSheet } from 'react-native';
+import PageControl from 'react-native-page-control';
+import Range from '../components/Range';
+import colors from '../styles/colors';
+import typography from '../styles/typography';
+import Button from '../components/Button';
+import { firebaseAuth } from '../config/keys';
+import firebase from 'firebase';
+const ls = require('local-storage');
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -17,27 +17,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.secondary,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
-const width = Dimensions.get("window").width;
+const width = Dimensions.get('window').width;
 
 export class PeriodLength extends Component {
   render() {
     const { navigate } = this.props.navigation;
 
     const signInAnonymously = () => {
-      let lastStartDate = ls.get("lastStartDate").split("T")[0];
-      let periodLenght = ls.get("periodLenght");
-      let cycleLenght = ls.get("CycleLenght");
+      let lastStartDate = ls.get('lastStartDate').split('T')[0];
+      let periodLenght = ls.get('periodLenght');
+      let cycleLenght = ls.get('CycleLenght');
       firebaseAuth
         .signInAnonymously()
         .then((result) => {
           firebase
             .firestore()
-            .collection("users")
+            .collection('users')
             .doc(firebase.auth().currentUser.uid)
             .set({
               lastStartDate: lastStartDate,
@@ -46,7 +46,7 @@ export class PeriodLength extends Component {
             });
           console.log(result);
         })
-        .then(() => navigate("Overview", { type: "anonymous" }))
+        .then(() => navigate('Overview', { type: 'anonymous' }))
         .catch((error) => {
           this.setState({ errorMessage: error.message }, () => {
             console.log(error);
@@ -73,7 +73,7 @@ export class PeriodLength extends Component {
         <View style={styles.container}>
           <Text style={typography.h1}>Ange antal dagar du har mens</Text>
           <Range average={5} arrayLength={20} keyValue="periodLenght" />
-          <View style={{ bottom: 20, position: "absolute" }}>
+          <View style={{ bottom: 20, position: 'absolute' }}>
             <Button
               title="Fyll i senare"
               backgroundColor="secondary"
