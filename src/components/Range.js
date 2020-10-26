@@ -56,6 +56,8 @@ const ItemToRender = ({ item, index }, indexSelected, vertical) => {
 };
 
 const Range = ({ average, arrayLength, keyValue }) => {
+  ls.set(keyValue, average);
+
   function handleChange(index) {
     setSelected(index);
     ls.set(keyValue, index);

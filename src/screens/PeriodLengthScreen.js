@@ -6,6 +6,7 @@ import colors from "../styles/colors";
 import typography from "../styles/typography";
 import Button from "../components/Button";
 import { firebaseAuth } from "../config/keys";
+import firebase from "firebase";
 const ls = require("local-storage");
 
 const styles = StyleSheet.create({
@@ -28,8 +29,23 @@ export class PeriodLength extends Component {
     const { navigate } = this.props.navigation;
 
     const signInAnonymously = () => {
+      let lastStartDate = ls.get("lastStartDate").split("T")[0];
+      let periodLenght = ls.get("periodLenght");
+      let cycleLenght = ls.get("CycleLenght");
       firebaseAuth
         .signInAnonymously()
+        .then((result) => {
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+              lastStartDate: lastStartDate,
+              periodLenght: periodLenght,
+              cycleLenght: cycleLenght,
+            });
+          console.log(result);
+        })
         .then(() => navigate("Overview", { type: "anonymous" }))
         .catch((error) => {
           this.setState({ errorMessage: error.message }, () => {

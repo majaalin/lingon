@@ -10,6 +10,9 @@ const DatePicker = () => {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(true);
 
+  const today = new Date();
+  ls.set("lastStartDate", today);
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");

@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import colors from "../styles/colors";
 import typography from "../styles/typography";
+import { firebaseAuth } from "../config/keys";
 
 const ls = require("local-storage");
 
