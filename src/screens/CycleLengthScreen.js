@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
-import PageControl from "react-native-page-control";
-import Range from "../components/Range";
-import colors from "../styles/colors";
-import typography from "../styles/typography";
-import Button from "../components/Button";
-const ls = require("local-storage");
+import React, { Component } from 'react';
+import { View, Text, SafeAreaView, Dimensions, StyleSheet } from 'react-native';
+import PageControl from 'react-native-page-control';
+import Range from '../components/Range';
+import colors from '../styles/colors';
+import typography from '../styles/typography';
+import Button from '../components/Button';
+const ls = require('local-storage');
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.secondary,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
-const width = Dimensions.get("window").width;
+const width = Dimensions.get('window').width;
 
 export class CycleLength extends Component {
   render() {
@@ -45,8 +45,8 @@ export class CycleLength extends Component {
 
         <View style={styles.container}>
           <Text style={typography.h1}>Ange längd på din menscykel</Text>
-          <Range average={28} arrayLength={40} keyValue="CycleLenght" />
-          <View style={{ bottom: 20, position: "absolute" }}>
+          <Range average={28} arrayLength={40} keyValue="CycleLength" />
+          <View style={{ bottom: 20, position: 'absolute' }}>
             <Button
               title="Fyll i senare"
               backgroundColor="secondary"
@@ -54,7 +54,7 @@ export class CycleLength extends Component {
             />
             <Button
               title="Fortsätt"
-              onPress={() => navigate("PeriodLengthScreen")}
+              onPress={() => navigate('PeriodLengthScreen')}
             />
           </View>
         </View>

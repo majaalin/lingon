@@ -30,8 +30,8 @@ export class PeriodLength extends Component {
 
     const signInAnonymously = () => {
       let lastStartDate = ls.get('lastStartDate').split('T')[0];
-      let periodLenght = ls.get('periodLenght');
-      let cycleLenght = ls.get('CycleLenght');
+      let periodLength = ls.get('periodLength');
+      let cycleLength = ls.get('CycleLength');
       firebaseAuth
         .signInAnonymously()
         .then((result) => {
@@ -41,8 +41,8 @@ export class PeriodLength extends Component {
             .doc(firebase.auth().currentUser.uid)
             .set({
               lastStartDate: lastStartDate,
-              periodLenght: periodLenght,
-              cycleLenght: cycleLenght,
+              periodLength: periodLength,
+              cycleLength: cycleLength,
             });
           console.log(result);
         })
@@ -72,7 +72,7 @@ export class PeriodLength extends Component {
 
         <View style={styles.container}>
           <Text style={typography.h1}>Ange antal dagar du har mens</Text>
-          <Range average={5} arrayLength={20} keyValue="periodLenght" />
+          <Range average={5} arrayLength={20} keyValue="periodLength" />
           <View style={{ bottom: 20, position: 'absolute' }}>
             <Button
               title="Fyll i senare"
