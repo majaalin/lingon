@@ -1,4 +1,6 @@
 import React, { Component, useState } from 'react';
+import { firebaseAuth } from '../config/keys';
+import firebase from 'firebase';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LocaleConfig } from 'react-native-calendars';
@@ -8,9 +10,11 @@ import { color } from 'react-native-reanimated';
 import CycleLength from '../screens/CycleLengthScreen';
 import { formatDistance, subDays } from 'date-fns';
 
+const db = firebase.firestore();
+
 let ovulationDate = ['2020-10-01', '2020-10-02', '2020-10-03', '2020-10-04'];
 
-let periodDate = ['2020-10-20'];
+let expectedPeriodDate = ['2020-10-20'];
 
 LocaleConfig.locales['sv'] = {
   monthNames: [
@@ -61,7 +65,7 @@ export class Calender extends Component {
   }
 
   colorDate = () => {
-    let periodDateColored = periodDate.reduce(
+    let expectedPeriodDateColored = expectedPeriodDate.reduce(
       (c, v) =>
         Object.assign(c, {
           [v]: {
@@ -87,7 +91,10 @@ export class Calender extends Component {
       {}
     );
 
-    const markedPeriod = Object.assign(periodDateColored, ovulationDateColored);
+    const markedPeriod = Object.assign(
+      expectedPeriodDateColored,
+      ovulationDateColored
+    );
 
     this.setState({ markedPeriod: markedPeriod });
   };
@@ -95,7 +102,7 @@ export class Calender extends Component {
   render() {
     return (
       <View>
-        <Text>{this.state.currentDate}</Text>
+        {/* <Text>{this.state.currentDate}</Text> */}
         <Calendar
           horizontal={true}
           pagingEnabled={true}

@@ -19,18 +19,18 @@ const styles = StyleSheet.create({
 });
 
 export default function Overview() {
-  let [cycleLenght, setCycleLenght] = useState(0);
-  let [lastStartDate, setLastStartDate] = useState(0);
-  let [periodLenght, setPeriodLenght] = useState(0);
+  const [cycleLength, setCycleLength] = useState(0);
+  const [lastStartDate, setLastStartDate] = useState(0);
+  const [periodLength, setPeriodLength] = useState(0);
 
   db.collection('users')
     .doc(firebase.auth().currentUser.uid)
     .get()
     .then(function (doc) {
       if (doc.exists) {
-        setCycleLenght(doc.data().cycleLenght);
+        setCycleLength(doc.data().cycleLength);
         setLastStartDate(doc.data().lastStartDate);
-        setPeriodLenght(doc.data().periodLenght);
+        setPeriodLength(doc.data().periodLength);
       } else {
         // doc.data() will be undefined in this case
         console.log('No such document!');
@@ -41,8 +41,8 @@ export default function Overview() {
     <View style={styles.container}>
       <Text style={typography.buttonSecondary}>3 dagar kvar</Text>
       <Text>Senaste mensstart: {lastStartDate}</Text>
-      <Text>Antal mensdagar: {periodLenght}</Text>
-      <Text>Menslängd: {cycleLenght}</Text>
+      <Text>Antal mensdagar: {periodLength}</Text>
+      <Text>Menslängd: {cycleLength}</Text>
       <StatusBar barStyle="light-content" />
     </View>
   );
