@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
 });
 
 export default function Overview() {
-  const [cycleLenght, setCycleLenght] = useState(0);
-  const [lastStartDate, setLastStartDate] = useState(0);
-  const [periodLenght, setPeriodLenght] = useState(0);
+  let [cycleLenght, setCycleLenght] = useState(0);
+  let [lastStartDate, setLastStartDate] = useState(0);
+  let [periodLenght, setPeriodLenght] = useState(0);
 
   db.collection('users')
     .doc(firebase.auth().currentUser.uid)

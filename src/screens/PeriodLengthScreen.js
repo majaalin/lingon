@@ -29,9 +29,12 @@ export class PeriodLength extends Component {
     const { navigate } = this.props.navigation;
 
     const signInAnonymously = () => {
-      let lastStartDate = ls.get('lastStartDate').split('T')[0];
-      let periodLenght = ls.get('periodLenght');
-      let cycleLenght = ls.get('CycleLenght');
+      const today = new Date();
+      let lastStartDate =
+        (ls.get('lastStartDate') && ls.get('lastStartDate')) || today;
+      let periodLenght =
+        (ls.get('periodLenght') && ls.get('periodLenght')) || 5;
+      let cycleLenght = (ls.get('CycleLenght') && ls.get('CycleLenght')) || 28;
       firebaseAuth
         .signInAnonymously()
         .then((result) => {

@@ -27,7 +27,6 @@ export default {
     fontFamily: 'KarlaRegular',
     fontSize: 18,
     color: colors.primary,
-    textAlign: 'center',
   },
   p: {
     fontFamily: 'KarlaRegular',

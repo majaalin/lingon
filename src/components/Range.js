@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import SmoothPicker from "react-native-smooth-picker";
-import colors from "../styles/colors";
-import typography from "../styles/typography";
-const ls = require("local-storage");
+import React, { useRef, useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import SmoothPicker from 'react-native-smooth-picker';
+import colors from '../styles/colors';
+import typography from '../styles/typography';
+const ls = require('local-storage');
 
 const opacities = {
   0: 1,
@@ -56,8 +56,6 @@ const ItemToRender = ({ item, index }, indexSelected, vertical) => {
 };
 
 const Range = ({ average, arrayLength, keyValue }) => {
-  ls.set(keyValue, average);
-
   function handleChange(index) {
     setSelected(index);
     ls.set(keyValue, index);
@@ -85,12 +83,12 @@ const Range = ({ average, arrayLength, keyValue }) => {
 const styles = StyleSheet.create({
   wrapperHorizontal: {
     height: 150,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   OptionWrapper: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: 4,
     marginRight: 4,
     borderWidth: 3,

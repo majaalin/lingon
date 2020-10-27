@@ -1,23 +1,20 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import colors from "../styles/colors";
-import typography from "../styles/typography";
-const ls = require("local-storage");
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import colors from '../styles/colors';
+import typography from '../styles/typography';
+const ls = require('local-storage');
 
 const DatePicker = () => {
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
+  const [mode, setMode] = useState('date');
   const [show, setShow] = useState(true);
-
-  const today = new Date();
-  ls.set("lastStartDate", today);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
+    setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    ls.set("lastStartDate", currentDate);
+    ls.set('lastStartDate', currentDate);
   };
 
   const showMode = (currentMode) => {
@@ -26,7 +23,7 @@ const DatePicker = () => {
   };
 
   const showDatepicker = () => {
-    showMode("date");
+    showMode('date');
   };
 
   return (
