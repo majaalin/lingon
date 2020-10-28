@@ -10,6 +10,7 @@ import {
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import NotesButton from '../components/NotesButton';
+const ls = require('local-storage');
 
 const styles = StyleSheet.create({
   container: {

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Overview() {
+export default function Overview({ navigation }) {
   const [cycleLength, setCycleLength] = useState(0);
   const [lastStartDate, setLastStartDate] = useState(0);
   const [periodLength, setPeriodLength] = useState(0);
@@ -39,7 +39,12 @@ export default function Overview() {
 
   return (
     <View style={styles.container}>
-      <Text style={typography.buttonSecondary}>3 dagar kvar</Text>
+      <Text
+        style={typography.buttonSecondary}
+        onPress={() => navigation.navigate('SettingsModal')}
+      >
+        3 dagar kvar
+      </Text>
       <Text>Senaste mensstart: {lastStartDate}</Text>
       <Text>Antal mensdagar: {periodLength}</Text>
       <Text>Menslängd: {cycleLength}</Text>

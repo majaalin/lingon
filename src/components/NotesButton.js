@@ -5,9 +5,25 @@ import typography from '../styles/typography';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 
+const ls = require('local-storage');
+const db = firebase.firestore();
+
 let notesArray = [];
 
 function NotesButton({ title, date }) {
+  const [pressed, setPressed] = useState(false);
+  db.collection(firebase.auth().currentUser.uid)
+    .doc(date)
+    .get()
+    .then(function (doc) {
+      if (doc.exists) {
+        ls.set('hej', doc.data().Note);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('No such document!');
+      }
+    });
+
   const onPressNote = () => {
     if (pressed) {
       setPressed(false);
@@ -15,8 +31,8 @@ function NotesButton({ title, date }) {
       notesArray.splice(notesArrayIndex, 1);
       firebase
         .firestore()
-        .collection('notes')
-        .doc(firebase.auth().currentUser.uid)
+        .collection(firebase.auth().currentUser.uid)
+        .doc(date)
         .update({
           Note: notesArray,
         });
@@ -25,15 +41,26 @@ function NotesButton({ title, date }) {
       notesArray.push(title);
       firebase
         .firestore()
-        .collection('notes')
-        .doc(firebase.auth().currentUser.uid)
+        .collection(firebase.auth().currentUser.uid)
+        .doc(date)
         .set({
-          Date: date,
           Note: notesArray,
         });
     }
   };
-  const [pressed, setPressed] = useState(false);
+
+  const hejhejhej = ls.get('hej') || ['empty'];
+
+  if (hejhejhej.includes(title)) {
+    return (
+      <TouchableOpacity
+        style={styles.pressedButton}
+        onPress={() => onPressNote({ title, date })}
+      >
+        <Text style={typography.buttonPrimary}>{title}</Text>
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableOpacity
       style={pressed ? styles.pressedButton : styles.button}
