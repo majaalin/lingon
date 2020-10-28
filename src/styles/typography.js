@@ -44,7 +44,7 @@ export default {
     color: colors.secondary,
   },
   buttonPrimary: {
-    fontFamily: 'KarlaBold',
+    fontFamily: 'KarlaRegular',
     fontSize: 16,
     color: colors.white,
   },

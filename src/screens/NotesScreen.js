@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
+import NotesButton from '../components/NotesButton';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
     justifyContent: 'center',
-    margin: 20,
+    marginLeft: 20,
   },
   button: {
     borderColor: colors.primary,
@@ -42,38 +43,34 @@ const styles = StyleSheet.create({
     borderRadius: 42 / 2,
     marginRight: 8,
     marginTop: 18,
-    color: colors.primary,
+    backgroundColor: colors.primary,
     fontSize: 16,
   },
 });
 
-let symptoms = ['Nere', 'PMS', 'Mensvärk', 'Glad', 'Ledsen'];
-let period = ['Lätt', 'Måttlig', 'Riklig'];
-let sex = ['Skyddat sex', 'Oskyddat sex'];
+let today = new Date();
+let date =
+  today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+let symptomNotes = ['Nere', 'PMS', 'Mensvärk', 'Glad', 'Ledsen'];
+let periodNotes = ['Lätt', 'Måttlig', 'Riklig'];
+let sexNotes = ['Skyddat sex', 'Oskyddat sex'];
 
 export default function Notes({ navigation }) {
-  const [pressed, setPressed] = useState(false);
-
   return (
     <View style={styles.container}>
       <Text
         onPress={() => navigation.goBack()}
         label="Dismiss modal"
-        style={typography.h1}
+        style={{ marginBottom: 40 }}
       >
-        Anteckningar
+        {date}
       </Text>
       <Text style={typography.h5}>Symptom</Text>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', marginBottom: 40 }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {symptoms.map((symptom) => (
-            <TouchableOpacity
-              style={pressed ? styles.button : styles.pressedButton}
-              value={symptom}
-              onClick={() => setPressed(true)}
-            >
-              <Text style={typography.p}>{symptom}</Text>
-            </TouchableOpacity>
+          {symptomNotes.map((symptom) => (
+            <NotesButton title={symptom} date={date} />
           ))}
         </ScrollView>
       </View>
@@ -84,6 +81,18 @@ export default function Notes({ navigation }) {
         onChangeText={(text) => onChangeText(text)}
         value={value}
       ></TextInput> */}
+      <Text style={typography.h5}>Mens</Text>
+      <View style={{ flexDirection: 'row', marginBottom: 40 }}>
+        {periodNotes.map((period) => (
+          <NotesButton title={period} date={date} />
+        ))}
+      </View>
+      <Text style={typography.h5}>Sex</Text>
+      <View style={{ flexDirection: 'row', marginBottom: 40 }}>
+        {sexNotes.map((sex) => (
+          <NotesButton title={sex} date={date} />
+        ))}
+      </View>
     </View>
   );
 }
