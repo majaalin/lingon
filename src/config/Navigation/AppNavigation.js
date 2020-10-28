@@ -1,21 +1,22 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useFonts } from "expo-font";
-import { AppLoading } from "expo";
-import { Entypo } from "@expo/vector-icons";
-import colors from "../../styles/colors";
-import OverviewScreen from "../../screens/OverviewScreen";
-import NotesScreen from "../../screens/NotesScreen";
-import CalendarScreen from "../../screens/CalendarScreen";
-import StartScreen from "../../screens/StartScreen";
-import RegisterScreen from "../../screens/RegisterScreen";
-import LoginScreen from "../../screens/LoginScreen";
-import KarlaBold from "../../assets/fonts/Karla-Bold.ttf";
-import KarlaRegular from "../../assets/fonts/Karla-Regular.ttf";
-import BrandonBold from "../../assets/fonts/BrandonGrotesque-Bold.ttf";
-import BrandonRegular from "../../assets/fonts/BrandonGrotesque-Regular.ttf";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
+import { Entypo } from '@expo/vector-icons';
+import colors from '../../styles/colors';
+import OverviewScreen from '../../screens/OverviewScreen';
+import NotesScreen from '../../screens/NotesScreen';
+import CalendarScreen from '../../screens/CalendarScreen';
+import StartScreen from '../../screens/StartScreen';
+import RegisterScreen from '../../screens/RegisterScreen';
+import LoginScreen from '../../screens/LoginScreen';
+import SettingsScreen from '../../screens/SettingsScreen';
+import KarlaBold from '../../assets/fonts/Karla-Bold.ttf';
+import KarlaRegular from '../../assets/fonts/Karla-Regular.ttf';
+import BrandonBold from '../../assets/fonts/BrandonGrotesque-Bold.ttf';
+import BrandonRegular from '../../assets/fonts/BrandonGrotesque-Regular.ttf';
 
 export default function AppNavigation() {
   const [fontsLoaded] = useFonts({
@@ -34,7 +35,7 @@ export default function AppNavigation() {
         inactiveTintColor: colors.secondary,
         labelStyle: {
           fontSize: 16,
-          fontFamily: "BrandonBold",
+          fontFamily: 'BrandonBold',
         },
         style: {},
       }}
@@ -51,7 +52,7 @@ export default function AppNavigation() {
               activeTintColor="colors.primary"
             />
           ),
-          title: "Överblick",
+          title: 'Överblick',
         }}
       />
 
@@ -62,12 +63,12 @@ export default function AppNavigation() {
           tabBarIcon: ({ color }) => (
             <Entypo name="plus" color={color} size={26} />
           ),
-          title: "Anteckningar",
+          title: 'Anteckningar',
         }}
         listeners={({ navigation }) => ({
           tabPress: (e) => {
             e.preventDefault();
-            navigation.navigate("NotesModal");
+            navigation.navigate('NotesModal');
           },
         })}
       />
@@ -79,7 +80,7 @@ export default function AppNavigation() {
           tabBarIcon: ({ color }) => (
             <Entypo name="water" color={color} size={26} />
           ),
-          title: "Kalender",
+          title: 'Kalender',
         }}
       />
     </AppTabs.Navigator>
@@ -114,6 +115,11 @@ export default function AppNavigation() {
       <RootStack.Screen
         name="NotesModal"
         component={NotesScreen}
+        options={{ animationEnabled: true }}
+      />
+      <RootStack.Screen
+        name="SettingsModal"
+        component={SettingsScreen}
         options={{ animationEnabled: true }}
       />
     </RootStack.Navigator>
