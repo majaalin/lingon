@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
@@ -7,7 +7,6 @@ import { LocaleConfig } from 'react-native-calendars';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import { color } from 'react-native-reanimated';
-import CycleLength from '../screens/CycleLengthScreen';
 import { formatDistance, subDays } from 'date-fns';
 
 const db = firebase.firestore();
@@ -51,12 +50,13 @@ LocaleConfig.locales['sv'] = {
 };
 LocaleConfig.defaultLocale = 'sv';
 
-export class Calender extends Component {
+export class PeriodCalendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       markedPeriod: null,
       currentDate: null,
+      cycleLength: null,
     };
   }
 
@@ -97,12 +97,29 @@ export class Calender extends Component {
     );
 
     this.setState({ markedPeriod: markedPeriod });
+
+    db.collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          let userCycleLength = doc.data().cycleLength;
+          this.setState({ cycleLength: { userCycleLength } });
+          console.log(userCycleLength);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log('No such document!');
+        }
+      });
   };
 
   render() {
     return (
       <View>
         {/* <Text>{this.state.currentDate}</Text> */}
+        {/* <Text>{lastStartDate}</Text> */}
+        <Text>{this.state.cycleLength}</Text>
+        {/* <Text>{periodLength}</Text> */}
         <Calendar
           horizontal={true}
           pagingEnabled={true}
@@ -168,4 +185,4 @@ export class Calender extends Component {
   }
 }
 
-export default Calender;
+export default PeriodCalendar;
