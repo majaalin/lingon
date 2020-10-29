@@ -6,6 +6,7 @@ import { firebaseAuth } from '../config/keys';
 import { Entypo } from '@expo/vector-icons';
 import firebase from 'firebase';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Button from '../components/Button';
 
 const db = firebase.firestore();
 
@@ -14,8 +15,12 @@ const ls = require('local-storage');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 60,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
     backgroundColor: colors.secondary,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   wrapper: {
     flexDirection: 'row',
@@ -26,6 +31,13 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     height: 42,
     marginBottom: 11,
+    width: '100%',
+  },
+  picture: {
+    width: 152,
+    height: 152,
+    backgroundColor: colors.white,
+    borderRadius: 152 / 2,
   },
 });
 
@@ -34,28 +46,12 @@ export default function Settings({ navigation }) {
   const [lastStartDate, setLastStartDate] = useState(0);
   const [periodLength, setPeriodLength] = useState(0);
 
-  db.collection('users')
-    .doc(firebase.auth().currentUser.uid)
-    .get()
-    .then(function (doc) {
-      if (doc.exists) {
-        setCycleLength(doc.data().cycleLength);
-        setLastStartDate(doc.data().lastStartDate);
-        setPeriodLength(doc.data().periodLength);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
-      }
-    });
-
   return (
     <View style={styles.container}>
-      <Text
-        style={typography.buttonSecondary}
-        onPress={() => navigation.goBack()}
-      >
+      <Text style={typography.h1} onPress={() => navigation.goBack()}>
         Settings
       </Text>
+      <View style={styles.picture}></View>
       <View style={styles.wrapper}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Entypo name="drop" color={colors.primary} size={26} />
