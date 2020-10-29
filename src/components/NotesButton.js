@@ -8,10 +8,9 @@ import firebase from 'firebase';
 const ls = require('local-storage');
 const db = firebase.firestore();
 
-let notesArray = [];
-
 function NotesButton({ title, date }) {
   const [pressed, setPressed] = useState(false);
+  const [notesArray, setNotesArray] = useState([]);
 
   useEffect(() => {
     setPressed();
@@ -22,11 +21,10 @@ function NotesButton({ title, date }) {
     .get()
     .then(function (doc) {
       if (doc.exists) {
-        notesArray = doc.data().Note;
+        setNotesArray(doc.data().Note);
+        return;
       } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
-        setPressed(false);
+        setNotesArray([]);
       }
     });
 
