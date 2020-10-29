@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
@@ -12,20 +12,26 @@ let notesArray = [];
 
 function NotesButton({ title, date }) {
   const [pressed, setPressed] = useState(false);
+
+  useEffect(() => {
+    setPressed();
+  }, [pressed]);
+
   db.collection(firebase.auth().currentUser.uid)
     .doc(date)
     .get()
     .then(function (doc) {
       if (doc.exists) {
-        ls.set('hej', doc.data().Note);
+        notesArray = doc.data().Note;
       } else {
         // doc.data() will be undefined in this case
         console.log('No such document!');
+        setPressed(false);
       }
     });
 
   const onPressNote = () => {
-    if (pressed) {
+    if (pressed || notesArray.includes(title)) {
       setPressed(false);
       const notesArrayIndex = notesArray.indexOf(title);
       notesArray.splice(notesArrayIndex, 1);
@@ -38,7 +44,9 @@ function NotesButton({ title, date }) {
         });
     } else {
       setPressed(true);
-      notesArray.push(title);
+      if (!notesArray.includes(title)) {
+        notesArray.push(title);
+      }
       firebase
         .firestore()
         .collection(firebase.auth().currentUser.uid)
@@ -49,9 +57,7 @@ function NotesButton({ title, date }) {
     }
   };
 
-  const hejhejhej = ls.get('hej') || ['empty'];
-
-  if (hejhejhej.includes(title)) {
+  if (notesArray.includes(title)) {
     return (
       <TouchableOpacity
         style={styles.pressedButton}
@@ -63,11 +69,23 @@ function NotesButton({ title, date }) {
   }
   return (
     <TouchableOpacity
-      style={pressed ? styles.pressedButton : styles.button}
+      style={
+        pressed
+          ? styles.pressedButton
+          : styles.button && notesArray.includes(title)
+          ? styles.pressedButton
+          : styles.button
+      }
       onPress={() => onPressNote({ title, date })}
     >
       <Text
-        style={pressed ? typography.buttonPrimary : typography.buttonSecondary}
+        style={
+          pressed
+            ? typography.buttonPrimary
+            : typography.buttonSecondary && notesArray.includes(title)
+            ? typography.buttonPrimary
+            : typography.buttonSecondary
+        }
       >
         {title}
       </Text>
