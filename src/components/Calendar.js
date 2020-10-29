@@ -8,8 +8,6 @@ import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 const db = firebase.firestore();
 
-let ovulationDate = ['2020-10-01', '2020-10-02', '2020-10-03', '2020-10-04'];
-
 LocaleConfig.locales['sv'] = {
   monthNames: [
     'Jan',
@@ -53,7 +51,11 @@ export default function PeriodCalendar() {
   const [markedPeriod, setMarkedPeriod] = useState(0);
   const [currentDate, setCurrentDate] = useState(0);
   const [date, setDate] = useState(0);
-  const expectedPeriodDate = useState('2020-10-20', '2020-10-21', '2020-10-22');
+  const expectedPeriodDates = useState(
+    '2020-10-20',
+    '2020-10-21',
+    '2020-10-22'
+  );
   const expectedOvulationDate = useState(
     '2020-10-20',
     '2020-10-21',
@@ -75,7 +77,7 @@ export default function PeriodCalendar() {
     });
 
   // colorDate = () => {
-  //   let expectedPeriodDateColored = expectedPeriodDate.reduce(
+  //   let expectedPeriodDateColored = expectedPeriodDates.reduce(
   //     (c, v) =>
   //       Object.assign(c, {
   //         [v]: {
@@ -111,23 +113,187 @@ export default function PeriodCalendar() {
 
   return (
     <View>
-      <Text>{cycleLength}</Text>
+      {/* <Text>{cycleLength}</Text>
       <Text>{periodLength}</Text>
-      <Text>{lastStartDate}</Text>
+      <Text>{lastStartDate}</Text> */}
       <Calendar
         horizontal={true}
         pagingEnabled={true}
         enableSwipeMonths={true}
         markingType={'period'}
         markedDates={{
-          ['2020-10-20']: {
+          ['2020-09-17']: {
+            selected: true,
+            startingDay: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-18']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-19']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-20']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-21']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-22']: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+            marked: true,
+            selectedColor: colors.primary,
+            color: colors.secondary,
+          },
+          ['2020-09-23']: {
+            selected: true,
+            endingDay: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-02']: {
             selected: true,
             startingDay: true,
             color: colors.primary,
             disableTouchEvent: true,
             selectedDayTextColor: colors.white,
           },
+          ['2020-09-03']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-04']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-05']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-06']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            backgroundColor: colors.primary,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-07']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            backgroundColor: colors.primary,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-09-08']: {
+            selected: true,
+            endingDay: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            backgroundColor: colors.primary,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-18']: {
+            selected: true,
+            startingDay: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-19']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-20']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
           ['2020-10-21']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-22']: {
+            selected: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-23']: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+            marked: true,
+            selectedColor: colors.primary,
+            color: colors.secondary,
+          },
+          ['2020-10-24']: {
+            selected: true,
+            endingDay: true,
+            color: colors.secondary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-06']: {
+            selected: true,
+            startingDay: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-07']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-08']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-09']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-10']: {
+            selected: true,
+            color: colors.primary,
+            disableTouchEvent: true,
+            backgroundColor: colors.primary,
+            selectedDayTextColor: colors.white,
+          },
+          ['2020-10-11']: {
             selected: true,
             endingDay: true,
             color: colors.primary,
