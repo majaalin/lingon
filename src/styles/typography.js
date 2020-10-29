@@ -39,9 +39,10 @@ export default {
     color: colors.primary,
   },
   navigation: {
-    fontFamily: 'BrandonBold',
-    fontSize: 14,
-    color: colors.secondary,
+    fontFamily: 'BrandonRegular',
+    fontSize: 16,
+    color: colors.primary,
+    textAlign: 'center',
   },
   buttonPrimary: {
     fontFamily: 'KarlaRegular',

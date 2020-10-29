@@ -7,6 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 import firebase from 'firebase';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Button from '../components/Button';
+import Header from '../components/Header';
 
 const db = firebase.firestore();
 
@@ -15,12 +16,12 @@ const ls = require('local-storage');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
     backgroundColor: colors.secondary,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 70,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   wrapper: {
     flexDirection: 'row',
@@ -48,6 +49,11 @@ export default function Settings({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Header
+        title="Inställningar"
+        icon="cross"
+        onPress={() => navigation.goBack()}
+      />
       <Text style={typography.h1} onPress={() => navigation.goBack()}>
         Settings
       </Text>
