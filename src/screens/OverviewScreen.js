@@ -5,20 +5,12 @@ import typography from '../styles/typography';
 import Button from '../components/Button';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
-
-const db = firebase.firestore();
-
-const ls = require('local-storage');
+import Header from '../components/Header';
 
 let date = new Date();
 let today = date.toISOString().split('T')[0];
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
-
-let periodDay =
-  date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-
-let testArray = ['2020-10-20', '2020-10-21', '2020-10-22'];
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +18,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 70,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
 });
 
@@ -80,6 +75,11 @@ export default function Overview({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Header
+        title="Överblick"
+        icon="cog"
+        onPress={() => navigation.navigate('SettingsModal')}
+      />
       <Text>Senaste mensstart: {lastStartDate}</Text>
       <Text>Antal mensdagar: {periodLength}</Text>
       <Text>Menslängd: {cycleLength}</Text>

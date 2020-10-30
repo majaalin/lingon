@@ -6,22 +6,23 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  SafeAreaView,
 } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import NotesButton from '../components/NotesButton';
 import CalendarStrip from 'react-native-calendar-strip';
+import Header from '../components/Header';
 const ls = require('local-storage');
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.secondary,
-    justifyContent: 'center',
-    paddingLeft: 20,
-    marginTop: 60,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    justifyContent: 'space-around',
+    marginTop: 70,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   button: {
     borderColor: colors.primary,
@@ -66,72 +67,75 @@ export default function Notes({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text
-        onPress={() => navigation.goBack()}
-        label="Dismiss modal"
-        style={typography.h1}
-      >
-        {selectedDate}
-      </Text>
+      <Header title="Symtom" icon="cross" onPress={() => navigation.goBack()} />
       <CalendarStrip
+        scrollable
+        calendarAnimation={{ type: 'sequence', duration: 30 }}
+        daySelectionAnimation={{
+          type: 'background',
+          duration: 300,
+          highlightColor: colors.primary,
+        }}
+        // scrollable={true}
         showMonth={false}
         selectedDate={selectedDate}
         onDateSelected={(date) => {
           const newDate = date.format('YYYY-MM-DD');
           setSelectedDate(newDate);
         }}
-        highlightColor={'#9265DC'}
         highlightDateNumberStyle={{
           color: colors.white,
-          backgroundColor: colors.primary,
-          padding: 10,
-          borderRadius: 50,
-          borderColor: 'green',
         }}
         highlightDateNameStyle={{
-          color: colors.primary,
+          color: colors.white,
         }}
-        markedDatesStyle={{ backgroundColor: colors.primary }}
         dateNumberStyle={{
           color: colors.primary,
-          padding: 10,
         }}
         dateNameStyle={{ color: colors.primary }}
         calendarColor={colors.white}
         iconLeft="none"
         iconRight="none"
         style={{
-          height: 60,
+          height: 50,
           marginRight: 20,
           borderRadius: 5,
+          marginLeft: 20,
+          marginTop: 60,
         }}
       />
-      <Text style={typography.h5}>Symptom</Text>
-      <View style={{ flexDirection: 'row', marginBottom: 40 }}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {symptomNotes.map((symptom) => (
-            <NotesButton title={symptom} date={selectedDate} />
-          ))}
-        </ScrollView>
-      </View>
-      {/* <TextInput
+      <View
+        style={{
+          paddingLeft: 20,
+        }}
+      >
+        <Text style={typography.h5}>Symptom</Text>
+        <View style={{ flexDirection: 'row', marginBottom: 40 }}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {symptomNotes.map((symptom) => (
+              <NotesButton title={symptom} date={selectedDate} />
+            ))}
+          </ScrollView>
+        </View>
+        {/* <TextInput
         style={styles.button}
         placeholder={'Lägg till symtom +'}
         placeholderTextColor={colors.primary}
         onChangeText={(text) => onChangeText(text)}
         value={value}
       ></TextInput> */}
-      <Text style={typography.h5}>Mens</Text>
-      <View style={{ flexDirection: 'row', marginBottom: 40 }}>
-        {periodNotes.map((period) => (
-          <NotesButton title={period} date={selectedDate} />
-        ))}
-      </View>
-      <Text style={typography.h5}>Sex</Text>
-      <View style={{ flexDirection: 'row', marginBottom: 40 }}>
-        {sexNotes.map((sex) => (
-          <NotesButton title={sex} date={selectedDate} />
-        ))}
+        <Text style={typography.h5}>Mens</Text>
+        <View style={{ flexDirection: 'row', marginBottom: 40 }}>
+          {periodNotes.map((period) => (
+            <NotesButton title={period} date={selectedDate} />
+          ))}
+        </View>
+        <Text style={typography.h5}>Sex</Text>
+        <View style={{ flexDirection: 'row', marginBottom: 40 }}>
+          {sexNotes.map((sex) => (
+            <NotesButton title={sex} date={selectedDate} />
+          ))}
+        </View>
       </View>
     </View>
   );
