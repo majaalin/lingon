@@ -54,9 +54,6 @@ export default function Settings({ navigation }) {
         icon="cross"
         onPress={() => navigation.goBack()}
       />
-      <Text style={typography.h1} onPress={() => navigation.goBack()}>
-        Settings
-      </Text>
       <View style={styles.picture}></View>
       <View style={styles.wrapper}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>

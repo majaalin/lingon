@@ -5,7 +5,6 @@ import typography from '../styles/typography';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 
-const ls = require('local-storage');
 const db = firebase.firestore();
 
 function NotesButton({ title, date }) {

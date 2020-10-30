@@ -68,45 +68,10 @@ export default function Notes({ navigation }) {
   return (
     <View style={styles.container}>
       <Header title="Symtom" icon="cross" onPress={() => navigation.goBack()} />
-      <CalendarStrip
-        scrollable
-        calendarAnimation={{ type: 'sequence', duration: 30 }}
-        daySelectionAnimation={{
-          type: 'background',
-          duration: 300,
-          highlightColor: colors.primary,
-        }}
-        // scrollable={true}
-        showMonth={false}
-        selectedDate={selectedDate}
-        onDateSelected={(date) => {
-          const newDate = date.format('YYYY-MM-DD');
-          setSelectedDate(newDate);
-        }}
-        highlightDateNumberStyle={{
-          color: colors.white,
-        }}
-        highlightDateNameStyle={{
-          color: colors.white,
-        }}
-        dateNumberStyle={{
-          color: colors.primary,
-        }}
-        dateNameStyle={{ color: colors.primary }}
-        calendarColor={colors.white}
-        iconLeft="none"
-        iconRight="none"
-        style={{
-          height: 50,
-          marginRight: 20,
-          borderRadius: 5,
-          marginLeft: 20,
-          marginTop: 60,
-        }}
-      />
       <View
         style={{
           paddingLeft: 20,
+          marginTop: 60,
         }}
       >
         <Text style={typography.h5}>Symptom</Text>
@@ -137,6 +102,39 @@ export default function Notes({ navigation }) {
           ))}
         </View>
       </View>
+      <CalendarStrip
+        calendarAnimation={{ type: 'sequence', duration: 30 }}
+        daySelectionAnimation={{
+          type: 'background',
+          duration: 300,
+          highlightColor: colors.primary,
+        }}
+        showMonth={false}
+        selectedDate={selectedDate}
+        onDateSelected={(date) => {
+          const newDate = date.format('YYYY-MM-DD');
+          setSelectedDate(newDate);
+        }}
+        highlightDateNumberStyle={{
+          color: colors.white,
+        }}
+        highlightDateNameStyle={{
+          color: colors.white,
+        }}
+        dateNumberStyle={{
+          color: colors.primary,
+        }}
+        dateNameStyle={{ color: colors.primary }}
+        calendarColor={colors.white}
+        iconLeft="none"
+        iconRight="none"
+        style={{
+          height: 60,
+          marginRight: 20,
+          borderRadius: 60 / 2,
+          marginLeft: 20,
+        }}
+      />
     </View>
   );
 }
