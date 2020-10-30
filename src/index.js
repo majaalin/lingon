@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import AppNavigation from "./config/Navigation/AppNavigation";
-import AuthNavigation from "./config/Navigation/AuthNavigation";
-import { View, Text } from "react-native";
-import * as firebase from "firebase";
+import React, { Component } from 'react';
+import AppNavigation from './config/Navigation/AppNavigation';
+import AuthNavigation from './config/Navigation/AuthNavigation';
+import { View, Text } from 'react-native';
+import * as firebase from 'firebase';
 
 export class App extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ export class App extends Component {
     if (!loaded) {
       return (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
           <Text>Loading...</Text>
         </View>
