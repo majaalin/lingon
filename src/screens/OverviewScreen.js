@@ -7,6 +7,8 @@ import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import Header from '../components/Header';
 
+const db = firebase.firestore();
+
 let date = new Date();
 let today = date.toISOString().split('T')[0];
 const month = date.toLocaleString('default', { month: 'long' });
