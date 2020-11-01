@@ -40,6 +40,10 @@ export default function Overview({ navigation }) {
       periodDays.push(today);
     }
 
+    if (!periodDays.includes(lastStartDate)) {
+      periodDays.push(lastStartDate);
+    }
+
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
