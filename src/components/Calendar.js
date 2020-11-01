@@ -45,263 +45,37 @@ LocaleConfig.locales['sv'] = {
 LocaleConfig.defaultLocale = 'sv';
 
 export default function PeriodCalendar() {
-  const [cycleLength, setCycleLength] = useState(0);
-  const [lastStartDate, setLastStartDate] = useState(0);
-  const [periodLength, setPeriodLength] = useState(0);
-  const [markedPeriod, setMarkedPeriod] = useState(0);
-  const [currentDate, setCurrentDate] = useState(0);
-  const [date, setDate] = useState(0);
-  const expectedPeriodDates = useState(
-    '2020-10-20',
-    '2020-10-21',
-    '2020-10-22'
-  );
-  const expectedOvulationDate = useState(
-    '2020-10-20',
-    '2020-10-21',
-    '2020-10-22'
-  );
+  const [markedPeriod, setMarkedPeriod] = useState([]);
+  const [period, setPeriod] = useState(['null']);
 
   db.collection('users')
     .doc(firebase.auth().currentUser.uid)
     .get()
     .then(function (doc) {
-      if (doc.exists) {
-        setCycleLength(doc.data().cycleLength);
-        setLastStartDate(doc.data().lastStartDate);
-        setPeriodLength(doc.data().periodLength);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
-      }
+      setPeriod(doc.data().periodDays);
     });
 
-  // colorDate = () => {
-  //   let expectedPeriodDateColored = expectedPeriodDates.reduce(
-  //     (c, v) =>
-  //       Object.assign(c, {
-  //         [v]: {
-  //           color: colors.primary,
-  //           textColor: colors.white,
-  //           endingDay: true,
-  //           startingDay: true,
-  //         },
-  //       }),
-  //     {}
-  //   );
-
-  //   let ovulationDateColored = ovulationDate.reduce(
-  //     (c, v) =>
-  //       Object.assign(c, {
-  //         [v]: {
-  //           color: colors.secondary,
-  //           textColor: colors.white,
-  //           endingDay: true,
-  //           startingDay: true,
-  //         },
-  //       }),
-  //     {}
-  //   );
-
-  //   const markedPeriod = Object.assign(
-  //     expectedPeriodDateColored,
-  //     ovulationDateColored
-  //   );
-
-  //   setMarkedPeriod(markedPeriod);
-  // };
+  let obj = period.reduce(
+    (c, v) =>
+      Object.assign(c, {
+        [v]: {
+          color: colors.primary,
+          textColor: colors.white,
+          endingDay: true,
+          startingDay: true,
+        },
+      }),
+    {}
+  );
 
   return (
     <View>
-      {/* <Text>{cycleLength}</Text>
-      <Text>{periodLength}</Text>
-      <Text>{lastStartDate}</Text> */}
       <Calendar
         horizontal={true}
         pagingEnabled={true}
         enableSwipeMonths={true}
         markingType={'period'}
-        markedDates={{
-          ['2020-09-17']: {
-            selected: true,
-            startingDay: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-18']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-19']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-20']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-21']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-22']: {
-            selected: true,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-            marked: true,
-            selectedColor: colors.primary,
-            color: colors.secondary,
-          },
-          ['2020-09-23']: {
-            selected: true,
-            endingDay: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-02']: {
-            selected: true,
-            startingDay: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-03']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-04']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-05']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-06']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            backgroundColor: colors.primary,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-07']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            backgroundColor: colors.primary,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-09-08']: {
-            selected: true,
-            endingDay: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            backgroundColor: colors.primary,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-18']: {
-            selected: true,
-            startingDay: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-19']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-20']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-21']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-22']: {
-            selected: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-23']: {
-            selected: true,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-            marked: true,
-            selectedColor: colors.primary,
-            color: colors.secondary,
-          },
-          ['2020-10-24']: {
-            selected: true,
-            endingDay: true,
-            color: colors.secondary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-06']: {
-            selected: true,
-            startingDay: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-07']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-08']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-09']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-10']: {
-            selected: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            backgroundColor: colors.primary,
-            selectedDayTextColor: colors.white,
-          },
-          ['2020-10-11']: {
-            selected: true,
-            endingDay: true,
-            color: colors.primary,
-            disableTouchEvent: true,
-            backgroundColor: colors.primary,
-            selectedDayTextColor: colors.white,
-          },
-        }}
+        markedDates={obj}
         onDayPress={(day) => setDate(day.dateString)}
         onDayLongPress={(day) => {
           console.log('selected day', day.dateString);
