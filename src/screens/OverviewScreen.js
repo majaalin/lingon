@@ -6,7 +6,7 @@ import Button from '../components/Button';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import Header from '../components/Header';
-
+import { addDays } from 'date-fns';
 const db = firebase.firestore();
 
 let date = new Date();

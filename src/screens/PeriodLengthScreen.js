@@ -7,6 +7,7 @@ import typography from '../styles/typography';
 import Button from '../components/Button';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
+import { addDays } from 'date-fns';
 const ls = require('local-storage');
 
 const styles = StyleSheet.create({
@@ -35,6 +36,14 @@ export class PeriodLength extends Component {
       let periodLength =
         (ls.get('periodLength') && ls.get('periodLength')) || 5;
       let cycleLength = (ls.get('CycleLength') && ls.get('CycleLength')) || 28;
+
+      let firstPeriod = [];
+
+      for (let i = 0; i < periodLength; i++) {
+        let date = addDays(new Date(lastStartDate), i);
+        firstPeriod.push(date.toISOString().split('T')[0]);
+      }
+
       firebaseAuth
         .signInAnonymously()
         .then((result) => {
@@ -46,7 +55,7 @@ export class PeriodLength extends Component {
               lastStartDate: lastStartDate.split('T')[0],
               periodLength: periodLength,
               cycleLength: cycleLength,
-              periodDays: lastStartDate.split('T')[0],
+              periodDays: firstPeriod,
             });
           console.log(result);
         })
