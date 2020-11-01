@@ -13,13 +13,15 @@ let date = new Date();
 let today = date.toISOString().split('T')[0];
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
+const daysLeftBeforePeriodBegins = 3;
+const currentDayOfPeriod = 1;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.secondary,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     marginTop: 70,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -31,29 +33,29 @@ export default function Overview({ navigation }) {
   const [lastStartDate, setLastStartDate] = useState(0);
   const [periodLength, setPeriodLength] = useState(0);
   const [pressed, setPressed] = useState(false);
-  const [currentPeriod, setCurrentPeriod] = useState([]);
+  const [periodDays, setPeriodDays] = useState([]);
 
   const addDates = () => {
-    if (!currentPeriod.includes(today)) {
-      currentPeriod.push(today);
+    if (!periodDays.includes(today)) {
+      periodDays.push(today);
     }
 
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then(function (doc) {
-        if (doc.exists && !currentPeriod.exists) {
+        if (doc.exists && !periodDays.exists) {
           firebase
             .firestore()
             .collection('users')
             .doc(firebase.auth().currentUser.uid)
             .update({
-              currentPeriod: currentPeriod,
+              periodDays: periodDays,
             });
-          console.log(currentPeriod);
+          console.log(periodDays);
           return;
         } else {
-          setCurrentPeriod([]);
+          setPeriodDays([]);
         }
       });
   };
@@ -82,17 +84,13 @@ export default function Overview({ navigation }) {
         icon="cog"
         onPress={() => navigation.navigate('SettingsModal')}
       />
-      <Text>Senaste mensstart: {lastStartDate}</Text>
-      <Text>Antal mensdagar: {periodLength}</Text>
-      <Text>Menslängd: {cycleLength}</Text>
-      <Text style={typography.h5}>{displayedDate}</Text>
-      <Text
-        style={typography.h1}
-        onPress={() => navigation.navigate('SettingsModal')}
-      >
-        3 dagar kvar
+      <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
+      <Text style={typography.h1}>
+        {pressed
+          ? `Dag ${currentDayOfPeriod}`
+          : `${daysLeftBeforePeriodBegins} dagar kvar`}
       </Text>
-      <View style={{ bottom: 100, position: 'absolute' }}>
+      <View style={{ bottom: 50 }}>
         <Button
           title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
           onPress={() => {
