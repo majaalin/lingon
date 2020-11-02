@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
-import Button from '../components/Button';
+import ButtonPrimary from '../components/ButtonPrimary';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import Header from '../components/Header';

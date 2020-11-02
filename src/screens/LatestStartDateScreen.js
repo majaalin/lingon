@@ -4,7 +4,8 @@ import PageControl from 'react-native-page-control';
 import DatePicker from '../components/DatePicker';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
-import Button from '../components/Button';
+import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonSecondary from '../components/ButtonSecondary';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -47,12 +48,12 @@ export class LatestStartDate extends Component {
           <DatePicker />
         </View>
         <View style={{ bottom: 30, position: 'absolute' }}>
-          <Button
+          <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
           />
-          <Button
+          <ButtonPrimary
             title="Fortsätt"
             onPress={() => navigate('CycleLengthScreen')}
           />

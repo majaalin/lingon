@@ -4,7 +4,8 @@ import PageControl from 'react-native-page-control';
 import Range from '../components/Range';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
-import Button from '../components/Button';
+import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonSecondary from '../components/ButtonSecondary';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import { addDays } from 'date-fns';
@@ -103,12 +104,12 @@ export class PeriodLength extends Component {
           <Range average={5} arrayLength={20} keyValue="periodLength" />
         </View>
         <View style={{ bottom: 30, position: 'absolute' }}>
-          <Button
+          <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
           />
-          <Button title="Fortsätt" onPress={() => signInAnonymously()} />
+          <ButtonPrimary title="Fortsätt" onPress={() => signInAnonymously()} />
         </View>
       </View>
     );

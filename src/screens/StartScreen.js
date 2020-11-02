@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
-import Button from '../components/Button';
+import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonSecondary from '../components/ButtonSecondary';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,13 +24,13 @@ export default function Start({ navigation }) {
         Svara på några frågor och vi kommer att anpassa appen för dig.
       </Text>
       <View style={{ bottom: 30, position: 'absolute' }}>
-        <Button
+        <ButtonSecondary
           title="Logga in"
           backgroundColor="secondary"
           font="buttonSecondary"
           onPress={() => navigation.navigate('Login')}
         />
-        <Button
+        <ButtonPrimary
           title="Kom igång"
           onPress={() => navigation.navigate('LatestStartDate')}
         />
