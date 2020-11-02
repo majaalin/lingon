@@ -46,24 +46,22 @@ LocaleConfig.defaultLocale = 'sv';
 
 export default function PeriodCalendar() {
   const [period, setPeriod] = useState(['null']);
-  const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState([]);
+  const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState([
+    'null',
+  ]);
 
-  const getUserData = () => {
+  if (period.includes('null') || estimatedMenstrualDays.includes('null')) {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then(function (doc) {
-        if (doc.exists && period === 'null') {
+        if (doc.exists) {
           setPeriod(doc.data().periodDays);
           setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays);
           return;
         }
       });
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, [period]);
+  }
 
   let markedPeriod = period.reduce(
     (c, v) =>
