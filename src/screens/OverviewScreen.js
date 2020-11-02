@@ -6,16 +6,15 @@ import ButtonPrimary from '../components/ButtonPrimary';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import Header from '../components/Header';
-import { addDays } from 'date-fns';
 const db = firebase.firestore();
 const ls = require('local-storage');
+import moment from 'moment';
+moment().format();
 
 let date = new Date();
 let today = date.toISOString().split('T')[0];
-today = '2020-11-10';
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
-const daysLeftBeforePeriodBegins = 3;
 const currentDayOfPeriod = 1;
 
 const styles = StyleSheet.create({
@@ -33,7 +32,19 @@ const styles = StyleSheet.create({
 export default function Overview({ navigation }) {
   const [pressed, setPressed] = useState(false);
   const [periodDays, setPeriodDays] = useState(['null']);
+  const [nextPeriodStartDate, setNextPeriodStartDate] = useState(0);
 
+  if (nextPeriodStartDate === 0) {
+    db.collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setNextPeriodStartDate(doc.data().nextPeriodStartDate);
+          return;
+        }
+      });
+  }
   if (periodDays.includes('null')) {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
@@ -73,6 +84,10 @@ export default function Overview({ navigation }) {
       setPressed(false);
     }
   };
+
+  const diff = moment(nextPeriodStartDate).diff(moment(today));
+
+  const daysLeftBeforePeriodBegins = moment.duration(diff).days();
 
   return (
     <View style={styles.container}>
