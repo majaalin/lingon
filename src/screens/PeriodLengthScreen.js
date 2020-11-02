@@ -44,6 +44,15 @@ export class PeriodLength extends Component {
         firstPeriod.push(date.toISOString().split('T')[0]);
       }
 
+      let estimatedMenstrualDays = [];
+
+      let nextPeriodStartDate = addDays(new Date(lastStartDate), cycleLength);
+
+      for (let i = 0; i < periodLength; i++) {
+        let date = addDays(new Date(nextPeriodStartDate), i);
+        estimatedMenstrualDays.push(date.toISOString().split('T')[0]);
+      }
+
       firebaseAuth
         .signInAnonymously()
         .then((result) => {
@@ -56,8 +65,8 @@ export class PeriodLength extends Component {
               periodLength: periodLength,
               cycleLength: cycleLength,
               periodDays: firstPeriod,
+              estimatedMenstrualDays: estimatedMenstrualDays,
             });
-          console.log(result);
         })
         .then(() => navigate('Overview', { type: 'anonymous' }))
         .catch((error) => {
