@@ -45,6 +45,30 @@ LocaleConfig.locales['sv'] = {
 
 LocaleConfig.defaultLocale = 'sv';
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.white,
+    borderRadius: 28,
+    width: 343,
+    height: 410,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginBottom: 50,
+  },
+  wrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    width: 200,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+});
+
 export default function PeriodCalendar() {
   const [period, setPeriod] = useState([ls.get('periodDays')]);
   const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState([
@@ -93,7 +117,7 @@ export default function PeriodCalendar() {
   const allMarked = Object.assign(markedPeriod, markedEstimatedMenstrualDays);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Calendar
         horizontal={true}
         pagingEnabled={true}
@@ -105,7 +129,6 @@ export default function PeriodCalendar() {
           console.log('selected day', day.dateString);
         }}
         style={{
-          margin: 20,
           borderRadius: 28,
           height: 410,
           width: 343,
@@ -151,6 +174,32 @@ export default function PeriodCalendar() {
           },
         }}
       />
+      <View style={styles.wrapper}>
+        <View style={styles.row}>
+          <View
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: 10 / 2,
+              backgroundColor: colors.primary,
+              marginRight: 10,
+            }}
+          ></View>
+          <Text style={typography.h4}>Mens</Text>
+        </View>
+        <View style={styles.row}>
+          <View
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: 10 / 2,
+              backgroundColor: colors.secondary,
+              marginRight: 10,
+            }}
+          ></View>
+          <Text style={typography.h4}>Förväntad mens</Text>
+        </View>
+      </View>
     </View>
   );
 }
