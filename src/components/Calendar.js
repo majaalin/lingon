@@ -53,7 +53,7 @@ export default function PeriodCalendar() {
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then(function (doc) {
-        if (doc.exists) {
+        if (doc.exists && period === 'null') {
           setPeriod(doc.data().periodDays);
           setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays);
           return;

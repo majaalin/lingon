@@ -33,16 +33,16 @@ export default function Overview({ navigation }) {
   const [pressed, setPressed] = useState(false);
   const [periodDays, setPeriodDays] = useState([]);
 
-  db.collection('users')
-    .doc(firebase.auth().currentUser.uid)
-    .get()
-    .then(function (doc) {
-      if (doc.exists) {
-        setPeriodDays(doc.data().periodDays);
-      }
-    });
-
   const addDates = () => {
+    db.collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setPeriodDays(doc.data().periodDays);
+        }
+      });
+
     if (!periodDays.includes(today)) {
       periodDays.push(today);
 

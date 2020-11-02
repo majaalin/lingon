@@ -1,14 +1,14 @@
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBhflAdWC_SfQNHc0Bfnfs50YXUxyxQJok",
-  authDomain: "lingon-efa1f.firebaseapp.com",
-  databaseURL: "https://lingon-efa1f.firebaseio.com",
-  projectId: "lingon-efa1f",
-  storageBucket: "lingon-efa1f.appspot.com",
-  messagingSenderId: "1096786685361",
-  appId: "1:1096786685361:web:34d7fbb8e5e0c73ebc2190",
-  measurementId: "G-14SESQM186",
+  apiKey: 'AIzaSyB3CE5XvAQripG33Gqt4ulAbZ9fB3OwH_M',
+  authDomain: 'lingon-app-5b652.firebaseapp.com',
+  databaseURL: 'https://lingon-app-5b652.firebaseio.com',
+  projectId: 'lingon-app-5b652',
+  storageBucket: 'lingon-app-5b652.appspot.com',
+  messagingSenderId: '465688609238',
+  appId: '1:465688609238:web:c014d3ef33ae6a8700e477',
+  measurementId: 'G-HE953G396L',
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
