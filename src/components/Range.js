@@ -94,6 +94,13 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 50,
     borderColor: colors.primary,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
   },
 });
 
