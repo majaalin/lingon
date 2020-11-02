@@ -61,16 +61,19 @@ const styles = StyleSheet.create({
   },
 });
 
-let today = new Date();
-let date =
-  today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+let date = new Date();
+// let date =
+//   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+const month = date.toLocaleString('default', { month: 'long' });
+let displayedDate = date.getDate() + ' ' + month;
 
 let symptomNotes = ['Nere', 'PMS', 'Mensvärk', 'Glad', 'Ledsen'];
 let periodNotes = ['Lätt', 'Måttlig', 'Riklig'];
 let sexNotes = ['Skyddat sex', 'Oskyddat sex'];
 
 export default function Notes({ navigation }) {
-  const [selectedDate, setSelectedDate] = useState(date);
+  const [selectedDate, setSelectedDate] = useState(displayedDate);
 
   return (
     <View style={styles.container}>
@@ -79,6 +82,13 @@ export default function Notes({ navigation }) {
         style={{
           paddingLeft: 20,
           marginTop: 60,
+        }}
+      >
+        <Text style={typography.h1}>{selectedDate}</Text>
+      </View>
+      <View
+        style={{
+          paddingLeft: 20,
         }}
       >
         <Text style={typography.h5}>Symptom</Text>
@@ -109,7 +119,7 @@ export default function Notes({ navigation }) {
           ))}
         </View>
       </View>
-      <CalendarStrip
+      {/* <CalendarStrip
         calendarAnimation={{ type: 'sequence', duration: 30 }}
         daySelectionAnimation={{
           type: 'background',
@@ -141,7 +151,7 @@ export default function Notes({ navigation }) {
           borderRadius: 60 / 2,
           marginLeft: 20,
         }}
-      />
+      /> */}
     </View>
   );
 }
