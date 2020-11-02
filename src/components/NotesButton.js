@@ -104,6 +104,13 @@ const styles = StyleSheet.create({
     marginTop: 18,
     color: colors.primary,
     fontSize: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
   },
   pressedButton: {
     borderColor: colors.primary,

@@ -26,6 +26,13 @@ const styles = StyleSheet.create({
     marginTop: 70,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    shadowColor: '#7B6160',
+    shadowOffset: {
+      width: 0,
+      height: -4,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
   },
 });
 
@@ -113,7 +120,7 @@ export default function Overview({ navigation }) {
         onPress={() => navigation.navigate('SettingsModal')}
       />
       <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
-      <Text style={typography.h1}>
+      <Text style={[typography.h1, { paddingLeft: 20, paddingRight: 20 }]}>
         {pressed ? `Dag ${currentDayOfPeriod}` : daysLeftBeforePeriodBegins}
       </Text>
       <View style={{ marginBottom: 150 }}>

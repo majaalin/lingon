@@ -23,6 +23,13 @@ const styles = StyleSheet.create({
     marginTop: 70,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    shadowColor: '#7B6160',
+    shadowOffset: {
+      width: 0,
+      height: -4,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
   },
   button: {
     borderColor: colors.primary,
