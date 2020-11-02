@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import { LocaleConfig } from 'react-native-calendars';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -45,17 +45,23 @@ LocaleConfig.locales['sv'] = {
 LocaleConfig.defaultLocale = 'sv';
 
 export default function PeriodCalendar() {
-  const [markedPeriod, setMarkedPeriod] = useState([]);
   const [period, setPeriod] = useState(['null']);
+  const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState([]);
 
-  db.collection('users')
-    .doc(firebase.auth().currentUser.uid)
-    .get()
-    .then(function (doc) {
-      setPeriod(doc.data().periodDays);
-    });
+  useEffect(() => {
+    db.collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setPeriod(doc.data().periodDays);
+          setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays);
+          return;
+        }
+      });
+  });
 
-  let obj = period.reduce(
+  let markedPeriod = period.reduce(
     (c, v) =>
       Object.assign(c, {
         [v]: {
@@ -68,6 +74,21 @@ export default function PeriodCalendar() {
     {}
   );
 
+  let markedEstimatedMenstrualDays = estimatedMenstrualDays.reduce(
+    (c, v) =>
+      Object.assign(c, {
+        [v]: {
+          color: colors.secondary,
+          textColor: colors.white,
+          endingDay: true,
+          startingDay: true,
+        },
+      }),
+    {}
+  );
+
+  const allMarked = Object.assign(markedPeriod, markedEstimatedMenstrualDays);
+
   return (
     <View>
       <Calendar
@@ -75,7 +96,7 @@ export default function PeriodCalendar() {
         pagingEnabled={true}
         enableSwipeMonths={true}
         markingType={'period'}
-        markedDates={obj}
+        markedDates={allMarked}
         onDayPress={(day) => setDate(day.dateString)}
         onDayLongPress={(day) => {
           console.log('selected day', day.dateString);
