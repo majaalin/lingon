@@ -73,6 +73,7 @@ export class PeriodLength extends Component {
               periodDays: firstPeriod,
               estimatedMenstrualDays: estimatedMenstrualDays,
               nextPeriodStartDate: estimatedMenstrualDays[0],
+              ongoingPeriod: false,
             });
         })
         .then(() => navigate('Overview', { type: 'anonymous' }))

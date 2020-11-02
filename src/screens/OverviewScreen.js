@@ -40,6 +40,18 @@ export default function Overview({ navigation }) {
   const [pressed, setPressed] = useState(false);
   const [periodDays, setPeriodDays] = useState(['null']);
   const [nextPeriodStartDate, setNextPeriodStartDate] = useState(0);
+  const [ongoingPeriod, setOngoingPeriod] = useState(false);
+
+  if (!ongoingPeriod) {
+    db.collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setPressed(doc.data().ongoingPeriod);
+        }
+      });
+  }
 
   if (nextPeriodStartDate === 0) {
     db.collection('users')
@@ -52,6 +64,7 @@ export default function Overview({ navigation }) {
         }
       });
   }
+
   if (periodDays.includes('null')) {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
@@ -84,10 +97,18 @@ export default function Overview({ navigation }) {
           .doc(firebase.auth().currentUser.uid)
           .update({
             periodDays: periodDays,
+            ongoingPeriod: true,
           });
       }
       setPressed(true);
     } else {
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          ongoingPeriod: false,
+        });
       setPressed(false);
     }
   };
