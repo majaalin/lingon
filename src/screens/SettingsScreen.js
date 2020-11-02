@@ -8,6 +8,8 @@ import firebase from 'firebase';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Button from '../components/Button';
 import Header from '../components/Header';
+import Picture from '../components/Picture';
+import avatar from '../assets/images/avatar.jpg';
 
 const db = firebase.firestore();
 
@@ -39,12 +41,6 @@ const styles = StyleSheet.create({
     height: 42,
     width: '100%',
   },
-  picture: {
-    width: 152,
-    height: 152,
-    backgroundColor: colors.white,
-    borderRadius: 152 / 2,
-  },
 });
 
 export default function Settings({ navigation }) {
@@ -70,8 +66,11 @@ export default function Settings({ navigation }) {
         icon="cross"
         onPress={() => navigation.goBack()}
       />
-      <View style={styles.picture}></View>
+
+      <Picture source={avatar} />
+
       <Button title="Spara din data i ett konto / Logga in" />
+
       <View style={styles.section}>
         <View style={styles.wrapper}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -87,6 +86,7 @@ export default function Settings({ navigation }) {
             />
           </View>
         </View>
+
         <View style={styles.wrapper}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Entypo name="time-slot" color={colors.primary} size={26} />
@@ -103,6 +103,7 @@ export default function Settings({ navigation }) {
             />
           </View>
         </View>
+
         <View style={styles.wrapper}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Entypo name="flower" color={colors.primary} size={26} />
@@ -120,6 +121,7 @@ export default function Settings({ navigation }) {
             <Switch ios_backgroundColor={colors.secondary} />
           </View>
         </View>
+
         <View style={styles.wrapper}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Entypo name="rainbow" color={colors.primary} size={26} />
