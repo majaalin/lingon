@@ -11,6 +11,7 @@ const db = firebase.firestore();
 
 let date = new Date();
 let today = date.toISOString().split('T')[0];
+today = '2020-11-04';
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
 const daysLeftBeforePeriodBegins = 3;
@@ -29,26 +30,28 @@ const styles = StyleSheet.create({
 });
 
 export default function Overview({ navigation }) {
-  const [cycleLength, setCycleLength] = useState(0);
-  const [lastStartDate, setLastStartDate] = useState(0);
-  const [periodLength, setPeriodLength] = useState(0);
   const [pressed, setPressed] = useState(false);
   const [periodDays, setPeriodDays] = useState([]);
+
+  db.collection('users')
+    .doc(firebase.auth().currentUser.uid)
+    .get()
+    .then(function (doc) {
+      if (doc.exists) {
+        setPeriodDays(doc.data().periodDays);
+      }
+    });
 
   const addDates = () => {
     if (!periodDays.includes(today)) {
       periodDays.push(today);
     }
 
-    if (!periodDays.includes(lastStartDate)) {
-      periodDays.push(lastStartDate);
-    }
-
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then(function (doc) {
-        if (doc.exists && !periodDays.exists) {
+        if (doc.exists) {
           firebase
             .firestore()
             .collection('users')
@@ -63,21 +66,6 @@ export default function Overview({ navigation }) {
         }
       });
   };
-
-  db.collection('users')
-    .doc(firebase.auth().currentUser.uid)
-    .get()
-    .then(function (doc) {
-      if (doc.exists) {
-        setCycleLength(doc.data().cycleLength);
-        setLastStartDate(doc.data().lastStartDate);
-        setPeriodLength(doc.data().periodLength);
-        return;
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
-      }
-    });
 
   const togglePressed = () => setPressed(!pressed);
 
