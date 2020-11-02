@@ -11,7 +11,7 @@ const db = firebase.firestore();
 
 let date = new Date();
 let today = date.toISOString().split('T')[0];
-today = '2020-11-04';
+today = '2020-11-03';
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
 const daysLeftBeforePeriodBegins = 3;
@@ -45,26 +45,22 @@ export default function Overview({ navigation }) {
   const addDates = () => {
     if (!periodDays.includes(today)) {
       periodDays.push(today);
-    }
 
-    db.collection('users')
-      .doc(firebase.auth().currentUser.uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          firebase
-            .firestore()
-            .collection('users')
-            .doc(firebase.auth().currentUser.uid)
-            .update({
-              periodDays: periodDays,
-            });
-          console.log(periodDays);
-          return;
-        } else {
-          setPeriodDays([]);
-        }
-      });
+      db.collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            firebase
+              .firestore()
+              .collection('users')
+              .doc(firebase.auth().currentUser.uid)
+              .update({
+                periodDays: periodDays,
+              });
+          }
+        });
+    }
   };
 
   const togglePressed = () => setPressed(!pressed);
