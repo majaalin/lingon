@@ -103,7 +103,7 @@ export default function Overview({ navigation }) {
           : `${daysLeftBeforePeriodBegins} dagar kvar`}
       </Text>
       <View style={{ marginBottom: 150 }}>
-        <Button
+        <ButtonPrimary
           title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
           onPress={() => {
             addDates();
