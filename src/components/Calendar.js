@@ -46,7 +46,7 @@ LocaleConfig.locales['sv'] = {
 LocaleConfig.defaultLocale = 'sv';
 
 export default function PeriodCalendar() {
-  const [period, setPeriod] = useState(['null']);
+  const [period, setPeriod] = useState([ls.get('periodDays')]);
   const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState([
     'null',
   ]);

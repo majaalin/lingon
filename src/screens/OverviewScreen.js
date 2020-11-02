@@ -12,7 +12,7 @@ const ls = require('local-storage');
 
 let date = new Date();
 let today = date.toISOString().split('T')[0];
-today = '2020-11-25';
+today = '2020-11-10';
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
 const daysLeftBeforePeriodBegins = 3;
@@ -48,8 +48,18 @@ export default function Overview({ navigation }) {
 
   const addDates = () => {
     if (!pressed) {
+      db.collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            setPeriodDays(doc.data().periodDays);
+            return;
+          }
+        });
       if (!periodDays.includes(today)) {
         periodDays.push(today);
+        console.log(periodDays);
         firebase
           .firestore()
           .collection('users')
