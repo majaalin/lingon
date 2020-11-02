@@ -18,10 +18,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.secondary,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     marginTop: 70,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+  },
+  section: {
+    width: '100%',
+    height: 220,
+    justifyContent: 'space-evenly',
+    marginBottom: 0,
   },
   wrapper: {
     flexDirection: 'row',
@@ -31,7 +37,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 10,
     height: 42,
-    marginBottom: 11,
     width: '100%',
   },
   picture: {
@@ -47,6 +52,17 @@ export default function Settings({ navigation }) {
   const [lastStartDate, setLastStartDate] = useState(0);
   const [periodLength, setPeriodLength] = useState(0);
 
+  db.collection('users')
+    .doc(firebase.auth().currentUser.uid)
+    .get()
+    .then(function (doc) {
+      if (doc.exists) {
+        setCycleLength(doc.data().cycleLength);
+        setLastStartDate(doc.data().lastStartDate);
+        setPeriodLength(doc.data().periodLength);
+      }
+    });
+
   return (
     <View style={styles.container}>
       <Header
@@ -55,42 +71,71 @@ export default function Settings({ navigation }) {
         onPress={() => navigation.goBack()}
       />
       <View style={styles.picture}></View>
-      <View style={styles.wrapper}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Entypo name="drop" color={colors.primary} size={26} />
-          <Text style={typography.h4}>Menslängd</Text>
+      <Button title="Spara din data i ett konto / Logga in" />
+      <View style={styles.section}>
+        <View style={styles.wrapper}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Entypo name="drop" color={colors.primary} size={26} />
+            <Text style={[typography.h4, { marginLeft: 20 }]}>Menslängd</Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={typography.p}>{periodLength} dagar</Text>
+            <Entypo
+              name="chevron-small-right"
+              color={colors.primary}
+              size={26}
+            />
+          </View>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={typography.p}>{periodLength} dagar</Text>
-          <Entypo name="chevron-small-right" color={colors.primary} size={26} />
+        <View style={styles.wrapper}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Entypo name="time-slot" color={colors.primary} size={26} />
+            <Text style={[typography.h4, , { marginLeft: 20 }]}>
+              Cykellängd
+            </Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={typography.p}>{cycleLength} dagar</Text>
+            <Entypo
+              name="chevron-small-right"
+              color={colors.primary}
+              size={26}
+            />
+          </View>
         </View>
-      </View>
-      <View style={styles.wrapper}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Entypo name="time-slot" color={colors.primary} size={26} />
-          <Text style={typography.h4}>Cykellängd</Text>
+        <View style={styles.wrapper}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Entypo name="flower" color={colors.primary} size={26} />
+            <Text style={[typography.h4, , { marginLeft: 20 }]}>
+              Fertilitet
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginRight: 5,
+            }}
+          >
+            <Switch ios_backgroundColor={colors.secondary} />
+          </View>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={typography.p}>{cycleLength} dagar</Text>
-          <Entypo name="chevron-small-right" color={colors.primary} size={26} />
-        </View>
-      </View>
-      <View style={styles.wrapper}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Entypo name="flower" color={colors.primary} size={26} />
-          <Text style={typography.h4}>Fertilitet</Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Switch ios_backgroundColor={colors.secondary} />
-        </View>
-      </View>
-      <View style={styles.wrapper}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Entypo name="rainbow" color={colors.primary} size={26} />
-          <Text style={typography.h4}>Få påminnelse</Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Switch ios_backgroundColor={colors.secondary} />
+        <View style={styles.wrapper}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Entypo name="rainbow" color={colors.primary} size={26} />
+            <Text style={[typography.h4, , { marginLeft: 20 }]}>
+              Få påminnelse
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginRight: 5,
+            }}
+          >
+            <Switch ios_backgroundColor={colors.secondary} />
+          </View>
         </View>
       </View>
       <StatusBar barStyle="light-content" />
