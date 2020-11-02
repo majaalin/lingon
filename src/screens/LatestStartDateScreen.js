@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
-import PageControl from "react-native-page-control";
-import DatePicker from "../components/DatePicker";
-import colors from "../styles/colors";
-import typography from "../styles/typography";
-import Button from "../components/Button";
+import React, { Component } from 'react';
+import { View, Text, SafeAreaView, Dimensions, StyleSheet } from 'react-native';
+import PageControl from 'react-native-page-control';
+import DatePicker from '../components/DatePicker';
+import colors from '../styles/colors';
+import typography from '../styles/typography';
+import Button from '../components/Button';
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: colors.secondary,
     paddingLeft: 20,
     paddingRight: 20,
   },
   container: {
-    flex: 1,
-    backgroundColor: colors.secondary,
-    alignItems: "center",
-    justifyContent: "center",
+    height: 540,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
 });
 
-const width = Dimensions.get("window").width;
+const width = Dimensions.get('window').width;
 
 export class LatestStartDate extends Component {
   render() {
@@ -45,17 +45,17 @@ export class LatestStartDate extends Component {
         <View style={styles.container}>
           <Text style={typography.h1}>Ange när senaste mensen startade</Text>
           <DatePicker />
-          <View style={{ bottom: 20, position: "absolute" }}>
-            <Button
-              title="Fyll i senare"
-              backgroundColor="secondary"
-              font="buttonSecondary"
-            />
-            <Button
-              title="Fortsätt"
-              onPress={() => navigate("CycleLengthScreen")}
-            />
-          </View>
+        </View>
+        <View style={{ bottom: 30, position: 'absolute' }}>
+          <Button
+            title="Fyll i senare"
+            backgroundColor="secondary"
+            font="buttonSecondary"
+          />
+          <Button
+            title="Fortsätt"
+            onPress={() => navigate('CycleLengthScreen')}
+          />
         </View>
       </View>
     );

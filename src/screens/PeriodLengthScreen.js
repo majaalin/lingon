@@ -13,13 +13,15 @@ const ls = require('local-storage');
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: colors.secondary,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   container: {
-    flex: 1,
-    backgroundColor: colors.secondary,
+    height: 540,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
 });
 
@@ -95,14 +97,14 @@ export class PeriodLength extends Component {
         <View style={styles.container}>
           <Text style={typography.h1}>Ange antal dagar du har mens</Text>
           <Range average={5} arrayLength={20} keyValue="periodLength" />
-          <View style={{ bottom: 20, position: 'absolute' }}>
-            <Button
-              title="Fyll i senare"
-              backgroundColor="secondary"
-              font="buttonSecondary"
-            />
-            <Button title="Fortsätt" onPress={() => signInAnonymously()} />
-          </View>
+        </View>
+        <View style={{ bottom: 30, position: 'absolute' }}>
+          <Button
+            title="Fyll i senare"
+            backgroundColor="secondary"
+            font="buttonSecondary"
+          />
+          <Button title="Fortsätt" onPress={() => signInAnonymously()} />
         </View>
       </View>
     );

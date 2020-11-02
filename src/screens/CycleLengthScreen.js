@@ -10,13 +10,15 @@ const ls = require('local-storage');
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: colors.secondary,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   container: {
-    flex: 1,
-    backgroundColor: colors.secondary,
+    height: 540,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
 });
 
@@ -46,17 +48,17 @@ export class CycleLength extends Component {
         <View style={styles.container}>
           <Text style={typography.h1}>Ange längd på din menscykel</Text>
           <Range average={28} arrayLength={40} keyValue="CycleLength" />
-          <View style={{ bottom: 20, position: 'absolute' }}>
-            <Button
-              title="Fyll i senare"
-              backgroundColor="secondary"
-              font="buttonSecondary"
-            />
-            <Button
-              title="Fortsätt"
-              onPress={() => navigate('PeriodLengthScreen')}
-            />
-          </View>
+        </View>
+        <View style={{ bottom: 30, position: 'absolute' }}>
+          <Button
+            title="Fyll i senare"
+            backgroundColor="secondary"
+            font="buttonSecondary"
+          />
+          <Button
+            title="Fortsätt"
+            onPress={() => navigate('PeriodLengthScreen')}
+          />
         </View>
       </View>
     );
