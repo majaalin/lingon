@@ -7,6 +7,7 @@ import typography from '../styles/typography';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 const db = firebase.firestore();
+const ls = require('local-storage');
 
 LocaleConfig.locales['sv'] = {
   monthNames: [
@@ -50,7 +51,7 @@ export default function PeriodCalendar() {
     'null',
   ]);
 
-  if (period.includes('null') || estimatedMenstrualDays.includes('null')) {
+  if (estimatedMenstrualDays.includes('null')) {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()

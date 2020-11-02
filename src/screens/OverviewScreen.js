@@ -8,10 +8,11 @@ import firebase from 'firebase';
 import Header from '../components/Header';
 import { addDays } from 'date-fns';
 const db = firebase.firestore();
+const ls = require('local-storage');
 
 let date = new Date();
 let today = date.toISOString().split('T')[0];
-today = '2020-11-03';
+today = '2020-11-25';
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
 const daysLeftBeforePeriodBegins = 3;
@@ -31,39 +32,37 @@ const styles = StyleSheet.create({
 
 export default function Overview({ navigation }) {
   const [pressed, setPressed] = useState(false);
-  const [periodDays, setPeriodDays] = useState([]);
+  const [periodDays, setPeriodDays] = useState(['null']);
 
-  const addDates = () => {
+  if (periodDays.includes('null')) {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then(function (doc) {
         if (doc.exists) {
           setPeriodDays(doc.data().periodDays);
+          return;
         }
       });
+  }
 
-    if (!periodDays.includes(today)) {
-      periodDays.push(today);
-
-      db.collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            firebase
-              .firestore()
-              .collection('users')
-              .doc(firebase.auth().currentUser.uid)
-              .update({
-                periodDays: periodDays,
-              });
-          }
-        });
+  const addDates = () => {
+    if (!pressed) {
+      if (!periodDays.includes(today)) {
+        periodDays.push(today);
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(firebase.auth().currentUser.uid)
+          .update({
+            periodDays: periodDays,
+          });
+      }
+      setPressed(true);
+    } else {
+      setPressed(false);
     }
   };
-
-  const togglePressed = () => setPressed(!pressed);
 
   return (
     <View style={styles.container}>
@@ -82,7 +81,6 @@ export default function Overview({ navigation }) {
         <Button
           title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
           onPress={() => {
-            togglePressed();
             addDates();
           }}
         />
