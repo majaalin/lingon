@@ -1,16 +1,16 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 
-import colors from "../styles/colors";
-import typography from "../styles/typography";
+import colors from '../styles/colors';
+import typography from '../styles/typography';
 
-const width = Dimensions.get("window").width - 20;
+const width = Dimensions.get('window').width - 30;
 
 function Button({
   title,
   onPress,
-  backgroundColor = "primary",
-  font = "buttonPrimary",
+  backgroundColor = 'primary',
+  font = 'buttonPrimary',
 }) {
   return (
     <TouchableOpacity
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
     borderRadius: 100,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: width,
     height: 60,
     marginTop: 20,
