@@ -48,7 +48,7 @@ export default function PeriodCalendar() {
   const [period, setPeriod] = useState(['null']);
   const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState([]);
 
-  useEffect(() => {
+  const getUserData = () => {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
@@ -59,7 +59,11 @@ export default function PeriodCalendar() {
           return;
         }
       });
-  });
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, [period]);
 
   let markedPeriod = period.reduce(
     (c, v) =>
