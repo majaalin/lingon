@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import { addDays } from 'date-fns';
+import moment from 'moment';
 const ls = require('local-storage');
 
 const styles = StyleSheet.create({
@@ -50,6 +51,8 @@ export class PeriodLength extends Component {
 
       let nextPeriodStartDate = addDays(new Date(lastStartDate), cycleLength);
 
+      ls.set('nextPeriodStartDate', nextPeriodStartDate);
+
       for (let i = 0; i < periodLength; i++) {
         let date = addDays(new Date(nextPeriodStartDate), i);
         estimatedMenstrualDays.push(date.toISOString().split('T')[0]);
@@ -68,6 +71,7 @@ export class PeriodLength extends Component {
               cycleLength: cycleLength,
               periodDays: firstPeriod,
               estimatedMenstrualDays: estimatedMenstrualDays,
+              nextPeriodStartDate: estimatedMenstrualDays[0],
             });
         })
         .then(() => navigate('Overview', { type: 'anonymous' }))
