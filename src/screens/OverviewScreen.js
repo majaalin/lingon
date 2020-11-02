@@ -87,7 +87,23 @@ export default function Overview({ navigation }) {
 
   const diff = moment(nextPeriodStartDate).diff(moment(today));
 
-  const daysLeftBeforePeriodBegins = moment.duration(diff).days();
+  let daysLeftBeforePeriodBegins = moment.duration(diff).days();
+
+  if (daysLeftBeforePeriodBegins >= 2) {
+    daysLeftBeforePeriodBegins = `${daysLeftBeforePeriodBegins} dagar kvar`;
+  } else if (daysLeftBeforePeriodBegins === 1) {
+    daysLeftBeforePeriodBegins = `${daysLeftBeforePeriodBegins} dag kvar`;
+  } else if (daysLeftBeforePeriodBegins === 0) {
+    daysLeftBeforePeriodBegins = 'Mensen är beräknad idag';
+  } else if (daysLeftBeforePeriodBegins === -1) {
+    daysLeftBeforePeriodBegins = `Mensen är ${Math.abs(
+      daysLeftBeforePeriodBegins
+    )} dag sen`;
+  } else {
+    daysLeftBeforePeriodBegins = `Mensen är ${Math.abs(
+      daysLeftBeforePeriodBegins
+    )} dagar sen`;
+  }
 
   return (
     <View style={styles.container}>
@@ -98,9 +114,7 @@ export default function Overview({ navigation }) {
       />
       <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
       <Text style={typography.h1}>
-        {pressed
-          ? `Dag ${currentDayOfPeriod}`
-          : `${daysLeftBeforePeriodBegins} dagar kvar`}
+        {pressed ? `Dag ${currentDayOfPeriod}` : daysLeftBeforePeriodBegins}
       </Text>
       <View style={{ marginBottom: 150 }}>
         <Button
