@@ -6,7 +6,7 @@ import typography from '../styles/typography';
 
 const width = Dimensions.get('window').width - 30;
 
-function Button({
+function ButtonSecondary({
   title,
   onPress,
   backgroundColor = 'primary',
@@ -33,7 +33,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderWidth: 2,
     borderColor: colors.primary,
+    shadowColor: '#E92206',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
   },
 });
 
-export default Button;
+export default ButtonSecondary;

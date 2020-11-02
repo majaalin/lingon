@@ -4,7 +4,8 @@ import PageControl from 'react-native-page-control';
 import Range from '../components/Range';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
-import Button from '../components/Button';
+import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonSecondary from '../components/ButtonSecondary';
 const ls = require('local-storage');
 
 const styles = StyleSheet.create({
@@ -50,12 +51,12 @@ export class CycleLength extends Component {
           <Range average={28} arrayLength={40} keyValue="CycleLength" />
         </View>
         <View style={{ bottom: 30, position: 'absolute' }}>
-          <Button
+          <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
           />
-          <Button
+          <ButtonPrimary
             title="Fortsätt"
             onPress={() => navigate('PeriodLengthScreen')}
           />
