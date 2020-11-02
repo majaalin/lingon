@@ -17,6 +17,7 @@ import KarlaBold from '../../assets/fonts/Karla-Bold.ttf';
 import KarlaRegular from '../../assets/fonts/Karla-Regular.ttf';
 import BrandonBold from '../../assets/fonts/BrandonGrotesque-Bold.ttf';
 import BrandonRegular from '../../assets/fonts/BrandonGrotesque-Regular.ttf';
+import { View } from 'react-native';
 
 export default function AppNavigation() {
   const [fontsLoaded] = useFonts({
@@ -37,7 +38,19 @@ export default function AppNavigation() {
           fontSize: 16,
           fontFamily: 'BrandonBold',
         },
-        style: {},
+        style: {
+          height: 60,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          position: 'absolute',
+          shadowColor: '#E92206',
+          shadowOffset: {
+            width: 0,
+            height: -4,
+          },
+          shadowOpacity: 0.15,
+          shadowRadius: 4,
+        },
       }}
     >
       <AppTabs.Screen
@@ -61,7 +74,27 @@ export default function AppNavigation() {
         component={NotesScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <Entypo name="plus" color={color} size={26} />
+            <View
+              style={{
+                width: 62,
+                height: 62,
+                borderRadius: 62 / 2,
+                backgroundColor: colors.primary,
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                bottom: 8,
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.3,
+                shadowRadius: 4.65,
+              }}
+            >
+              <Entypo name="plus" color={colors.white} size={26} />
+            </View>
           ),
           title: 'Anteckningar',
         }}

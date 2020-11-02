@@ -87,7 +87,7 @@ export default function Overview({ navigation }) {
           ? `Dag ${currentDayOfPeriod}`
           : `${daysLeftBeforePeriodBegins} dagar kvar`}
       </Text>
-      <View style={{ bottom: 50 }}>
+      <View style={{ marginBottom: 150 }}>
         <Button
           title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
           onPress={() => {
