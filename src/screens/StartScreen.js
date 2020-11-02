@@ -22,7 +22,7 @@ export default function Start({ navigation }) {
       <Text style={[typography.h5, { textAlign: 'center', marginTop: 30 }]}>
         Svara på några frågor och vi kommer att anpassa appen för dig.
       </Text>
-      <View style={{ bottom: 20, position: 'absolute' }}>
+      <View style={{ bottom: 30, position: 'absolute' }}>
         <Button
           title="Logga in"
           backgroundColor="secondary"
