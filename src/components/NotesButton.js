@@ -7,7 +7,7 @@ import firebase from 'firebase';
 
 const db = firebase.firestore();
 
-function NotesButton({ title, date }) {
+function NotesButton({ title, date, id }) {
   const [pressed, setPressed] = useState(false);
   const [notesArray, setNotesArray] = useState([]);
 
@@ -58,6 +58,7 @@ function NotesButton({ title, date }) {
     return (
       <TouchableOpacity
         style={styles.pressedButton}
+        key={id}
         onPress={() => onPressNote({ title, date })}
       >
         <Text style={typography.buttonPrimary}>{title}</Text>
@@ -73,6 +74,7 @@ function NotesButton({ title, date }) {
           ? styles.pressedButton
           : styles.button
       }
+      key={id}
       onPress={() => onPressNote({ title, date })}
     >
       <Text
