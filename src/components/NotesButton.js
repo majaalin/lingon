@@ -11,21 +11,24 @@ function NotesButton({ title, date, id }) {
   const [pressed, setPressed] = useState(false);
   const [notesArray, setNotesArray] = useState([]);
 
-  useEffect(() => {
-    setPressed();
-  }, [pressed]);
-
   db.collection(firebase.auth().currentUser.uid)
     .doc(date)
     .get()
     .then(function (doc) {
-      if (doc.exists) {
-        setNotesArray(doc.data().Note);
-        return;
-      } else {
-        setNotesArray([]);
+      if (!doc.exists) {
+        setNotesArray(['null']);
       }
     });
+
+  useEffect(() => {
+    let isSubscribed = true;
+    db.collection(firebase.auth().currentUser.uid)
+      .doc(date)
+      .onSnapshot(function (doc) {
+        isSubscribed ? setNotesArray(doc.data().Note) : 'null';
+      });
+    return () => (isSubscribed = false);
+  }, []);
 
   const onPressNote = () => {
     if (pressed || notesArray.includes(title)) {
