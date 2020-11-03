@@ -7,6 +7,7 @@ import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import Header from '../components/Header';
 const db = firebase.firestore();
+import { addDays } from 'date-fns';
 const ls = require('local-storage');
 import moment from 'moment';
 moment().format();
@@ -41,6 +42,9 @@ export default function Overview({ navigation }) {
   const [periodDays, setPeriodDays] = useState([]);
   const [nextPeriodStartDate, setNextPeriodStartDate] = useState(0);
   const [ongoingPeriod, setOngoingPeriod] = useState(false);
+  const [cycleLength, setCycleLength] = useState(false);
+  const [periodLength, setPeriodLength] = useState(false);
+  const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState(false);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -52,6 +56,11 @@ export default function Overview({ navigation }) {
           ? setNextPeriodStartDate(doc.data().nextPeriodStartDate)
           : 'null';
         isSubscribed ? setPeriodDays(doc.data().periodDays) : null;
+        isSubscribed ? setCycleLength(doc.data().cycleLength) : null;
+        isSubscribed ? setPeriodLength(doc.data().periodLength) : null;
+        isSubscribed
+          ? setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays)
+          : null;
       });
     return () => (isSubscribed = false);
   }, []);
@@ -59,6 +68,17 @@ export default function Overview({ navigation }) {
   const addDates = () => {
     if (!periodDays.includes(today)) {
       periodDays.push(today);
+      let lastStartDate = today;
+      let nextDate = addDays(new Date(lastStartDate), cycleLength);
+      let nextPeriodStartDate = nextDate.toISOString().split('T')[0];
+
+      let estimatedMenstrualDays = [];
+
+      for (let i = 0; i < periodLength; i++) {
+        let date = addDays(new Date(nextPeriodStartDate), i);
+        estimatedMenstrualDays.push(date.toISOString().split('T')[0]);
+      }
+
       setPressed(true);
       firebase
         .firestore()
@@ -66,6 +86,9 @@ export default function Overview({ navigation }) {
         .doc(firebase.auth().currentUser.uid)
         .update({
           periodDays: periodDays,
+          lastStartDate: lastStartDate,
+          estimatedMenstrualDays: estimatedMenstrualDays,
+          nextPeriodStartDate: nextPeriodStartDate,
           ongoingPeriod: true,
         });
     } else {
