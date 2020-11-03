@@ -47,7 +47,7 @@ export default function Overview({ navigation }) {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .onSnapshot(function (doc) {
-        isSubscribed ? setOngoingPeriod(doc.data().ongoingPeriod) : 'null';
+        isSubscribed ? setOngoingPeriod(doc.data().ongoingPeriod) : true;
         isSubscribed
           ? setNextPeriodStartDate(doc.data().nextPeriodStartDate)
           : 'null';

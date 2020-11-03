@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: colors.secondary,
-    paddingLeft: 20,
-    paddingRight: 20,
   },
   container: {
+    paddingLeft: 20,
+    paddingRight: 20,
     height: 540,
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -85,25 +85,25 @@ export class PeriodLength extends Component {
     };
 
     return (
-      <View style={styles.wrapper}>
-        <SafeAreaView>
-          <PageControl
-            numberOfPages={3}
-            currentPage={2}
-            hidesForSinglePage
-            pageIndicatorTintColor={colors.primary}
-            currentPageIndicatorTintColor={colors.white}
-            indicatorStyle={{ borderRadius: 5 }}
-            currentIndicatorStyle={{ borderRadius: 5 }}
-            indicatorSize={{ width: width / 3 - 20, height: 5 }}
-            onPageIndicatorPress={this.onItemTap}
-          />
-        </SafeAreaView>
+      <SafeAreaView style={styles.wrapper}>
+        <PageControl
+          numberOfPages={3}
+          currentPage={2}
+          hidesForSinglePage
+          pageIndicatorTintColor={colors.primary}
+          currentPageIndicatorTintColor={colors.white}
+          indicatorStyle={{ borderRadius: 5 }}
+          currentIndicatorStyle={{ borderRadius: 5 }}
+          indicatorSize={{ width: width / 3 - 20, height: 5 }}
+          onPageIndicatorPress={this.onItemTap}
+          style={{ marginTop: 20 }}
+        />
 
         <View style={styles.container}>
           <Text style={typography.h1}>Ange antal dagar du har mens</Text>
           <Range average={5} arrayLength={20} keyValue="periodLength" />
         </View>
+
         <View style={{ bottom: 30, position: 'absolute' }}>
           <ButtonSecondary
             title="Fyll i senare"
@@ -112,7 +112,7 @@ export class PeriodLength extends Component {
           />
           <ButtonPrimary title="Fortsätt" onPress={() => signInAnonymously()} />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
