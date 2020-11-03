@@ -77,7 +77,11 @@ export default function Notes({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Header title="Symtom" icon="cross" onPress={() => navigation.goBack()} />
+      <Header
+        title="Anteckningar"
+        icon="cross"
+        onPress={() => navigation.goBack()}
+      />
       <View
         style={{
           paddingLeft: 20,
