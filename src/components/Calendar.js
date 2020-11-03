@@ -75,18 +75,18 @@ export default function PeriodCalendar() {
     'null',
   ]);
 
-  if (estimatedMenstrualDays.includes('null')) {
+  useEffect(() => {
+    let isSubscribed = true;
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          setPeriod(doc.data().periodDays);
-          setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays);
-          return;
-        }
+      .onSnapshot(function (doc) {
+        isSubscribed ? setPeriod(doc.data().periodDays) : 'null';
+        isSubscribed
+          ? setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays)
+          : 'null';
       });
-  }
+    return () => (isSubscribed = false);
+  }, []);
 
   let markedPeriod = period.reduce(
     (c, v) =>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
@@ -13,6 +13,7 @@ moment().format();
 
 let date = new Date();
 let today = date.toISOString().split('T')[0];
+today = '2020-11-07';
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month + ' ' + date.getFullYear();
 const currentDayOfPeriod = 1;
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
 
 export default function Overview({ navigation }) {
   const [pressed, setPressed] = useState(false);
-  const [periodDays, setPeriodDays] = useState(['null']);
+  const [periodDays, setPeriodDays] = useState([]);
   const [nextPeriodStartDate, setNextPeriodStartDate] = useState(0);
   const [ongoingPeriod, setOngoingPeriod] = useState(false);
 
@@ -46,71 +47,30 @@ export default function Overview({ navigation }) {
     let isSubscribed = true;
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          isSubscribed ? setPressed(doc.data().ongoingPeriod) : null;
-        }
+      .onSnapshot(function (doc) {
+        isSubscribed ? setOngoingPeriod(doc.data().ongoingPeriod) : 'null';
+        isSubscribed
+          ? setNextPeriodStartDate(doc.data().nextPeriodStartDate)
+          : 'null';
+        isSubscribed ? setPeriodDays(doc.data().periodDays) : null;
       });
     return () => (isSubscribed = false);
   }, []);
 
-  if (nextPeriodStartDate === 0) {
-    db.collection('users')
-      .doc(firebase.auth().currentUser.uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          setNextPeriodStartDate(doc.data().nextPeriodStartDate);
-          return;
-        }
-      });
-  }
-
-  if (periodDays.includes('null')) {
-    db.collection('users')
-      .doc(firebase.auth().currentUser.uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          setPeriodDays(doc.data().periodDays);
-          return;
-        }
-      });
-  }
-
   const addDates = () => {
-    if (!pressed) {
-      db.collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            setPeriodDays(doc.data().periodDays);
-            firebase
-              .firestore()
-              .collection('users')
-              .doc(firebase.auth().currentUser.uid)
-              .update({
-                ongoingPeriod: true,
-              });
-            return;
-          }
-        });
-      if (!periodDays.includes(today)) {
-        periodDays.push(today);
-        console.log(periodDays);
-        firebase
-          .firestore()
-          .collection('users')
-          .doc(firebase.auth().currentUser.uid)
-          .update({
-            periodDays: periodDays,
-            ongoingPeriod: true,
-          });
-      }
+    if (!periodDays.includes(today)) {
+      periodDays.push(today);
       setPressed(true);
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          periodDays: periodDays,
+          ongoingPeriod: true,
+        });
     } else {
+      setPressed(false);
       firebase
         .firestore()
         .collection('users')
@@ -118,7 +78,6 @@ export default function Overview({ navigation }) {
         .update({
           ongoingPeriod: false,
         });
-      setPressed(false);
     }
   };
 
