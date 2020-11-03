@@ -42,7 +42,7 @@ export default function Overview({ navigation }) {
   const [nextPeriodStartDate, setNextPeriodStartDate] = useState(0);
   const [ongoingPeriod, setOngoingPeriod] = useState(false);
 
-  if (!ongoingPeriod) {
+  useEffect(() => {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
@@ -51,7 +51,7 @@ export default function Overview({ navigation }) {
           setPressed(doc.data().ongoingPeriod);
         }
       });
-  }
+  }, [ongoingPeriod]);
 
   if (nextPeriodStartDate === 0) {
     db.collection('users')
@@ -85,6 +85,13 @@ export default function Overview({ navigation }) {
         .then(function (doc) {
           if (doc.exists) {
             setPeriodDays(doc.data().periodDays);
+            firebase
+              .firestore()
+              .collection('users')
+              .doc(firebase.auth().currentUser.uid)
+              .update({
+                ongoingPeriod: true,
+              });
             return;
           }
         });
