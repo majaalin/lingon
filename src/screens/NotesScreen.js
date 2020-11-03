@@ -95,7 +95,7 @@ export default function Notes({ navigation }) {
         <View style={{ flexDirection: 'row', marginBottom: 40 }}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {symptomNotes.map((symptom) => (
-              <NotesButton title={symptom} date={selectedDate} />
+              <NotesButton title={symptom} date={selectedDate} key={symptom} />
             ))}
           </ScrollView>
         </View>
@@ -109,13 +109,13 @@ export default function Notes({ navigation }) {
         <Text style={typography.h5}>Mens</Text>
         <View style={{ flexDirection: 'row', marginBottom: 40 }}>
           {periodNotes.map((period) => (
-            <NotesButton title={period} date={selectedDate} />
+            <NotesButton title={period} date={selectedDate} key={period} />
           ))}
         </View>
         <Text style={typography.h5}>Sex</Text>
         <View style={{ flexDirection: 'row', marginBottom: 40 }}>
           {sexNotes.map((sex) => (
-            <NotesButton title={sex} date={selectedDate} />
+            <NotesButton title={sex} date={selectedDate} key={sex} />
           ))}
         </View>
       </View>

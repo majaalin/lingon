@@ -149,7 +149,7 @@ export default function Overview({ navigation }) {
       />
       <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
       <Text style={[typography.h1, { paddingLeft: 20, paddingRight: 20 }]}>
-        {pressed ? `Dag ${currentDayOfPeriod}` : daysLeftBeforePeriodBegins}
+        {pressed ? `Mensdag ${currentDayOfPeriod}` : daysLeftBeforePeriodBegins}
       </Text>
       <View style={{ marginBottom: 150 }}>
         <ButtonPrimary
