@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: colors.secondary,
-    paddingLeft: 20,
-    paddingRight: 20,
   },
   container: {
+    paddingLeft: 20,
+    paddingRight: 20,
     height: 540,
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -29,27 +29,27 @@ export class CycleLength extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.wrapper}>
-        <SafeAreaView>
-          <View>
-            <PageControl
-              numberOfPages={3}
-              currentPage={1}
-              hidesForSinglePage
-              pageIndicatorTintColor={colors.primary}
-              currentPageIndicatorTintColor={colors.white}
-              indicatorStyle={{ borderRadius: 5 }}
-              currentIndicatorStyle={{ borderRadius: 5 }}
-              indicatorSize={{ width: width / 3 - 20, height: 5 }}
-              onPageIndicatorPress={this.onItemTap}
-            />
-          </View>
-        </SafeAreaView>
+      <SafeAreaView style={styles.wrapper}>
+        <View>
+          <PageControl
+            numberOfPages={3}
+            currentPage={1}
+            hidesForSinglePage
+            pageIndicatorTintColor={colors.primary}
+            currentPageIndicatorTintColor={colors.white}
+            indicatorStyle={{ borderRadius: 5 }}
+            currentIndicatorStyle={{ borderRadius: 5 }}
+            indicatorSize={{ width: width / 3 - 20, height: 5 }}
+            onPageIndicatorPress={this.onItemTap}
+            style={{ marginTop: 20 }}
+          />
+        </View>
 
         <View style={styles.container}>
           <Text style={typography.h1}>Ange längd på din menscykel</Text>
           <Range average={28} arrayLength={40} keyValue="CycleLength" />
         </View>
+
         <View style={{ bottom: 30, position: 'absolute' }}>
           <ButtonSecondary
             title="Fyll i senare"
@@ -61,7 +61,7 @@ export class CycleLength extends Component {
             onPress={() => navigate('PeriodLengthScreen')}
           />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

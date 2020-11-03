@@ -11,10 +11,6 @@ function NotesButton({ title, date, id }) {
   const [pressed, setPressed] = useState(false);
   const [notesArray, setNotesArray] = useState([]);
 
-  useEffect(() => {
-    setPressed();
-  }, [pressed]);
-
   db.collection(firebase.auth().currentUser.uid)
     .doc(date)
     .get()
