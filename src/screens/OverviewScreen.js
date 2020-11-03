@@ -43,15 +43,17 @@ export default function Overview({ navigation }) {
   const [ongoingPeriod, setOngoingPeriod] = useState(false);
 
   useEffect(() => {
+    let isSubscribed = true;
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then(function (doc) {
         if (doc.exists) {
-          setPressed(doc.data().ongoingPeriod);
+          isSubscribed ? setPressed(doc.data().ongoingPeriod) : null;
         }
       });
-  }, [ongoingPeriod]);
+    return () => (isSubscribed = false);
+  }, []);
 
   if (nextPeriodStartDate === 0) {
     db.collection('users')
