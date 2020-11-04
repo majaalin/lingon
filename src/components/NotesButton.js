@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
     color: colors.primary,
     fontSize: 16,
-    shadowColor: '#000',
+    shadowColor: '#E92206',
     shadowOffset: {
       width: 0,
       height: 8,
