@@ -68,16 +68,20 @@ export default function Overview({ navigation }) {
     return () => (isSubscribed = false);
   }, []);
 
-  if (!periodDays.includes(today) && ongoingPeriod) {
-    periodDays.push(today);
-    firebase
-      .firestore()
-      .collection('users')
-      .doc(firebase.auth().currentUser.uid)
-      .update({
-        periodDays: periodDays,
-      });
-  }
+  useEffect(() => {
+    let isSubscribed = true;
+    if (!periodDays.includes(today) && ongoingPeriod) {
+      periodDays.push(today);
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          periodDays: periodDays,
+        });
+    }
+    return () => (isSubscribed = false);
+  }, []);
 
   const addDates = () => {
     if (!periodDays.includes(today)) {
@@ -106,9 +110,9 @@ export default function Overview({ navigation }) {
           ongoingPeriod: true,
         });
     } else {
+      setPressed(false);
       const periodDaysIndex = periodDays.indexOf(today);
       periodDays.splice(periodDaysIndex, 1);
-      setPressed(false);
       firebase
         .firestore()
         .collection('users')
