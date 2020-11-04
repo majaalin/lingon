@@ -80,10 +80,12 @@ export default function PeriodCalendar() {
     db.collection('users')
       .doc(firebase.auth().currentUser.uid)
       .onSnapshot(function (doc) {
-        isSubscribed ? setPeriod(doc.data().periodDays) : 'null';
-        isSubscribed
-          ? setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays)
-          : 'null';
+        if (doc.exists) {
+          isSubscribed ? setPeriod(doc.data().periodDays) : null;
+          isSubscribed
+            ? setEstimatedMenstrualDays(doc.data().estimatedMenstrualDays)
+            : null;
+        }
       });
     return () => (isSubscribed = false);
   }, []);

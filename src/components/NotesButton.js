@@ -25,7 +25,9 @@ function NotesButton({ title, date, id }) {
     db.collection(firebase.auth().currentUser.uid)
       .doc(date)
       .onSnapshot(function (doc) {
-        isSubscribed ? setNotesArray(doc.data().Note) : 'null';
+        if (doc.exists) {
+          isSubscribed ? setNotesArray(doc.data().Note) : null;
+        }
       });
     return () => (isSubscribed = false);
   }, []);
