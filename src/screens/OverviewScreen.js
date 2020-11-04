@@ -53,6 +53,7 @@ export default function Overview({ navigation }) {
       .onSnapshot(function (doc) {
         if (doc.exists) {
           isSubscribed ? setOngoingPeriod(doc.data().ongoingPeriod) : true;
+          isSubscribed ? setPressed(doc.data().ongoingPeriod) : true;
           isSubscribed
             ? setNextPeriodStartDate(doc.data().nextPeriodStartDate)
             : 'null';
@@ -94,6 +95,8 @@ export default function Overview({ navigation }) {
           ongoingPeriod: true,
         });
     } else {
+      const periodDaysIndex = periodDays.indexOf(today);
+      periodDays.splice(periodDaysIndex, 1);
       setPressed(false);
       firebase
         .firestore()
@@ -101,6 +104,7 @@ export default function Overview({ navigation }) {
         .doc(firebase.auth().currentUser.uid)
         .update({
           ongoingPeriod: false,
+          periodDays: periodDays,
         });
     }
   };
