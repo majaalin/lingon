@@ -68,6 +68,17 @@ export default function Overview({ navigation }) {
     return () => (isSubscribed = false);
   }, []);
 
+  if (!periodDays.includes(today) && ongoingPeriod) {
+    periodDays.push(today);
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .update({
+        periodDays: periodDays,
+      });
+  }
+
   const addDates = () => {
     if (!periodDays.includes(today)) {
       periodDays.push(today);
