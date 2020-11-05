@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
-import { AppLoading } from 'expo';
 import { Entypo } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import OverviewScreen from '../../screens/OverviewScreen';
@@ -13,6 +12,7 @@ import StartScreen from '../../screens/StartScreen';
 import RegisterScreen from '../../screens/RegisterScreen';
 import LoginScreen from '../../screens/LoginScreen';
 import SettingsScreen from '../../screens/SettingsScreen';
+import SplashScreen from '../../screens/SplashScreen';
 import KarlaBold from '../../assets/fonts/Karla-Bold.ttf';
 import KarlaRegular from '../../assets/fonts/Karla-Regular.ttf';
 import BrandonBold from '../../assets/fonts/BrandonGrotesque-Bold.ttf';
@@ -127,6 +127,12 @@ export default function AppNavigation() {
       screenOptions={{ animationEnabled: false }}
       mode="modal"
     >
+      <RootStack.Screen
+        name="Splash"
+        component={SplashScreen}
+        options={{ headerShown: false }}
+      />
+
       <RootStack.Screen name="Main" component={AppTabsScreen} />
 
       <RootStack.Screen
@@ -134,6 +140,7 @@ export default function AppNavigation() {
         component={StartScreen}
         options={{ headerShown: false }}
       />
+
       <RootStack.Screen
         name="Log in"
         component={LoginScreen}

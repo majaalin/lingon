@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import AppNavigation from './config/Navigation/AppNavigation';
 import AuthNavigation from './config/Navigation/AuthNavigation';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import colors from './styles/colors';
 import * as firebase from 'firebase';
+import SplashScreen from './screens/SplashScreen';
 
 export class App extends Component {
   constructor(props) {
@@ -33,25 +34,13 @@ export class App extends Component {
     const { loggedIn, loaded } = this.state;
 
     if (!loaded) {
-      return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: colors.secondary,
-            textColor: colors.primary,
-          }}
-        >
-          <Text>Loading...</Text>
-        </View>
-      );
+      return <View style={{ backgroundColor: '#F0C4BF' }} />;
     }
 
     if (!loggedIn) {
       return <AuthNavigation />;
     }
-    // if user starting date, period length, cycle length exists in database, go to home screen. else go to start screen next time user opens app
+
     return <AppNavigation />;
   }
 }
