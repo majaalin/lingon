@@ -6,6 +6,7 @@ import colors from '../styles/colors';
 import typography from '../styles/typography';
 import ButtonPrimary from '../components/ButtonPrimary';
 import ButtonSecondary from '../components/ButtonSecondary';
+import * as Animatable from 'react-native-animatable';
 const ls = require('local-storage');
 
 const styles = StyleSheet.create({

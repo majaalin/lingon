@@ -159,7 +159,7 @@ export default function AppNavigation() {
   );
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (

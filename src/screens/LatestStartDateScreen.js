@@ -6,6 +6,7 @@ import colors from '../styles/colors';
 import typography from '../styles/typography';
 import ButtonPrimary from '../components/ButtonPrimary';
 import ButtonSecondary from '../components/ButtonSecondary';
+import * as Animatable from 'react-native-animatable';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -43,20 +44,32 @@ export class LatestStartDate extends Component {
           style={{ marginTop: 20 }}
         />
         <View style={styles.container}>
-          <Text style={typography.h1}>Ange när senaste mensen startade</Text>
-          <DatePicker />
+          <Animatable.Text
+            animation="bounceInDown"
+            delay={500}
+            style={typography.h1}
+          >
+            Ange när senaste mensen startade
+          </Animatable.Text>
+          <Animatable.View animation="bounceInDown" delay={1000}>
+            <DatePicker />
+          </Animatable.View>
         </View>
 
         <View style={{ bottom: 30, position: 'absolute' }}>
-          <ButtonSecondary
-            title="Fyll i senare"
-            backgroundColor="secondary"
-            font="buttonSecondary"
-          />
-          <ButtonPrimary
-            title="Fortsätt"
-            onPress={() => navigate('CycleLengthScreen')}
-          />
+          <Animatable.View animation="bounceInLeft" delay={1500}>
+            <ButtonSecondary
+              title="Fyll i senare"
+              backgroundColor="secondary"
+              font="buttonSecondary"
+            />
+          </Animatable.View>
+          <Animatable.View animation="bounceInRight" delay={1500}>
+            <ButtonPrimary
+              title="Fortsätt"
+              onPress={() => navigate('CycleLengthScreen')}
+            />
+          </Animatable.View>
         </View>
       </SafeAreaView>
     );

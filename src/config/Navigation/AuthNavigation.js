@@ -68,7 +68,7 @@ export default function AuthNavigation() {
   );
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (

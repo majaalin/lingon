@@ -163,7 +163,7 @@ export default function Overview({ navigation }) {
           }}
         />
       </View>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
     </View>
   );
 }
