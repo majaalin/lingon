@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, Text, View, StatusBar, Switch } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
@@ -10,6 +10,7 @@ import Button from '../components/ButtonPrimary';
 import Header from '../components/Header';
 import Picture from '../components/Picture';
 import avatar from '../assets/images/avatar.jpg';
+import * as Animatable from 'react-native-animatable';
 
 const db = firebase.firestore();
 
@@ -66,6 +67,14 @@ export default function Settings({ navigation }) {
       }
     });
 
+  const AnimationRef = useRef(null);
+
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -76,7 +85,14 @@ export default function Settings({ navigation }) {
 
       <Picture source={avatar} />
 
-      <Button title="Spara din data i ett konto / Logga in" />
+      <Animatable.View ref={AnimationRef}>
+        <Button
+          title="Spara din data i ett konto / Logga in"
+          onPress={() => {
+            animation();
+          }}
+        />
+      </Animatable.View>
 
       <View style={styles.section}>
         <View style={styles.wrapper}>

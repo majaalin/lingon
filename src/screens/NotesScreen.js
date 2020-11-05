@@ -96,20 +96,13 @@ export default function Notes({ navigation }) {
         }}
       >
         <Text style={typography.h5}>Symptom</Text>
-        <View style={{ flexDirection: 'row', marginBottom: 40 }}>
+        <View style={{ flexDirection: 'row', marginBottom: 40, height: 70 }}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {symptomNotes.map((symptom) => (
               <NotesButton title={symptom} date={selectedDate} key={symptom} />
             ))}
           </ScrollView>
         </View>
-        {/* <TextInput
-        style={styles.button}
-        placeholder={'Lägg till symtom +'}
-        placeholderTextColor={colors.primary}
-        onChangeText={(text) => onChangeText(text)}
-        value={value}
-      ></TextInput> */}
         <Text style={typography.h5}>Mens</Text>
         <View style={{ flexDirection: 'row', marginBottom: 40 }}>
           {periodNotes.map((period) => (
@@ -123,39 +116,6 @@ export default function Notes({ navigation }) {
           ))}
         </View>
       </View>
-      {/* <CalendarStrip
-        calendarAnimation={{ type: 'sequence', duration: 30 }}
-        daySelectionAnimation={{
-          type: 'background',
-          duration: 300,
-          highlightColor: colors.primary,
-        }}
-        showMonth={false}
-        selectedDate={selectedDate}
-        onDateSelected={(date) => {
-          const newDate = date.format('YYYY-MM-DD');
-          setSelectedDate(newDate);
-        }}
-        highlightDateNumberStyle={{
-          color: colors.white,
-        }}
-        highlightDateNameStyle={{
-          color: colors.white,
-        }}
-        dateNumberStyle={{
-          color: colors.primary,
-        }}
-        dateNameStyle={{ color: colors.primary }}
-        calendarColor={colors.white}
-        iconLeft="none"
-        iconRight="none"
-        style={{
-          height: 60,
-          marginRight: 20,
-          borderRadius: 60 / 2,
-          marginLeft: 20,
-        }}
-      /> */}
     </View>
   );
 }

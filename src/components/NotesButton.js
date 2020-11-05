@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
+import * as Animatable from 'react-native-animatable';
 
 const db = firebase.firestore();
 
 function NotesButton({ title, date, id }) {
   const [pressed, setPressed] = useState(false);
   const [notesArray, setNotesArray] = useState([]);
+
+  const AnimationRef = useRef(null);
+
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
 
   db.collection(firebase.auth().currentUser.uid)
     .doc(date)
@@ -61,39 +70,53 @@ function NotesButton({ title, date, id }) {
 
   if (notesArray.includes(title)) {
     return (
-      <TouchableOpacity
-        style={styles.pressedButton}
-        key={id}
-        onPress={() => onPressNote({ title, date })}
-      >
-        <Text style={typography.buttonPrimary}>{title}</Text>
-      </TouchableOpacity>
+      <Animatable.View ref={AnimationRef}>
+        <TouchableOpacity
+          style={styles.pressedButton}
+          key={id}
+          onPress={() => {
+            {
+              animation();
+              onPressNote({ title, date });
+            }
+          }}
+        >
+          <Text style={typography.buttonPrimary}>{title}</Text>
+        </TouchableOpacity>
+      </Animatable.View>
     );
   }
   return (
-    <TouchableOpacity
-      style={
-        pressed
-          ? styles.pressedButton
-          : styles.button && notesArray.includes(title)
-          ? styles.pressedButton
-          : styles.button
-      }
-      key={id}
-      onPress={() => onPressNote({ title, date })}
-    >
-      <Text
+    <Animatable.View ref={AnimationRef}>
+      <TouchableOpacity
         style={
           pressed
-            ? typography.buttonPrimary
-            : typography.buttonSecondary && notesArray.includes(title)
-            ? typography.buttonPrimary
-            : typography.buttonSecondary
+            ? styles.pressedButton
+            : styles.button && notesArray.includes(title)
+            ? styles.pressedButton
+            : styles.button
         }
+        key={id}
+        onPress={() => {
+          {
+            animation();
+            onPressNote({ title, date });
+          }
+        }}
       >
-        {title}
-      </Text>
-    </TouchableOpacity>
+        <Text
+          style={
+            pressed
+              ? typography.buttonPrimary
+              : typography.buttonSecondary && notesArray.includes(title)
+              ? typography.buttonPrimary
+              : typography.buttonSecondary
+          }
+        >
+          {title}
+        </Text>
+      </TouchableOpacity>
+    </Animatable.View>
   );
 }
 

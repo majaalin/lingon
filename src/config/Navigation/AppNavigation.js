@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,6 +17,7 @@ import KarlaBold from '../../assets/fonts/Karla-Bold.ttf';
 import KarlaRegular from '../../assets/fonts/Karla-Regular.ttf';
 import BrandonBold from '../../assets/fonts/BrandonGrotesque-Bold.ttf';
 import BrandonRegular from '../../assets/fonts/BrandonGrotesque-Regular.ttf';
+import * as Animatable from 'react-native-animatable';
 import { View } from 'react-native';
 
 export default function AppNavigation() {
@@ -26,6 +27,14 @@ export default function AppNavigation() {
     BrandonBold,
     BrandonRegular,
   });
+
+  const AnimationRef = useRef(null);
+
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
 
   const AppTabs = createBottomTabNavigator();
 
@@ -74,7 +83,8 @@ export default function AppNavigation() {
         component={NotesScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <View
+            <Animatable.View
+              ref={AnimationRef}
               style={{
                 width: 62,
                 height: 62,
@@ -94,14 +104,17 @@ export default function AppNavigation() {
               }}
             >
               <Entypo name="plus" color={colors.white} size={26} />
-            </View>
+            </Animatable.View>
           ),
           title: 'Anteckningar',
         }}
         listeners={({ navigation }) => ({
           tabPress: (e) => {
             e.preventDefault();
-            navigation.navigate('NotesModal');
+            animation();
+            setTimeout(() => {
+              navigation.navigate('NotesModal');
+            }, 300);
           },
         })}
       />

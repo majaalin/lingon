@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
@@ -18,31 +18,51 @@ const styles = StyleSheet.create({
 });
 
 export default function Start({ navigation }) {
+  const AnimationRef = useRef(null);
+
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Animatable.Text animation="bounceInDown" style={typography.h1}>
+      <Animatable.Text animation="fadeInDown" style={typography.h1}>
         Välkommen
       </Animatable.Text>
       <Animatable.Text
-        animation="bounceInDown"
+        animation="fadeInDown"
         delay={1000}
         style={[typography.h5, { textAlign: 'center', marginTop: 30 }]}
       >
         Svara på några frågor och vi kommer att anpassa appen för dig.
       </Animatable.Text>
       <View style={{ bottom: 30, position: 'absolute' }}>
-        <Animatable.View animation="bounceInLeft" delay={1500}>
+        <Animatable.View ref={AnimationRef}>
           <ButtonSecondary
             title="Logga in"
             backgroundColor="secondary"
             font="buttonSecondary"
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => {
+              animation();
+              setTimeout(() => {
+                navigation.navigate('Login');
+              }, 700);
+            }}
           />
         </Animatable.View>
-        <Animatable.View animation="bounceInRight" delay={1500}>
+        <Animatable.View ref={AnimationRef}>
           <ButtonPrimary
             title="Kom igång"
-            onPress={() => navigation.navigate('LatestStartDate')}
+            onPress={() => {
+              {
+                animation();
+                setTimeout(() => {
+                  navigation.navigate('LatestStartDate');
+                }, 700);
+              }
+            }}
           />
         </Animatable.View>
       </View>

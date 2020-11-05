@@ -1,5 +1,11 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import React, { useRef } from 'react';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Dimensions,
+} from 'react-native';
 
 import colors from '../styles/colors';
 import typography from '../styles/typography';
@@ -14,8 +20,8 @@ function ButtonPrimary({
 }) {
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: colors[backgroundColor] }]}
       onPress={onPress}
+      style={[styles.button, { backgroundColor: colors[backgroundColor] }]}
     >
       <Text style={typography[font]}>{title}</Text>
     </TouchableOpacity>
