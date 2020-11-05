@@ -167,19 +167,26 @@ export default function Overview({ navigation }) {
         onPress={() => navigation.navigate('SettingsModal')}
       />
       <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
-      <Text style={[typography.h1, { paddingLeft: 20, paddingRight: 20 }]}>
-        {pressed ? `Mensdag ${currentDayOfPeriod}` : daysLeftBeforePeriodBegins}
-      </Text>
+      <Animatable.View ref={AnimationRef}>
+        <Text
+          style={[
+            typography.h1,
+            { paddingLeft: 20, paddingRight: 20, paddingBottom: 100 },
+          ]}
+        >
+          {pressed
+            ? `Mensdag ${currentDayOfPeriod}`
+            : daysLeftBeforePeriodBegins}
+        </Text>
+      </Animatable.View>
       <View style={{ marginBottom: 150 }}>
-        <Animatable.View ref={AnimationRef}>
-          <ButtonPrimary
-            title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
-            onPress={() => {
-              addDates();
-              animation();
-            }}
-          />
-        </Animatable.View>
+        <ButtonPrimary
+          title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
+          onPress={() => {
+            addDates();
+            animation();
+          }}
+        />
       </View>
       <StatusBar barStyle="dark-content" />
     </View>
