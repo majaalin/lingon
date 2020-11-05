@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import { View, Text, SafeAreaView, Dimensions, StyleSheet } from 'react-native';
 import PageControl from 'react-native-page-control';
 import Range from '../components/Range';
@@ -9,6 +9,7 @@ import ButtonSecondary from '../components/ButtonSecondary';
 import { firebaseAuth } from '../config/keys';
 import firebase from 'firebase';
 import { addDays } from 'date-fns';
+import * as Animatable from 'react-native-animatable';
 import moment from 'moment';
 const ls = require('local-storage');
 
@@ -29,92 +30,109 @@ const styles = StyleSheet.create({
 
 const width = Dimensions.get('window').width;
 
-export class PeriodLength extends Component {
-  render() {
-    const { navigate } = this.props.navigation;
+export default function PeriodLength() {
+  const AnimationRef = useRef(null);
 
-    const signInAnonymously = () => {
-      const date = new Date();
-      let today = date.toISOString();
-      let lastStartDate = ls.get('lastStartDate') || today;
-      let periodLength =
-        (ls.get('periodLength') && ls.get('periodLength')) || 5;
-      let cycleLength = (ls.get('CycleLength') && ls.get('CycleLength')) || 28;
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
 
-      let firstPeriod = [];
+  const signInAnonymously = () => {
+    const date = new Date();
+    let today = date.toISOString();
+    let lastStartDate = ls.get('lastStartDate') || today;
+    let periodLength = (ls.get('periodLength') && ls.get('periodLength')) || 5;
+    let cycleLength = (ls.get('CycleLength') && ls.get('CycleLength')) || 28;
 
-      for (let i = 0; i < periodLength; i++) {
-        let date = addDays(new Date(lastStartDate), i);
-        firstPeriod.push(date.toISOString().split('T')[0]);
-      }
+    let firstPeriod = [];
 
-      let estimatedMenstrualDays = [];
+    for (let i = 0; i < periodLength; i++) {
+      let date = addDays(new Date(lastStartDate), i);
+      firstPeriod.push(date.toISOString().split('T')[0]);
+    }
 
-      let nextPeriodStartDate = addDays(new Date(lastStartDate), cycleLength);
+    let estimatedMenstrualDays = [];
 
-      ls.set('nextPeriodStartDate', nextPeriodStartDate);
+    let nextPeriodStartDate = addDays(new Date(lastStartDate), cycleLength);
 
-      for (let i = 0; i < periodLength; i++) {
-        let date = addDays(new Date(nextPeriodStartDate), i);
-        estimatedMenstrualDays.push(date.toISOString().split('T')[0]);
-      }
+    ls.set('nextPeriodStartDate', nextPeriodStartDate);
 
-      firebaseAuth
-        .signInAnonymously()
-        .then((result) => {
-          firebase
-            .firestore()
-            .collection('users')
-            .doc(firebase.auth().currentUser.uid)
-            .set({
-              lastStartDate: lastStartDate.split('T')[0],
-              periodLength: periodLength,
-              cycleLength: cycleLength,
-              periodDays: firstPeriod,
-              estimatedMenstrualDays: estimatedMenstrualDays,
-              nextPeriodStartDate: estimatedMenstrualDays[0],
-              ongoingPeriod: false,
-            });
-        })
-        .then(() => navigate('Overview', { type: 'anonymous' }))
-        .catch((error) => {
-          this.setState({ errorMessage: error.message }, () => {
-            console.log(error);
+    for (let i = 0; i < periodLength; i++) {
+      let date = addDays(new Date(nextPeriodStartDate), i);
+      estimatedMenstrualDays.push(date.toISOString().split('T')[0]);
+    }
+
+    firebaseAuth
+      .signInAnonymously()
+      .then((result) => {
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(firebase.auth().currentUser.uid)
+          .set({
+            lastStartDate: lastStartDate.split('T')[0],
+            periodLength: periodLength,
+            cycleLength: cycleLength,
+            periodDays: firstPeriod,
+            estimatedMenstrualDays: estimatedMenstrualDays,
+            nextPeriodStartDate: estimatedMenstrualDays[0],
+            ongoingPeriod: false,
           });
+      })
+      .then(() => navigate('Overview', { type: 'anonymous' }))
+      .catch((error) => {
+        this.setState({ errorMessage: error.message }, () => {
+          console.log(error);
         });
-    };
+      });
+  };
 
-    return (
-      <SafeAreaView style={styles.wrapper}>
-        <PageControl
-          numberOfPages={3}
-          currentPage={2}
-          hidesForSinglePage
-          pageIndicatorTintColor={colors.primary}
-          currentPageIndicatorTintColor={colors.white}
-          indicatorStyle={{ borderRadius: 5 }}
-          currentIndicatorStyle={{ borderRadius: 5 }}
-          indicatorSize={{ width: width / 3 - 20, height: 5 }}
-          onPageIndicatorPress={this.onItemTap}
-          style={{ marginTop: 20 }}
-        />
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      <PageControl
+        numberOfPages={3}
+        currentPage={2}
+        hidesForSinglePage
+        pageIndicatorTintColor={colors.primary}
+        currentPageIndicatorTintColor={colors.white}
+        indicatorStyle={{ borderRadius: 5 }}
+        currentIndicatorStyle={{ borderRadius: 5 }}
+        indicatorSize={{ width: width / 3 - 20, height: 5 }}
+        style={{ marginTop: 20 }}
+      />
 
-        <View style={styles.container}>
-          <Text style={typography.h1}>Ange antal dagar du har mens</Text>
-          <Range average={5} arrayLength={20} keyValue="periodLength" />
-        </View>
+      <View style={styles.container}>
+        <Text style={typography.h1}>Ange antal dagar du har mens</Text>
+        <Range average={5} arrayLength={20} keyValue="periodLength" />
+      </View>
 
-        <View style={{ bottom: 30, position: 'absolute' }}>
+      <View style={{ bottom: 30, position: 'absolute' }}>
+        <Animatable.View ref={AnimationRef}>
           <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
-            font="buttonSecondary"
+            fon="buttonSecondary"
+            onPress={() => {
+              animation();
+            }}
           />
-          <ButtonPrimary title="Fortsätt" onPress={() => signInAnonymously()} />
-        </View>
-      </SafeAreaView>
-    );
-  }
+        </Animatable.View>
+        <Animatable.View ref={AnimationRef}>
+          <ButtonPrimary
+            title="Fortsätt"
+            onPress={() => {
+              {
+                animation();
+                setTimeout(() => {
+                  signInAnonymously();
+                }, 700);
+              }
+            }}
+          />
+        </Animatable.View>
+      </View>
+    </SafeAreaView>
+  );
 }
-
-export default PeriodLength;

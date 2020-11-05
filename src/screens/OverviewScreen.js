@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import ButtonPrimary from '../components/ButtonPrimary';
 import { firebaseAuth } from '../config/keys';
+import * as Animatable from 'react-native-animatable';
 import firebase from 'firebase';
 import Header from '../components/Header';
 const db = firebase.firestore();
@@ -124,6 +131,14 @@ export default function Overview({ navigation }) {
     }
   };
 
+  const AnimationRef = useRef(null);
+
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
+
   const diff = moment(nextPeriodStartDate).diff(moment(today));
 
   let daysLeftBeforePeriodBegins = moment.duration(diff).days();
@@ -156,12 +171,15 @@ export default function Overview({ navigation }) {
         {pressed ? `Mensdag ${currentDayOfPeriod}` : daysLeftBeforePeriodBegins}
       </Text>
       <View style={{ marginBottom: 150 }}>
-        <ButtonPrimary
-          title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
-          onPress={() => {
-            addDates();
-          }}
-        />
+        <Animatable.View ref={AnimationRef}>
+          <ButtonPrimary
+            title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
+            onPress={() => {
+              addDates();
+              animation();
+            }}
+          />
+        </Animatable.View>
       </View>
       <StatusBar barStyle="dark-content" />
     </View>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import { View, Text, SafeAreaView, Dimensions, StyleSheet } from 'react-native';
 import PageControl from 'react-native-page-control';
 import Range from '../components/Range';
@@ -26,45 +26,58 @@ const styles = StyleSheet.create({
 
 const width = Dimensions.get('window').width;
 
-export class CycleLength extends Component {
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <SafeAreaView style={styles.wrapper}>
-        <View>
-          <PageControl
-            numberOfPages={3}
-            currentPage={1}
-            hidesForSinglePage
-            pageIndicatorTintColor={colors.primary}
-            currentPageIndicatorTintColor={colors.white}
-            indicatorStyle={{ borderRadius: 5 }}
-            currentIndicatorStyle={{ borderRadius: 5 }}
-            indicatorSize={{ width: width / 3 - 20, height: 5 }}
-            onPageIndicatorPress={this.onItemTap}
-            style={{ marginTop: 20 }}
-          />
-        </View>
+export default function CycleLength({ navigation }) {
+  const AnimationRef = useRef(null);
 
-        <View style={styles.container}>
-          <Text style={typography.h1}>Ange längd på din menscykel</Text>
-          <Range average={28} arrayLength={40} keyValue="CycleLength" />
-        </View>
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
 
-        <View style={{ bottom: 30, position: 'absolute' }}>
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      <View>
+        <PageControl
+          numberOfPages={3}
+          currentPage={1}
+          hidesForSinglePage
+          pageIndicatorTintColor={colors.primary}
+          currentPageIndicatorTintColor={colors.white}
+          indicatorStyle={{ borderRadius: 5 }}
+          currentIndicatorStyle={{ borderRadius: 5 }}
+          indicatorSize={{ width: width / 3 - 20, height: 5 }}
+          style={{ marginTop: 20 }}
+        />
+      </View>
+
+      <View style={styles.container}>
+        <Text style={typography.h1}>Ange längd på din menscykel</Text>
+        <Range average={28} arrayLength={40} keyValue="CycleLength" />
+      </View>
+
+      <View style={{ bottom: 30, position: 'absolute' }}>
+        <Animatable.View ref={AnimationRef}>
           <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
           />
+        </Animatable.View>
+        <Animatable.View ref={AnimationRef}>
           <ButtonPrimary
             title="Fortsätt"
-            onPress={() => navigate('PeriodLengthScreen')}
+            onPress={() => {
+              {
+                animation();
+                setTimeout(() => {
+                  navigation.navigate('PeriodLengthScreen');
+                }, 700);
+              }
+            }}
           />
-        </View>
-      </SafeAreaView>
-    );
-  }
+        </Animatable.View>
+      </View>
+    </SafeAreaView>
+  );
 }
-
-export default CycleLength;

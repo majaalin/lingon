@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import { View, Text, SafeAreaView, Dimensions, StyleSheet } from 'react-native';
 import PageControl from 'react-native-page-control';
 import DatePicker from '../components/DatePicker';
@@ -25,55 +25,74 @@ const styles = StyleSheet.create({
 
 const width = Dimensions.get('window').width;
 
-export class LatestStartDate extends Component {
-  render() {
-    const { navigate } = this.props.navigation;
+export default function LatestStartDate({ navigation }) {
+  const AnimationRef = useRef(null);
 
-    return (
-      <SafeAreaView style={styles.wrapper}>
-        <PageControl
-          numberOfPages={3}
-          currentPage={0}
-          hidesForSinglePage
-          pageIndicatorTintColor={colors.primary}
-          currentPageIndicatorTintColor={colors.white}
-          indicatorStyle={{ borderRadius: 5 }}
-          currentIndicatorStyle={{ borderRadius: 5 }}
-          indicatorSize={{ width: width / 3 - 20, height: 5 }}
-          onPageIndicatorPress={this.onItemTap}
-          style={{ marginTop: 20 }}
-        />
-        <View style={styles.container}>
-          <Animatable.Text
-            animation="bounceInDown"
-            delay={500}
-            style={typography.h1}
-          >
-            Ange när senaste mensen startade
-          </Animatable.Text>
-          <Animatable.View animation="bounceInDown" delay={1000}>
-            <DatePicker />
-          </Animatable.View>
-        </View>
+  const animation = () => {
+    if (AnimationRef) {
+      AnimationRef.current?.pulse();
+    }
+  };
 
-        <View style={{ bottom: 30, position: 'absolute' }}>
-          <Animatable.View animation="bounceInLeft" delay={1500}>
-            <ButtonSecondary
-              title="Fyll i senare"
-              backgroundColor="secondary"
-              font="buttonSecondary"
-            />
-          </Animatable.View>
-          <Animatable.View animation="bounceInRight" delay={1500}>
-            <ButtonPrimary
-              title="Fortsätt"
-              onPress={() => navigate('CycleLengthScreen')}
-            />
-          </Animatable.View>
-        </View>
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      <PageControl
+        numberOfPages={3}
+        currentPage={0}
+        hidesForSinglePage
+        pageIndicatorTintColor={colors.primary}
+        currentPageIndicatorTintColor={colors.white}
+        indicatorStyle={{ borderRadius: 5 }}
+        currentIndicatorStyle={{ borderRadius: 5 }}
+        indicatorSize={{ width: width / 3 - 20, height: 5 }}
+        style={{ marginTop: 20 }}
+      />
+      <View style={styles.container}>
+        <Animatable.Text
+          animation="fadeInDown"
+          delay={500}
+          style={typography.h1}
+        >
+          Ange när senaste mensen startade
+        </Animatable.Text>
+        <Animatable.View animation="fadeInDown" delay={1000}>
+          <DatePicker />
+        </Animatable.View>
+      </View>
+
+      <View style={{ bottom: 30, position: 'absolute' }}>
+        <Animatable.View
+          animation="bounceInLeft"
+          delay={1500}
+          ref={AnimationRef}
+        >
+          <ButtonSecondary
+            title="Fyll i senare"
+            backgroundColor="secondary"
+            font="buttonSecondary"
+            onPress={() => {
+              animation();
+            }}
+          />
+        </Animatable.View>
+        <Animatable.View
+          animation="bounceInRight"
+          delay={1500}
+          ref={AnimationRef}
+        >
+          <ButtonPrimary
+            title="Fortsätt"
+            onPress={() => {
+              {
+                animation();
+                setTimeout(() => {
+                  navigation.navigate('CycleLengthScreen');
+                }, 700);
+              }
+            }}
+          />
+        </Animatable.View>
+      </View>
+    </SafeAreaView>
+  );
 }
-
-export default LatestStartDate;
