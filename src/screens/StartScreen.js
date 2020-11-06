@@ -32,27 +32,24 @@ export default function Start({ navigation }) {
         Välkommen
       </Animatable.Text>
       <Animatable.Text
-        animation="fadeInDown"
-        delay={1000}
+        animation="fadeIn"
+        delay={600}
         style={[typography.h5, { textAlign: 'center', marginTop: 30 }]}
       >
         Svara på några frågor och vi kommer att anpassa appen för dig.
       </Animatable.Text>
       <View style={{ bottom: 30, position: 'absolute' }}>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View ref={AnimationRef} animation="fadeIn" delay={100}>
           <ButtonSecondary
             title="Logga in"
             backgroundColor="secondary"
             font="buttonSecondary"
             onPress={() => {
               animation();
-              setTimeout(() => {
-                navigation.navigate('Login');
-              }, 700);
             }}
           />
         </Animatable.View>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View ref={AnimationRef} animation="fadeIn" delay={100}>
           <ButtonPrimary
             title="Kom igång"
             onPress={() => {

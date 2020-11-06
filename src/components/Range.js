@@ -71,6 +71,7 @@ const Range = ({ average, arrayLength, keyValue }) => {
         data={Array.from({ length: arrayLength }, (_, i) => i)}
         horizontal={true}
         scrollAnimation
+        snapToAlignment={'center'}
         showsHorizontalScrollIndicator={false}
         onSelected={({ item, index }) => handleChange(index)}
         renderItem={(option) => ItemToRender(option, selected, true)}
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   OptionWrapper: {
     justifyContent: 'center',

@@ -27,51 +27,79 @@ const styles = StyleSheet.create({
 const width = Dimensions.get('window').width;
 
 export default function CycleLength({ navigation }) {
-  const AnimationRef = useRef(null);
+  const AnimationRefPrimary = useRef(null);
+  const AnimationRefSecondary = useRef(null);
 
-  const animation = () => {
-    if (AnimationRef) {
-      AnimationRef.current?.pulse();
+  const animationSecondary = () => {
+    if (AnimationRefSecondary) {
+      AnimationRefSecondary.current?.pulse();
+    }
+  };
+
+  const animationPrimary = () => {
+    if (AnimationRefPrimary) {
+      AnimationRefPrimary.current?.pulse();
     }
   };
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <View>
-        <PageControl
-          numberOfPages={3}
-          currentPage={1}
-          hidesForSinglePage
-          pageIndicatorTintColor={colors.primary}
-          currentPageIndicatorTintColor={colors.white}
-          indicatorStyle={{ borderRadius: 5 }}
-          currentIndicatorStyle={{ borderRadius: 5 }}
-          indicatorSize={{ width: width / 3 - 20, height: 5 }}
-          style={{ marginTop: 20 }}
-        />
+        <Animatable.View animation="fadeIn" delay={100}>
+          <PageControl
+            numberOfPages={3}
+            currentPage={1}
+            hidesForSinglePage
+            pageIndicatorTintColor={colors.primary}
+            currentPageIndicatorTintColor={colors.white}
+            indicatorStyle={{ borderRadius: 5 }}
+            currentIndicatorStyle={{ borderRadius: 5 }}
+            indicatorSize={{ width: width / 3 - 20, height: 5 }}
+            style={{ marginTop: 20 }}
+          />
+        </Animatable.View>
       </View>
-
       <View style={styles.container}>
-        <Animatable.Text style={typography.h1}>
+        <Animatable.Text
+          animation="fadeInDown"
+          delay={500}
+          style={typography.h1}
+        >
           Ange längd på din menscykel
         </Animatable.Text>
-        <Range average={28} arrayLength={40} keyValue="CycleLength" />
+        <Animatable.View animation="fadeIn" delay={1000}>
+          <Range average={28} arrayLength={40} keyValue="CycleLength" />
+        </Animatable.View>
       </View>
 
       <View style={{ bottom: 30, position: 'absolute' }}>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View
+          ref={AnimationRefSecondary}
+          animation="fadeIn"
+          delay={100}
+        >
           <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
+            onPress={() => {
+              animationSecondary();
+              setTimeout(() => {
+                navigation.navigate('PeriodLengthScreen');
+              }, 700);
+            }}
           />
         </Animatable.View>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View
+          ref={AnimationRefPrimary}
+          animation="fadeIn"
+          delay={100}
+        >
           <ButtonPrimary
             title="Fortsätt"
             onPress={() => {
               {
-                animation();
+                animationPrimary();
                 setTimeout(() => {
                   navigation.navigate('PeriodLengthScreen');
                 }, 700);

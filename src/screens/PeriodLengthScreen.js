@@ -31,11 +31,18 @@ const styles = StyleSheet.create({
 const width = Dimensions.get('window').width;
 
 export default function PeriodLength() {
-  const AnimationRef = useRef(null);
+  const AnimationRefPrimary = useRef(null);
+  const AnimationRefSecondary = useRef(null);
 
-  const animation = () => {
-    if (AnimationRef) {
-      AnimationRef.current?.pulse();
+  const animationSecondary = () => {
+    if (AnimationRefSecondary) {
+      AnimationRefSecondary.current?.pulse();
+    }
+  };
+
+  const animationPrimary = () => {
+    if (AnimationRefPrimary) {
+      AnimationRefPrimary.current?.pulse();
     }
   };
 
@@ -89,17 +96,19 @@ export default function PeriodLength() {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <PageControl
-        numberOfPages={3}
-        currentPage={2}
-        hidesForSinglePage
-        pageIndicatorTintColor={colors.primary}
-        currentPageIndicatorTintColor={colors.white}
-        indicatorStyle={{ borderRadius: 5 }}
-        currentIndicatorStyle={{ borderRadius: 5 }}
-        indicatorSize={{ width: width / 3 - 20, height: 5 }}
-        style={{ marginTop: 20 }}
-      />
+      <Animatable.View animation="fadeIn" delay={100}>
+        <PageControl
+          numberOfPages={3}
+          currentPage={2}
+          hidesForSinglePage
+          pageIndicatorTintColor={colors.primary}
+          currentPageIndicatorTintColor={colors.white}
+          indicatorStyle={{ borderRadius: 5 }}
+          currentIndicatorStyle={{ borderRadius: 5 }}
+          indicatorSize={{ width: width / 3 - 20, height: 5 }}
+          style={{ marginTop: 20 }}
+        />
+      </Animatable.View>
 
       <View style={styles.container}>
         <Animatable.Text
@@ -109,26 +118,39 @@ export default function PeriodLength() {
         >
           Ange antal dagar du har mens
         </Animatable.Text>
-        <Range average={5} arrayLength={20} keyValue="periodLength" />
+        <Animatable.View animation="fadeIn" delay={1000}>
+          <Range average={5} arrayLength={20} keyValue="periodLength" />
+        </Animatable.View>
       </View>
 
       <View style={{ bottom: 30, position: 'absolute' }}>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View
+          ref={AnimationRefSecondary}
+          animation="fadeIn"
+          delay={100}
+        >
           <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
             onPress={() => {
-              animation();
+              animationSecondary();
+              setTimeout(() => {
+                signInAnonymously();
+              }, 700);
             }}
           />
         </Animatable.View>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View
+          ref={AnimationRefPrimary}
+          animation="fadeIn"
+          delay={100}
+        >
           <ButtonPrimary
             title="Fortsätt"
             onPress={() => {
               {
-                animation();
+                animationPrimary();
                 setTimeout(() => {
                   signInAnonymously();
                 }, 700);

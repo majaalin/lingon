@@ -168,16 +168,18 @@ export default function Overview({ navigation }) {
       />
       <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
       <Animatable.View ref={AnimationRef}>
-        <Text
+        <Animatable.Text
           style={[
             typography.h1,
             { paddingLeft: 20, paddingRight: 20, paddingBottom: 100 },
           ]}
+          animation="fadeIn"
+          delay={1000}
         >
           {pressed
             ? `Mensdag ${currentDayOfPeriod}`
             : daysLeftBeforePeriodBegins}
-        </Text>
+        </Animatable.Text>
       </Animatable.View>
       <View style={{ marginBottom: 150 }}>
         <ButtonPrimary

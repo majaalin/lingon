@@ -26,27 +26,36 @@ const styles = StyleSheet.create({
 const width = Dimensions.get('window').width;
 
 export default function LatestStartDate({ navigation }) {
-  const AnimationRef = useRef(null);
+  const AnimationRefPrimary = useRef(null);
+  const AnimationRefSecondary = useRef(null);
 
-  const animation = () => {
-    if (AnimationRef) {
-      AnimationRef.current?.pulse();
+  const animationSecondary = () => {
+    if (AnimationRefSecondary) {
+      AnimationRefSecondary.current?.pulse();
+    }
+  };
+
+  const animationPrimary = () => {
+    if (AnimationRefPrimary) {
+      AnimationRefPrimary.current?.pulse();
     }
   };
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <PageControl
-        numberOfPages={3}
-        currentPage={0}
-        hidesForSinglePage
-        pageIndicatorTintColor={colors.primary}
-        currentPageIndicatorTintColor={colors.white}
-        indicatorStyle={{ borderRadius: 5 }}
-        currentIndicatorStyle={{ borderRadius: 5 }}
-        indicatorSize={{ width: width / 3 - 20, height: 5 }}
-        style={{ marginTop: 20 }}
-      />
+      <Animatable.View animation="fadeIn" delay={100}>
+        <PageControl
+          numberOfPages={3}
+          currentPage={0}
+          hidesForSinglePage
+          pageIndicatorTintColor={colors.primary}
+          currentPageIndicatorTintColor={colors.white}
+          indicatorStyle={{ borderRadius: 5 }}
+          currentIndicatorStyle={{ borderRadius: 5 }}
+          indicatorSize={{ width: width / 3 - 20, height: 5 }}
+          style={{ marginTop: 20 }}
+        />
+      </Animatable.View>
       <View style={styles.container}>
         <Animatable.Text
           animation="fadeInDown"
@@ -55,28 +64,39 @@ export default function LatestStartDate({ navigation }) {
         >
           Ange när senaste mensen startade
         </Animatable.Text>
-        <Animatable.View animation="fadeInDown" delay={1000}>
+        <Animatable.View animation="fadeIn" delay={100}>
           <DatePicker />
         </Animatable.View>
       </View>
 
       <View style={{ bottom: 30, position: 'absolute' }}>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View
+          ref={AnimationRefSecondary}
+          animation="fadeIn"
+          delay={100}
+        >
           <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
             font="buttonSecondary"
             onPress={() => {
-              animation();
+              animationSecondary();
+              setTimeout(() => {
+                navigation.navigate('CycleLengthScreen');
+              }, 700);
             }}
           />
         </Animatable.View>
-        <Animatable.View ref={AnimationRef}>
+        <Animatable.View
+          ref={AnimationRefPrimary}
+          animation="fadeIn"
+          delay={100}
+        >
           <ButtonPrimary
             title="Fortsätt"
             onPress={() => {
               {
-                animation();
+                animationPrimary();
                 setTimeout(() => {
                   navigation.navigate('CycleLengthScreen');
                 }, 700);
