@@ -50,7 +50,7 @@ export default function AuthNavigation() {
       />
 
       <Stack.Screen
-        name="Overview"
+        name="Main"
         component={OverviewScreen}
         options={{ headerShown: false }}
       />

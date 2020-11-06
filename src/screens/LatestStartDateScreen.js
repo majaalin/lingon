@@ -61,11 +61,7 @@ export default function LatestStartDate({ navigation }) {
       </View>
 
       <View style={{ bottom: 30, position: 'absolute' }}>
-        <Animatable.View
-          animation="bounceInLeft"
-          delay={1500}
-          ref={AnimationRef}
-        >
+        <Animatable.View ref={AnimationRef}>
           <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
@@ -75,11 +71,7 @@ export default function LatestStartDate({ navigation }) {
             }}
           />
         </Animatable.View>
-        <Animatable.View
-          animation="bounceInRight"
-          delay={1500}
-          ref={AnimationRef}
-        >
+        <Animatable.View ref={AnimationRef}>
           <ButtonPrimary
             title="Fortsätt"
             onPress={() => {

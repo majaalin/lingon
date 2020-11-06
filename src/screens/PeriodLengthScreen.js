@@ -81,11 +81,9 @@ export default function PeriodLength() {
             ongoingPeriod: false,
           });
       })
-      .then(() => navigate('Overview', { type: 'anonymous' }))
+      .then(() => navigate('Main', { type: 'anonymous' }))
       .catch((error) => {
-        this.setState({ errorMessage: error.message }, () => {
-          console.log(error);
-        });
+        console.log(error);
       });
   };
 
@@ -104,7 +102,13 @@ export default function PeriodLength() {
       />
 
       <View style={styles.container}>
-        <Text style={typography.h1}>Ange antal dagar du har mens</Text>
+        <Animatable.Text
+          animation="fadeInDown"
+          delay={500}
+          style={typography.h1}
+        >
+          Ange antal dagar du har mens
+        </Animatable.Text>
         <Range average={5} arrayLength={20} keyValue="periodLength" />
       </View>
 
@@ -113,7 +117,7 @@ export default function PeriodLength() {
           <ButtonSecondary
             title="Fyll i senare"
             backgroundColor="secondary"
-            fon="buttonSecondary"
+            font="buttonSecondary"
             onPress={() => {
               animation();
             }}

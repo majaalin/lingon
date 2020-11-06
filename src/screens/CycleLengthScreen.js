@@ -52,7 +52,9 @@ export default function CycleLength({ navigation }) {
       </View>
 
       <View style={styles.container}>
-        <Text style={typography.h1}>Ange längd på din menscykel</Text>
+        <Animatable.Text style={typography.h1}>
+          Ange längd på din menscykel
+        </Animatable.Text>
         <Range average={28} arrayLength={40} keyValue="CycleLength" />
       </View>
 
