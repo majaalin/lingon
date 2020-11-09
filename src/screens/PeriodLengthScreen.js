@@ -109,17 +109,12 @@ export default function PeriodLength() {
       </Animatable.View>
 
       <View style={styles.container}>
-        <Animatable.Text
-          animation="fadeInDown"
-          delay={500}
-          style={typography.h1}
-        >
+        <Animatable.Text animation="fadeIn" delay={400} style={typography.h1}>
           Ange antal dagar du har mens
         </Animatable.Text>
-        <Animatable.View animation="fadeIn" delay={1000}>
+        <Animatable.View animation="fadeIn" delay={1605}>
           <Range average={5} arrayLength={20} keyValue="periodLength" />
         </Animatable.View>
-        ;
       </View>
 
       <View style={{ bottom: 30, position: 'absolute' }}>

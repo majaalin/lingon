@@ -57,11 +57,7 @@ export default function LatestStartDate({ navigation }) {
         />
       </Animatable.View>
       <View style={styles.container}>
-        <Animatable.Text
-          animation="fadeInDown"
-          delay={500}
-          style={typography.h1}
-        >
+        <Animatable.Text animation="fadeIn" delay={400} style={typography.h1}>
           Ange när senaste mensen startade
         </Animatable.Text>
         <Animatable.View animation="fadeIn" delay={100}>

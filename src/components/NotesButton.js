@@ -20,14 +20,18 @@ function NotesButton({ title, date, id }) {
     }
   };
 
-  db.collection(firebase.auth().currentUser.uid)
-    .doc(date)
-    .get()
-    .then(function (doc) {
-      if (!doc.exists) {
-        setNotesArray(['null']);
-      }
-    });
+  useEffect(() => {
+    let isSubscribed = true;
+    db.collection(firebase.auth().currentUser.uid)
+      .doc(date)
+      .get()
+      .then(function (doc) {
+        if (!doc.exists) {
+          setNotesArray(['null']);
+        }
+      });
+    return () => (isSubscribed = false);
+  }, []);
 
   useEffect(() => {
     let isSubscribed = true;

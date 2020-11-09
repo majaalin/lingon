@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Animated } from 'react-native';
 import SmoothPicker from 'react-native-smooth-picker';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
@@ -61,16 +61,22 @@ const Range = ({ average, arrayLength, keyValue }) => {
     ls.set(keyValue, index);
   }
 
+  const [isHidden, setIsHidden] = useState(0);
   const [selected, setSelected] = useState(average);
+
+  setTimeout(() => {
+    setIsHidden(1);
+  }, 1600);
+
   return (
     <View style={styles.wrapperHorizontal}>
       <SmoothPicker
+        style={{ opacity: isHidden }}
         initialScrollToIndex={selected}
         onScrollToIndexFailed={() => {}}
         keyExtractor={(_, index) => index.toString()}
         data={Array.from({ length: arrayLength }, (_, i) => i)}
         horizontal={true}
-        scrollAnimation
         snapToAlignment={'center'}
         showsHorizontalScrollIndicator={false}
         onSelected={({ item, index }) => handleChange(index)}

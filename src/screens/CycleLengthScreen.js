@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, SafeAreaView, Dimensions, StyleSheet } from 'react-native';
 import PageControl from 'react-native-page-control';
 import Range from '../components/Range';
@@ -58,14 +58,10 @@ export default function CycleLength({ navigation }) {
         </Animatable.View>
       </View>
       <View style={styles.container}>
-        <Animatable.Text
-          animation="fadeInDown"
-          delay={500}
-          style={typography.h1}
-        >
+        <Animatable.Text animation="fadeIn" delay={400} style={typography.h1}>
           Ange längd på din menscykel
         </Animatable.Text>
-        <Animatable.View animation="fadeIn" delay={1000}>
+        <Animatable.View animation="fadeIn" delay={1605}>
           <Range average={28} arrayLength={40} keyValue="CycleLength" />
         </Animatable.View>
       </View>
