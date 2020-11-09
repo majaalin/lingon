@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
   },
   container: {
-    paddingLeft: 20,
-    paddingRight: 20,
     height: 540,
     alignItems: 'center',
     justifyContent: 'space-evenly',

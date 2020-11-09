@@ -20,8 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
   },
   container: {
-    paddingLeft: 20,
-    paddingRight: 20,
     height: 540,
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -121,6 +119,7 @@ export default function PeriodLength() {
         <Animatable.View animation="fadeIn" delay={1000}>
           <Range average={5} arrayLength={20} keyValue="periodLength" />
         </Animatable.View>
+        ;
       </View>
 
       <View style={{ bottom: 30, position: 'absolute' }}>
