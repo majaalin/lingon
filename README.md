@@ -1,8 +1,6 @@
 # Lingon
 
-## Techniques
-
-The site was built using React Native, Expo and Firebase.
+A nice period tracker built using React Native, Expo and Firebase. The user can log in anonymously, track its period and add information about symptoms, menstrual flow and sexlife on a daily basis.
 
 ### Installation
 
@@ -23,6 +21,7 @@ npm install
 ```
 npm run start
 ```
+4. Download the Expo app from the App store. Then, use your camera to start the app.
 
 ## Authors
 - Terese Thulin
