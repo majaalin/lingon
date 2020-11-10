@@ -21,7 +21,7 @@ npm install
 ```
 npm run start
 ```
-4. Download the Expo app from the App store. Then use your camera to scan the QR code and start the app.
+4. Download Expo from App store. Then use your camera to scan the QR code and start the app.
 
 ### Authors
 - Terese Thulin
