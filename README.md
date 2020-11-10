@@ -1,6 +1,6 @@
 # Lingon
 
-A nice period tracker built using React Native, Expo and Firebase. The user can log in anonymously, track its period and add information about symptoms, menstrual flow and sexlife on a daily basis.
+A period tracker built using React Native, Expo and Firebase. The user can log in anonymously, track its period and add information about symptoms, menstrual flow and sexlife on a daily basis.
 
 ### Installation
 
