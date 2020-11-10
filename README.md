@@ -23,9 +23,9 @@ npm run start
 ```
 4. Download the Expo app from the App store. Then, use your camera to start the app.
 
-## Authors
+### Authors
 - Terese Thulin
 - Maja Alin
 
-## License
+### License
 This project is licensed under the MIT License.
