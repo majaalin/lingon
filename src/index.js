@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import AppNavigation from './config/Navigation/AppNavigation';
 import AuthNavigation from './config/Navigation/AuthNavigation';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, LogBox } from 'react-native';
 import colors from './styles/colors';
 import * as firebase from 'firebase';
 import SplashScreen from './screens/SplashScreen';
@@ -9,6 +9,8 @@ import SplashScreen from './screens/SplashScreen';
 export default function App({ navigation }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loaded, setLoaded] = useState(false);
+
+  LogBox.ignoreAllLogs();
 
   useEffect(() => {
     let isSubscribed = true;

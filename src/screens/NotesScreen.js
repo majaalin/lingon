@@ -68,7 +68,14 @@ let date = new Date();
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month;
 
-let symptomNotes = ['Nere', 'PMS', 'Mensvärk', 'Glad', 'Ledsen'];
+let symptomNotes = [
+  'Ledsen',
+  'PMS',
+  'Mensvärk',
+  'Glad',
+  'Irriterad',
+  'Rastlös',
+];
 let periodNotes = ['Lätt', 'Måttlig', 'Riklig'];
 let sexNotes = ['Skyddat sex', 'Oskyddat sex'];
 
@@ -95,7 +102,7 @@ export default function Notes({ navigation }) {
           paddingLeft: 20,
         }}
       >
-        <Text style={typography.h5}>Symptom</Text>
+        <Text style={typography.h5}>Symtom</Text>
         <View style={{ flexDirection: 'row', marginBottom: 40, height: 70 }}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {symptomNotes.map((symptom) => (
