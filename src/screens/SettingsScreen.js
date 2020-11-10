@@ -163,7 +163,7 @@ export default function Settings({ navigation }) {
           </View>
         </View>
       </View>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
     </View>
   );
 }
