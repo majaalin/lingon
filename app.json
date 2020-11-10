@@ -1,14 +1,13 @@
 {
   "expo": {
-    "name": "lingon",
+    "name": "Lingon",
     "slug": "lingon",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/images/app-icon.png",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F0C4BF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
