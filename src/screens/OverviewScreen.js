@@ -169,10 +169,7 @@ export default function Overview({ navigation }) {
       <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
       <Animatable.View ref={AnimationRef}>
         <Animatable.Text
-          style={[
-            typography.h1,
-            { paddingLeft: 20, paddingRight: 20, paddingBottom: 100 },
-          ]}
+          style={[typography.h1, { paddingLeft: 20, paddingRight: 20 }]}
           animation="fadeIn"
           delay={1000}
         >
