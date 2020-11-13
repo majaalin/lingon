@@ -75,6 +75,7 @@ export default function PeriodCalendar() {
     'null',
   ]);
 
+  // Read data without reloading app
   useEffect(() => {
     let isSubscribed = true;
     db.collection('users')

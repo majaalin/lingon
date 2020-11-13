@@ -20,6 +20,7 @@ import BrandonRegular from '../../assets/fonts/BrandonGrotesque-Regular.ttf';
 import * as Animatable from 'react-native-animatable';
 import { View } from 'react-native';
 
+// Navigation when logged in
 export default function AppNavigation() {
   const [fontsLoaded] = useFonts({
     KarlaBold,

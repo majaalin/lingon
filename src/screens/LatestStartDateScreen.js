@@ -43,23 +43,23 @@ export default function LatestStartDate({ navigation }) {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Animatable.View animation="fadeIn" delay={100}>
-        <PageControl
-          numberOfPages={3}
-          currentPage={0}
-          hidesForSinglePage
-          pageIndicatorTintColor={colors.primary}
-          currentPageIndicatorTintColor={colors.white}
-          indicatorStyle={{ borderRadius: 5 }}
-          currentIndicatorStyle={{ borderRadius: 5 }}
-          indicatorSize={{ width: width / 3 - 20, height: 5 }}
-          style={{ marginTop: 20 }}
-        />
-      </Animatable.View>
+      <PageControl
+        numberOfPages={3}
+        currentPage={0}
+        hidesForSinglePage
+        pageIndicatorTintColor={colors.primary}
+        currentPageIndicatorTintColor={colors.white}
+        indicatorStyle={{ borderRadius: 5 }}
+        currentIndicatorStyle={{ borderRadius: 5 }}
+        indicatorSize={{ width: width / 3 - 20, height: 5 }}
+        style={{ marginTop: 20 }}
+      />
+
       <View style={styles.container}>
         <Animatable.Text animation="fadeIn" delay={400} style={typography.h1}>
           Ange när senaste mensen startade
         </Animatable.Text>
+
         <Animatable.View animation="fadeIn" delay={100}>
           <DatePicker />
         </Animatable.View>
@@ -83,6 +83,7 @@ export default function LatestStartDate({ navigation }) {
             }}
           />
         </Animatable.View>
+
         <Animatable.View
           ref={AnimationRefPrimary}
           animation="fadeIn"

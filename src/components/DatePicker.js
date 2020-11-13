@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import colors from '../styles/colors';
-import typography from '../styles/typography';
 const ls = require('local-storage');
 
 const DatePicker = () => {

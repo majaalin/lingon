@@ -11,6 +11,7 @@ export class SplashScreen extends Component {
     };
   }
 
+  // Play splash animation, then determine if user is logged in and navigate
   componentDidMount() {
     this.animation.play();
 

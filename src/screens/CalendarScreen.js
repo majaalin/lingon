@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import colors from '../styles/colors';
-import typography from '../styles/typography';
 import PeriodCalendar from '../components/Calendar';
 import Header from '../components/Header';
-import { auto } from 'async';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,22 +20,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.15,
     shadowRadius: 4,
-  },
-  wrapper: {
-    backgroundColor: colors.white,
-    borderRadius: 28,
-    width: 343,
-    height: 'auto',
-    padding: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
   },
 });
 

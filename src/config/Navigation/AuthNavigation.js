@@ -1,9 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
-import { AppLoading } from 'expo';
 import StartScreen from '../../screens/StartScreen';
 import OverviewScreen from '../../screens/OverviewScreen';
 import LoginScreen from '../../screens/LoginScreen';
@@ -16,6 +14,7 @@ import KarlaRegular from '../../assets/fonts/Karla-Regular.ttf';
 import BrandonBold from '../../assets/fonts/BrandonGrotesque-Bold.ttf';
 import BrandonRegular from '../../assets/fonts/BrandonGrotesque-Regular.ttf';
 
+// Navigation when not logged in
 export default function AuthNavigation() {
   const [fontsLoaded] = useFonts({
     KarlaBold,

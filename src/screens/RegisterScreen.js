@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Textinput } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import firebase from "firebase";
-import colors from "../styles/colors";
-import typography from "../styles/typography";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button, Textinput } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import firebase from 'firebase';
+import colors from '../styles/colors';
+import typography from '../styles/typography';
+
+// Backlog
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.secondary,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
@@ -18,9 +20,9 @@ export class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      name: "",
+      email: '',
+      password: '',
+      name: '',
     };
     this.onSignUp = this.onSignUp.bind(this);
   }
@@ -33,7 +35,7 @@ export class Register extends Component {
       .then((result) => {
         firebase
           .firestore()
-          .collection("users")
+          .collection('users')
           .doc(firebase.auth().currentUser.uid)
           .set({
             name,

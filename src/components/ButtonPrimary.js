@@ -1,11 +1,5 @@
 import React, { useRef } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 import colors from '../styles/colors';
 import typography from '../styles/typography';

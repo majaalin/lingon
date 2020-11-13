@@ -5,7 +5,6 @@ import typography from '../styles/typography';
 import { firebaseAuth } from '../config/keys';
 import { Entypo } from '@expo/vector-icons';
 import firebase from 'firebase';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Button from '../components/ButtonPrimary';
 import Header from '../components/Header';
 import Picture from '../components/Picture';

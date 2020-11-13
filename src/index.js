@@ -1,10 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
 import AppNavigation from './config/Navigation/AppNavigation';
 import AuthNavigation from './config/Navigation/AuthNavigation';
-import { View, Text, StyleSheet, LogBox } from 'react-native';
-import colors from './styles/colors';
+import { View, Text, LogBox } from 'react-native';
 import * as firebase from 'firebase';
-import SplashScreen from './screens/SplashScreen';
 
 export default function App({ navigation }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,9 +28,11 @@ export default function App({ navigation }) {
     return <View style={{ backgroundColor: '#F0C4BF' }} />;
   }
 
+  // Go to Start
   if (!loggedIn) {
     return <AuthNavigation />;
   }
 
+  // Go to Overview
   return <AppNavigation />;
 }

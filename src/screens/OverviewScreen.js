@@ -9,16 +9,17 @@ import {
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import ButtonPrimary from '../components/ButtonPrimary';
-import { firebaseAuth } from '../config/keys';
-import * as Animatable from 'react-native-animatable';
-import firebase from 'firebase';
 import Header from '../components/Header';
+import * as Animatable from 'react-native-animatable';
+import firebaseAuth from '../config/keys';
+import firebase from 'firebase';
 const db = firebase.firestore();
 import { addDays } from 'date-fns';
 const ls = require('local-storage');
 import moment from 'moment';
 moment().format();
 
+// Conversion of date formats
 let date = new Date();
 let today = date.toISOString().split('T')[0];
 const month = date.toLocaleString('default', { month: 'long' });
@@ -53,6 +54,7 @@ export default function Overview({ navigation }) {
   const [periodLength, setPeriodLength] = useState(false);
   const [estimatedMenstrualDays, setEstimatedMenstrualDays] = useState(false);
 
+  // Read data without reloading app
   useEffect(() => {
     let isSubscribed = true;
     db.collection('users')
@@ -90,6 +92,7 @@ export default function Overview({ navigation }) {
     return () => (isSubscribed = false);
   }, []);
 
+  // Start new period
   const addDates = () => {
     if (!periodDays.includes(today)) {
       periodDays.push(today);
@@ -139,8 +142,8 @@ export default function Overview({ navigation }) {
     }
   };
 
+  // Calculate countdown to next period
   const diff = moment(nextPeriodStartDate).diff(moment(today));
-
   let daysLeftBeforePeriodBegins = moment.duration(diff).days();
 
   if (daysLeftBeforePeriodBegins >= 2) {
@@ -166,7 +169,9 @@ export default function Overview({ navigation }) {
         icon="cog"
         onPress={() => navigation.navigate('SettingsModal')}
       />
+
       <Text style={[typography.h5, { marginTop: 50 }]}>{displayedDate}</Text>
+
       <Animatable.View ref={AnimationRef}>
         <Animatable.Text
           style={[typography.h1, { paddingLeft: 20, paddingRight: 20 }]}
@@ -178,6 +183,7 @@ export default function Overview({ navigation }) {
             : daysLeftBeforePeriodBegins}
         </Animatable.Text>
       </Animatable.View>
+
       <View style={{ marginBottom: 150 }}>
         <ButtonPrimary
           title={pressed ? 'Mensen är slut' : 'Mensen har börjat'}
@@ -187,6 +193,7 @@ export default function Overview({ navigation }) {
           }}
         />
       </View>
+
       <StatusBar barStyle="dark-content" />
     </View>
   );

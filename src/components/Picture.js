@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, Dimensions } from 'react-native';
-
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
+import { Image, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   image: {

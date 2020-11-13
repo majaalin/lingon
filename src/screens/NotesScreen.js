@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
-  SafeAreaView,
-} from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import NotesButton from '../components/NotesButton';
@@ -61,10 +53,8 @@ const styles = StyleSheet.create({
   },
 });
 
+// Conversion of dates
 let date = new Date();
-// let date =
-//   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
 const month = date.toLocaleString('default', { month: 'long' });
 let displayedDate = date.getDate() + ' ' + month;
 

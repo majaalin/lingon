@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import colors from '../styles/colors';
 import typography from '../styles/typography';
 import { Entypo } from '@expo/vector-icons';
-
-const width = Dimensions.get('window').width - 20;
 
 function Header({ title, icon, onPress }) {
   return (

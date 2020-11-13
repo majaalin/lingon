@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Start({ navigation }) {
+  // Button and text animations
   const AnimationRef = useRef(null);
 
   const animation = () => {

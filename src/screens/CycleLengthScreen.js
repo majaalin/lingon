@@ -43,24 +43,24 @@ export default function CycleLength({ navigation }) {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View>
-        <Animatable.View animation="fadeIn" delay={100}>
-          <PageControl
-            numberOfPages={3}
-            currentPage={1}
-            hidesForSinglePage
-            pageIndicatorTintColor={colors.primary}
-            currentPageIndicatorTintColor={colors.white}
-            indicatorStyle={{ borderRadius: 5 }}
-            currentIndicatorStyle={{ borderRadius: 5 }}
-            indicatorSize={{ width: width / 3 - 20, height: 5 }}
-            style={{ marginTop: 20 }}
-          />
-        </Animatable.View>
+        <PageControl
+          numberOfPages={3}
+          currentPage={1}
+          hidesForSinglePage
+          pageIndicatorTintColor={colors.primary}
+          currentPageIndicatorTintColor={colors.white}
+          indicatorStyle={{ borderRadius: 5 }}
+          currentIndicatorStyle={{ borderRadius: 5 }}
+          indicatorSize={{ width: width / 3 - 20, height: 5 }}
+          style={{ marginTop: 20 }}
+        />
       </View>
+
       <View style={styles.container}>
         <Animatable.Text animation="fadeIn" delay={400} style={typography.h1}>
           Ange längd på din menscykel
         </Animatable.Text>
+
         <Animatable.View animation="fadeIn" delay={1605}>
           <Range average={28} arrayLength={40} keyValue="CycleLength" />
         </Animatable.View>
@@ -84,6 +84,7 @@ export default function CycleLength({ navigation }) {
             }}
           />
         </Animatable.View>
+
         <Animatable.View
           ref={AnimationRefPrimary}
           animation="fadeIn"
