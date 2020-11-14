@@ -7,7 +7,7 @@
     "icon": "./src/assets/images/app-icon.png",
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#F0C4BF"
+      "backgroundColor": "#FFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
